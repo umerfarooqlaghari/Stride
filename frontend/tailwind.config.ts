@@ -8,9 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        navy: {
+          DEFAULT: "#0D1B3E",
+          mid: "#1E3A8A",
+          light: "#2B4FA8",
+        },
       },
     },
   },
@@ -18,3 +24,4 @@ const config: Config = {
 };
 
 export default config;
+
