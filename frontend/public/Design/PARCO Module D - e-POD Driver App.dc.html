@@ -22,17 +22,155 @@
 </helmet>
 
 <!-- ═══ PAGE WRAPPER ═══ -->
-<div style="min-height: 100vh; background: #D8E2F4; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 28px 16px 52px;">
+<div style="display: flex; width: 100vw; height: 100vh; background: #0A0F1E; overflow: hidden;">
 
-  <!-- Module label + Hub link -->
-  <div style="margin-bottom: 18px; text-align: center; position: relative; width: 390px;">
-    <div onClick="{{ goToHub }}" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 6px; background: rgba(0,0,0,0.06); cursor: pointer;" style-hover="background: rgba(0,0,0,0.1)">
-      <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M6 3l-4 4 4 4" stroke="rgba(0,0,0,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span style="font-size: 10.5px; font-weight: 600; color: rgba(0,0,0,0.4);">Hub</span>
+  <!-- SIDEBAR -->
+  <aside style="width: 218px; min-width: 218px; background: #0A0F1E; border-right: 1px solid rgba(255,255,255,0.055); display: flex; flex-direction: column; height: 100vh; flex-shrink: 0; z-index: 10;">
+    <!-- Logo -->
+    <div style="height: 58px; display: flex; align-items: center; padding: 0 16px; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.055); flex-shrink: 0;">
+      <div style="width: 32px; height: 32px; background: #C8102E; border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 1.5L15 5.25V11.75L8.5 15.5L2 11.75V5.25L8.5 1.5Z" fill="white" fill-opacity="0.95"/><circle cx="8.5" cy="8.5" r="2.4" fill="#C8102E"/></svg>
+      </div>
+      <div><div style="font-size: 13.5px; font-weight: 700; color: #E8EEF8;">PARCO</div><div style="font-size: 10px; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.5px;">Supply Chain</div></div>
+      <div style="margin-left: auto; font-size: 9px; padding: 2px 5px; border-radius: 3px; background: rgba(34,197,94,0.12); color: #22C55E; font-weight: 600;">MOD D</div>
     </div>
-    <div style="font-size: 10px; font-weight: 700; color: rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 3px;">Module D · e-POD Driver App</div>
-    <div style="font-size: 9.5px; color: rgba(0,0,0,0.2); letter-spacing: 0.3px;">High-Contrast Mobile · PARCO Fleet · Sunlight-Optimised</div>
-  </div>
+    <nav style="flex: 1; padding: 10px 8px; overflow-y: auto; display: flex; flex-direction: column; gap: 2px;">
+
+      <!-- Hub -->
+      <div onClick="{{ goToHub }}" style="display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 6px; cursor: pointer; margin-bottom: 2px;" style-hover="background: rgba(255,255,255,0.05)">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M6 3l-4 4 4 4" stroke="#4A5A72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span style="font-size: 11px; font-weight: 600; color: #4A5A72; letter-spacing: 0.3px;">Supply Chain Hub</span>
+      </div>
+      <div style="height: 1px; background: rgba(255,255,255,0.055); margin: 4px 4px 8px;"></div>
+
+      <!-- Module A -->
+      <div style="margin-bottom: 6px;">
+        <div onClick="{{ navA1 }}" style="display: flex; align-items: center; gap: 7px; padding: 5px 10px 5px 8px; margin-bottom: 2px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)">
+          <div style="width: 18px; height: 18px; border-radius: 4px; background: rgba(200,16,46,0.15); border: 1px solid rgba(200,16,46,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <span style="font-size: 9px; font-weight: 800; color: #C8102E;">A</span>
+          </div>
+          <span style="font-size: 10.5px; font-weight: 600; color: #4A5A72; letter-spacing: 0.3px; text-transform: uppercase;">Upstream Intake</span>
+        </div>
+        <div onClick="{{ navA1 }}" style="display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 14px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.03)">
+          <div style="width: 3px; height: 3px; border-radius: 50%; background: #2A3A52; flex-shrink: 0;"></div>
+          <span style="font-size: 11.5px; font-weight: 400; color: #3A4A62;">Dashboard</span>
+        </div>
+        <div onClick="{{ navA2 }}" style="display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 14px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.03)">
+          <div style="width: 3px; height: 3px; border-radius: 50%; background: #2A3A52; flex-shrink: 0;"></div>
+          <span style="font-size: 11.5px; font-weight: 400; color: #3A4A62;">Surveyor Form</span>
+        </div>
+        <div onClick="{{ navA3 }}" style="display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 14px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.03)">
+          <div style="width: 3px; height: 3px; border-radius: 50%; background: #2A3A52; flex-shrink: 0;"></div>
+          <span style="font-size: 11.5px; font-weight: 400; color: #3A4A62;">Compliance</span>
+        </div>
+        <div onClick="{{ navA4 }}" style="display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 14px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.03)">
+          <div style="width: 3px; height: 3px; border-radius: 50%; background: #2A3A52; flex-shrink: 0;"></div>
+          <span style="font-size: 11.5px; font-weight: 400; color: #3A4A62;">Audit Trail</span>
+        </div>
+      </div>
+
+      <!-- Module B -->
+      <div style="margin-bottom: 6px;">
+        <div onClick="{{ navB1 }}" style="display: flex; align-items: center; gap: 7px; padding: 5px 10px 5px 8px; margin-bottom: 2px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)">
+          <div style="width: 18px; height: 18px; border-radius: 4px; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <span style="font-size: 9px; font-weight: 800; color: #8B5CF6;">B</span>
+          </div>
+          <span style="font-size: 10.5px; font-weight: 600; color: #4A5A72; letter-spacing: 0.3px; text-transform: uppercase;">OCR Hub</span>
+        </div>
+        <div onClick="{{ navB1 }}" style="display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 14px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.03)">
+          <div style="width: 3px; height: 3px; border-radius: 50%; background: #2A3A52; flex-shrink: 0;"></div>
+          <span style="font-size: 11.5px; font-weight: 400; color: #3A4A62;">Upload Center</span>
+        </div>
+        <div onClick="{{ navB2 }}" style="display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 14px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.03)">
+          <div style="width: 3px; height: 3px; border-radius: 50%; background: #2A3A52; flex-shrink: 0;"></div>
+          <span style="font-size: 11.5px; font-weight: 400; color: #3A4A62;">OCR Verification</span>
+        </div>
+        <div onClick="{{ navB3 }}" style="display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 14px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.03)">
+          <div style="width: 3px; height: 3px; border-radius: 50%; background: #2A3A52; flex-shrink: 0;"></div>
+          <span style="font-size: 11.5px; font-weight: 400; color: #3A4A62;">Routing Engine</span>
+        </div>
+      </div>
+
+      <!-- Module C -->
+      <div style="margin-bottom: 6px;">
+        <div onClick="{{ navC1 }}" style="display: flex; align-items: center; gap: 7px; padding: 5px 10px 5px 8px; margin-bottom: 2px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)">
+          <div style="width: 18px; height: 18px; border-radius: 4px; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <span style="font-size: 9px; font-weight: 800; color: #F59E0B;">C</span>
+          </div>
+          <span style="font-size: 10.5px; font-weight: 600; color: #4A5A72; letter-spacing: 0.3px; text-transform: uppercase;">Gantry & Fleet</span>
+        </div>
+        <div onClick="{{ navC1 }}" style="display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 14px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.03)">
+          <div style="width: 3px; height: 3px; border-radius: 50%; background: #2A3A52; flex-shrink: 0;"></div>
+          <span style="font-size: 11.5px; font-weight: 400; color: #3A4A62;">RFID Gantry</span>
+        </div>
+        <div onClick="{{ navC2 }}" style="display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 14px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.03)">
+          <div style="width: 3px; height: 3px; border-radius: 50%; background: #2A3A52; flex-shrink: 0;"></div>
+          <span style="font-size: 11.5px; font-weight: 400; color: #3A4A62;">Live Telematics</span>
+        </div>
+        <div onClick="{{ navC3 }}" style="display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 14px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.03)">
+          <div style="width: 3px; height: 3px; border-radius: 50%; background: #2A3A52; flex-shrink: 0;"></div>
+          <span style="font-size: 11.5px; font-weight: 400; color: #3A4A62;">AI Alerts</span>
+        </div>
+      </div>
+
+      <!-- Module D -->
+      <div style="margin-bottom: 6px;">
+        <div style="display: flex; align-items: center; gap: 7px; padding: 5px 10px 5px 8px; margin-bottom: 2px;">
+          <div style="width: 18px; height: 18px; border-radius: 4px; background: #22C55E; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <span style="font-size: 9px; font-weight: 800; color: white;">D</span>
+          </div>
+          <span style="font-size: 10.5px; font-weight: 700; color: #22C55E; letter-spacing: 0.3px; text-transform: uppercase;">e-POD Driver</span>
+        </div>
+        <div onClick="{{ goTo1 }}" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px 6px 14px; border-radius: 5px; cursor: pointer; background: {{ n1Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+          <div style="width: 4px; height: 4px; border-radius: 50%; background: {{ n1Color }}; flex-shrink: 0;"></div>
+          <span style="font-size: 12px; font-weight: 500; color: {{ n1Color }};">Today's Route</span>
+        </div>
+        <div onClick="{{ goTo2 }}" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px 6px 14px; border-radius: 5px; cursor: pointer; background: {{ n2Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+          <div style="width: 4px; height: 4px; border-radius: 50%; background: {{ n2Color }}; flex-shrink: 0;"></div>
+          <span style="font-size: 12px; font-weight: 500; color: {{ n2Color }};">Active Delivery</span>
+        </div>
+        <div onClick="{{ goTo3 }}" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px 6px 14px; border-radius: 5px; cursor: pointer; background: {{ n3Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+          <div style="width: 4px; height: 4px; border-radius: 50%; background: {{ n3Color }}; flex-shrink: 0;"></div>
+          <span style="font-size: 12px; font-weight: 500; color: {{ n3Color }};">Delivery Challan</span>
+        </div>
+        <div onClick="{{ goTo4 }}" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px 6px 14px; border-radius: 5px; cursor: pointer; background: {{ n4Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+          <div style="width: 4px; height: 4px; border-radius: 50%; background: {{ n4Color }}; flex-shrink: 0;"></div>
+          <span style="font-size: 12px; font-weight: 500; color: {{ n4Color }};">Dealer Sign-Off</span>
+        </div>
+      </div>
+
+      <!-- Module E -->
+      <div style="margin-bottom: 6px;">
+        <div onClick="{{ navE1 }}" style="display: flex; align-items: center; gap: 7px; padding: 5px 10px 5px 8px; margin-bottom: 2px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)">
+          <div style="width: 18px; height: 18px; border-radius: 4px; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <span style="font-size: 9px; font-weight: 800; color: #3B82F6;">E</span>
+          </div>
+          <span style="font-size: 10.5px; font-weight: 600; color: #4A5A72; letter-spacing: 0.3px; text-transform: uppercase;">O2C / SAP Hub</span>
+        </div>
+        <div onClick="{{ navE1 }}" style="display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 14px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.03)">
+          <div style="width: 3px; height: 3px; border-radius: 50%; background: #2A3A52; flex-shrink: 0;"></div>
+          <span style="font-size: 11.5px; font-weight: 400; color: #3A4A62;">Reconciliation</span>
+        </div>
+        <div onClick="{{ navE2 }}" style="display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 14px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.03)">
+          <div style="width: 3px; height: 3px; border-radius: 50%; background: #2A3A52; flex-shrink: 0;"></div>
+          <span style="font-size: 11.5px; font-weight: 400; color: #3A4A62;">Invoice Engine</span>
+        </div>
+        <div onClick="{{ navE3 }}" style="display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 14px; border-radius: 5px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.03)">
+          <div style="width: 3px; height: 3px; border-radius: 50%; background: #2A3A52; flex-shrink: 0;"></div>
+          <span style="font-size: 11.5px; font-weight: 400; color: #3A4A62;">Dispute Queue</span>
+        </div>
+      </div>
+
+    </nav>
+  </aside>
+
+  <!-- PHONE FRAME -->
+  <div style="flex: 1; background: #D8E2F4; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 28px 16px 52px; overflow-y: auto; height: 100vh;">
+
+    <div style="margin-bottom: 18px; text-align: center; width: 390px;">
+      <div style="font-size: 10px; font-weight: 700; color: rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 3px;">Module D · e-POD Driver App</div>
+      <div style="font-size: 9.5px; color: rgba(0,0,0,0.2); letter-spacing: 0.3px;">High-Contrast Mobile · PARCO Fleet · Sunlight-Optimised</div>
+    </div>
 
   <!-- ═══ MOBILE CARD ═══ -->
   <div style="width: 390px; border-radius: 22px; overflow: hidden; box-shadow: 0 24px 80px rgba(10,14,30,0.22), 0 6px 24px rgba(10,14,30,0.1); display: flex; flex-direction: column;">
@@ -232,7 +370,7 @@
 
         <!-- Header -->
         <div style="height: 60px; background: white; border-bottom: 1px solid #EDF0F7; display: flex; align-items: center; padding: 0 18px; gap: 12px; flex-shrink: 0;">
-          <div onClick="{{ goTo2 }}" style="width: 38px; height: 38px; border-radius: 11px; background: #F5F7FB; border: 1px solid #EDF0F7; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;" style-hover="background: #EDF0F7">
+          <div onClick="{{ goTo1 }}" style="width: 38px; height: 38px; border-radius: 11px; background: #F5F7FB; border: 1px solid #EDF0F7; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;" style-hover="background: #EDF0F7">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10.5 3L5 8l5.5 5" stroke="#0D1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div>
@@ -339,7 +477,7 @@
 
         <!-- Header -->
         <div style="height: 60px; background: white; border-bottom: 1px solid #EDF0F7; display: flex; align-items: center; padding: 0 18px; gap: 12px; flex-shrink: 0;">
-          <div onClick="{{ goTo3 }}" style="width: 38px; height: 38px; border-radius: 11px; background: #F5F7FB; border: 1px solid #EDF0F7; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;" style-hover="background: #EDF0F7">
+          <div onClick="{{ goTo1 }}" style="width: 38px; height: 38px; border-radius: 11px; background: #F5F7FB; border: 1px solid #EDF0F7; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;" style-hover="background: #EDF0F7">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10.5 3L5 8l5.5 5" stroke="#0D1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div>
@@ -501,6 +639,9 @@ class Component extends DCLogic {
   };
 
   componentDidMount() {
+      const _sp = new URLSearchParams(window.location.search);
+      const _sc = parseInt(_sp.get('screen') || '1');
+      if (_sc >= 1 && _sc <= 4) this.setState({ screen: _sc });
     this._setupCanvas();
   }
 
@@ -610,7 +751,28 @@ class Component extends DCLogic {
       goTo2: () => this.setState({ screen: 2 }),
       goTo3: () => this.setState({ screen: 3 }),
       goTo4: () => this.setState({ screen: 4 }),
-      goToHub: () => { window.location.href = './PARCO Supply Chain Hub - Standalone.html'; },
+      n1Bg: S(1) ? 'rgba(34,197,94,0.09)' : 'transparent',
+      n2Bg: S(2) ? 'rgba(34,197,94,0.09)' : 'transparent',
+      n3Bg: S(3) ? 'rgba(34,197,94,0.09)' : 'transparent',
+      n4Bg: S(4) ? 'rgba(34,197,94,0.09)' : 'transparent',
+      n1Color: S(1) ? '#22C55E' : '#4A5A72',
+      n2Color: S(2) ? '#22C55E' : '#4A5A72',
+      n3Color: S(3) ? '#22C55E' : '#4A5A72',
+      n4Color: S(4) ? '#22C55E' : '#4A5A72',
+      goToHub: () => { window.location.href = './PARCO Supply Chain Hub.dc.html'; },
+      navA1: () => { window.location.href = './PARCO Module A - Upstream Intake.dc.html'; },
+      navA2: () => { window.location.href = './PARCO Module A - Upstream Intake.dc.html?screen=2'; },
+      navA3: () => { window.location.href = './PARCO Module A - Upstream Intake.dc.html?screen=3'; },
+      navA4: () => { window.location.href = './PARCO Module A - Upstream Intake.dc.html?screen=4'; },
+      navB1: () => { window.location.href = './PARCO Module B - OCR Hub.dc.html'; },
+      navB2: () => { window.location.href = './PARCO Module B - OCR Hub.dc.html?screen=2'; },
+      navB3: () => { window.location.href = './PARCO Module B - OCR Hub.dc.html?screen=3'; },
+      navC1: () => { window.location.href = './PARCO Module C - Gantry & Fleet.dc.html'; },
+      navC2: () => { window.location.href = './PARCO Module C - Gantry & Fleet.dc.html?screen=2'; },
+      navC3: () => { window.location.href = './PARCO Module C - Gantry & Fleet.dc.html?screen=3'; },
+      navE1: () => { window.location.href = './PARCO Module E - O2C SAP Hub.dc.html'; },
+      navE2: () => { window.location.href = './PARCO Module E - O2C SAP Hub.dc.html?screen=2'; },
+      navE3: () => { window.location.href = './PARCO Module E - O2C SAP Hub.dc.html?screen=3'; },
 
       stops,
 
