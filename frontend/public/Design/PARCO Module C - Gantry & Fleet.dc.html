@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #05080F; font-family: 'DM Sans', system-ui, sans-serif; color: #DDE4EF; overflow: hidden; }
+    ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.09); border-radius: 6px; }
+    button { font-family: inherit; cursor: pointer; }
+    @keyframes ping { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.2); opacity: 0; } }
+  </style>
+</helmet>
+
+<div style="display: flex; width: 100vw; height: 100vh; overflow: hidden; background: #05080F;">
+
+  <!-- SIDEBAR -->
+  <aside style="width: 218px; min-width: 218px; background: #0A0F1E; border-right: 1px solid rgba(255,255,255,0.055); display: flex; flex-direction: column; flex-shrink: 0;">
+    <div style="height: 58px; display: flex; align-items: center; padding: 0 16px; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.055); flex-shrink: 0;">
+      <div style="width: 32px; height: 32px; background: #C8102E; border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 1.5L15 5.25V11.75L8.5 15.5L2 11.75V5.25L8.5 1.5Z" fill="white" fill-opacity="0.95"/><circle cx="8.5" cy="8.5" r="2.4" fill="#C8102E"/></svg>
+      </div>
+      <div><div style="font-size: 13.5px; font-weight: 700; color: #E8EEF8;">PARCO</div><div style="font-size: 10px; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.5px;">Supply Chain</div></div>
+      <div style="margin-left: auto; font-size: 9px; padding: 2px 5px; border-radius: 3px; background: rgba(200,16,46,0.12); color: #C8102E; font-weight: 600;">MOD C</div>
+    </div>
+    <nav style="flex: 1; padding: 14px 8px; display: flex; flex-direction: column; gap: 18px; overflow-y: auto;">
+      <!-- Hub link -->
+      <div>
+        <div onClick="{{ goToHub }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: rgba(255,255,255,0.03);" style-hover="background: rgba(255,255,255,0.06)">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M6 3l-4 4 4 4" stroke="#5A6880" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="font-size: 11.5px; font-weight: 600; color: #5A6880; letter-spacing: 0.2px;">Supply Chain Hub</span>
+        </div>
+        <div style="height: 1px; background: rgba(255,255,255,0.05); margin: 6px 4px;"></div>
+      </div>
+      <div>
+        <div style="font-size: 9px; font-weight: 700; color: #2A3A52; text-transform: uppercase; letter-spacing: 1.2px; padding: 0 9px; margin-bottom: 5px;">Fleet C</div>
+        <div style="display: flex; flex-direction: column; gap: 1px;">
+          <div onClick="{{ goTo1 }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: {{ n1Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="5" width="8.5" height="5" rx="1" stroke="{{ n1Color }}" stroke-width="1.3"/><path d="M9.5 7l4-2v5l-4-2" stroke="{{ n1Color }}" stroke-width="1.3"/><circle cx="3" cy="11" r="1.2" stroke="{{ n1Color }}" stroke-width="1.1"/><circle cx="7" cy="11" r="1.2" stroke="{{ n1Color }}" stroke-width="1.1"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: {{ n1Color }};">RFID Gantry</span>
+          </div>
+          <div onClick="{{ goTo2 }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: {{ n2Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="{{ n2Color }}" stroke-width="1.3"/><circle cx="7" cy="7" r="1.8" stroke="{{ n2Color }}" stroke-width="1.3"/><path d="M7 1.5V3M7 11V12.5M1.5 7H3M11 7h1.5" stroke="{{ n2Color }}" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: {{ n2Color }};">Live Telematics</span>
+          </div>
+          <div onClick="{{ goTo3 }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: {{ n3Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5l1 3h3l-2.5 2 1 3L7 8l-2.5 1.5 1-3L3 4.5h3l1-3Z" stroke="{{ n3Color }}" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: {{ n3Color }};">AI Alerts</span>
+            <div style="margin-left: auto; min-width: 18px; height: 18px; border-radius: 9px; background: #C8102E; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: white; padding: 0 4px;">{{ criticalCount }}</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 9px; font-weight: 700; color: #2A3A52; text-transform: uppercase; letter-spacing: 1.2px; padding: 0 9px; margin-bottom: 5px;">Upstream A</div>
+        <div style="display: flex; flex-direction: column; gap: 1px;">
+          <div onClick="{{ goToUpstreamA }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" fill="#8896A9"/><rect x="8" y="1" width="5" height="5" rx="1" fill="#8896A9" fill-opacity="0.5"/><rect x="1" y="8" width="5" height="5" rx="1" fill="#8896A9" fill-opacity="0.5"/><rect x="8" y="8" width="5" height="5" rx="1" fill="#8896A9" fill-opacity="0.3"/></svg><span style="font-size: 13px; font-weight: 500; color: #8896A9;">Dashboard</span></div>
+          <div onClick="{{ goToUpstreamA }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5L13 4.5V8C13 11 10.5 13 7 13.5C3.5 13 1 11 1 8V4.5L7 1.5Z" stroke="#8896A9" stroke-width="1.3"/></svg><span style="font-size: 13px; font-weight: 500; color: #8896A9;">Compliance</span></div>
+        </div>
+      </div>
+    </nav>
+    <div style="padding: 10px 12px; border-top: 1px solid rgba(255,255,255,0.055); display: flex; align-items: center; gap: 9px; flex-shrink: 0;">
+      <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg,#C8102E,#7A091C); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white;">AR</div>
+      <div><div style="font-size: 11.5px; font-weight: 600; color: #B8C8DC;">A. Rahman</div><div style="font-size: 9.5px; color: #3A4A62;">SC Admin · Kemari</div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div style="flex: 1; display: flex; flex-direction: column; min-width: 0; overflow: hidden;">
+    <header style="height: 58px; background: #0A0F1E; border-bottom: 1px solid rgba(255,255,255,0.055); display: flex; align-items: center; padding: 0 22px; gap: 14px; flex-shrink: 0;">
+      <div style="flex: 1; display: flex; align-items: center; gap: 7px;">
+        <span style="font-size: 11px; color: #2A3A52; font-weight: 500;">Fleet &amp; Gantry</span>
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M3.5 2l4 3.5-4 3.5" stroke="#2A3A52" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span style="font-size: 13px; font-weight: 600; color: #C8D8EC;">{{ screenTitle }}</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 4px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.14);">
+        <div style="width: 5px; height: 5px; border-radius: 50%; background: #22C55E;"></div>
+        <span style="font-size: 11px; font-weight: 500; color: #22C55E;">RFID Online · 4 Bays · 150 Lorries Active</span>
+      </div>
+      <span style="font-size: 11.5px; color: #2E3E55; font-family: 'DM Mono', monospace;">25 Jun 2026 · 13:04 PKT</span>
+    </header>
+
+    <main style="flex: 1; overflow-y: auto; padding: 22px 26px; background: #05080F;">
+
+      <!-- ── SCREEN 1: RFID GANTRY ── -->
+      <div style="display: {{ s1D }}; flex-direction: column; gap: 18px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div><div style="font-size: 17px; font-weight: 700; color: #E2EAF6; margin-bottom: 3px;">Loading Gantry Complex</div><div style="font-size: 11.5px; color: #3A4A62;">Kemari Terminal · RFID Validation System · Supervisor: Eng. Farrukh Baig</div></div>
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <div style="padding: 7px 13px; border-radius: 6px; background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); font-size: 11.5px; font-weight: 600; color: #22C55E;">● RFID Online</div>
+            <div style="padding: 7px 13px; border-radius: 6px; border: 1px solid rgba(200,16,46,0.3); background: rgba(200,16,46,0.07); font-size: 11.5px; font-weight: 600; color: #C8102E; cursor: pointer;" style-hover="background: rgba(200,16,46,0.12)">+ New Vehicle</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 340px; gap: 16px; align-items: start;">
+
+          <!-- Bay cards grid -->
+          <div>
+            <div style="font-size: 10px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px;">Loading Bay Status</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <sc-for list="{{ bays }}" as="bay" hint-placeholder-count="4">
+                <div onClick="{{ bay.select }}" style="background: {{ bay.cardBg }}; border: 1.5px solid {{ bay.cardBorder }}; border-radius: 10px; padding: 16px; cursor: pointer; position: relative; overflow: hidden;" style-hover="background: #141E2E">
+                  <!-- Active pulse for loading bay -->
+                  <sc-if value="{{ bay.isLoading }}" hint-placeholder-val="{{ false }}">
+                    <div style="position: absolute; top: 12px; right: 12px; width: 8px; height: 8px;">
+                      <div style="position: absolute; inset: 0; border-radius: 50%; background: #22C55E; animation: ping 1.8s ease-out infinite;"></div>
+                      <div style="position: absolute; inset: 0; border-radius: 50%; background: #22C55E;"></div>
+                    </div>
+                  </sc-if>
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 11px;">
+                    <span style="font-size: 11px; font-weight: 700; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.8px;">Bay {{ bay.id }}</span>
+                    <span style="font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; color: {{ bay.statusColor }}; background: {{ bay.statusBg }};">{{ bay.statusLabel }}</span>
+                  </div>
+                  <div style="font-size: 14px; font-weight: 700; color: #C0D0E4; margin-bottom: 3px; font-family: 'DM Mono', monospace;">{{ bay.lorryId }}</div>
+                  <div style="font-size: 11px; color: #5A6880; margin-bottom: 10px;">{{ bay.driver }}</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11px; margin-bottom: 8px;">
+                    <span style="color: #8896A9;">{{ bay.product }}</span>
+                    <span style="color: #8896A9; font-family: 'DM Mono', monospace;">{{ bay.volume }}</span>
+                  </div>
+                  <div style="height: 4px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden;">
+                    <div style="height: 100%; width: {{ bay.progressWidth }}; background: {{ bay.statusColor }}; border-radius: 2px;"></div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- RFID detail panel -->
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden;">
+            <div style="padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.055); display: flex; align-items: center; gap: 10px;">
+              <div style="width: 28px; height: 28px; border-radius: 6px; background: rgba(200,16,46,0.1); display: flex; align-items: center; justify-content: center;">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="10" rx="1.5" stroke="#C8102E" stroke-width="1.3"/><path d="M4 5.5h6M4 8h4" stroke="#C8102E" stroke-width="1.3" stroke-linecap="round"/><circle cx="10.5" cy="8" r="1" fill="#C8102E"/></svg>
+              </div>
+              <div><div style="font-size: 12px; font-weight: 600; color: #C0D0E4;">RFID Verification — Bay {{ selectedBayId }}</div><div style="font-size: 10px; color: #3A4A62; margin-top: 1px;">{{ selectedLorryId }} · Real-time authentication</div></div>
+            </div>
+            <div style="padding: 14px 16px; display: flex; flex-direction: column; gap: 10px;">
+              <sc-for list="{{ selectedSteps }}" as="step" hint-placeholder-count="6">
+                <div style="display: flex; align-items: flex-start; gap: 10px;">
+                  <div style="width: 20px; height: 20px; border-radius: 50%; background: {{ step.dotBg }}; border: 1.5px solid {{ step.dotBorder }}; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">
+                    <sc-if value="{{ step.isDone }}" hint-placeholder-val="{{ false }}">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 3.5-4" stroke="#22C55E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </sc-if>
+                    <sc-if value="{{ step.isProgress }}" hint-placeholder-val="{{ false }}">
+                      <div style="width: 5px; height: 5px; border-radius: 50%; background: #F59E0B;"></div>
+                    </sc-if>
+                  </div>
+                  <div style="flex: 1; min-width: 0;">
+                    <div style="font-size: 11px; font-weight: 600; color: {{ step.labelColor }}; margin-bottom: 2px;">{{ step.label }}</div>
+                    <div style="font-size: 11px; font-family: 'DM Mono', monospace; color: {{ step.valColor }}; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ step.value }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.055);">
+              <button onClick="{{ generateGatePass }}" style="width: 100%; padding: 10px; background: {{ gatePassBtnBg }}; border: none; border-radius: 8px; font-size: 12.5px; font-weight: 700; color: white; cursor: {{ gatePassBtnCursor }}; display: flex; align-items: center; justify-content: center; gap: 7px;" style-hover="opacity: 0.88">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="8" rx="1.5" stroke="white" stroke-width="1.3"/><path d="M4 6.5h6M4 9h3" stroke="white" stroke-width="1.3" stroke-linecap="round"/><circle cx="10.5" cy="9" r="1" fill="white"/></svg>
+                Generate Digital Gate Pass
+              </button>
+              <div style="display: {{ gatePassConfirmDisplay }}; align-items: center; gap: 6px; margin-top: 9px; padding: 8px 11px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.2); border-radius: 7px;">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" fill="#22C55E" fill-opacity="0.15"/><path d="M4 7l2.5 2.5 3.5-4" stroke="#22C55E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span style="font-size: 11px; font-weight: 600; color: #22C55E;">Gate Pass GP-2847-C1 issued · Pushed to LRR-0812 app</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Gantry KPIs -->
+        <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 12px;">
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 14px 16px; border-top: 2px solid rgba(34,197,94,0.4);">
+            <div style="font-size: 10px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px;">Loading</div>
+            <div style="font-size: 26px; font-weight: 700; font-family: 'DM Mono', monospace; color: #22C55E; margin-bottom: 4px;">1</div>
+            <div style="font-size: 10.5px; color: #5A6880;">Bay B-1 active</div>
+          </div>
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 14px 16px; border-top: 2px solid rgba(245,158,11,0.4);">
+            <div style="font-size: 10px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px;">Queued</div>
+            <div style="font-size: 26px; font-weight: 700; font-family: 'DM Mono', monospace; color: #F59E0B; margin-bottom: 4px;">1</div>
+            <div style="font-size: 10.5px; color: #5A6880;">Bay B-2 waiting</div>
+          </div>
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 14px 16px; border-top: 2px solid rgba(255,255,255,0.1);">
+            <div style="font-size: 10px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px;">Available</div>
+            <div style="font-size: 26px; font-weight: 700; font-family: 'DM Mono', monospace; color: #E2EAF6; margin-bottom: 4px;">1</div>
+            <div style="font-size: 10.5px; color: #5A6880;">Bay B-3 open</div>
+          </div>
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 14px 16px; border-top: 2px solid rgba(59,130,246,0.4);">
+            <div style="font-size: 10px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px;">Completed</div>
+            <div style="font-size: 26px; font-weight: 700; font-family: 'DM Mono', monospace; color: #3B82F6; margin-bottom: 4px;">1</div>
+            <div style="font-size: 10.5px; color: #5A6880;">Bay B-4 done</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 2: LIVE MAP ── -->
+      <div style="display: {{ s2D }}; flex-direction: column; gap: 18px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div><div style="font-size: 17px; font-weight: 700; color: #E2EAF6; margin-bottom: 3px;">Live Fleet Telematics</div><div style="font-size: 11.5px; color: #3A4A62;">150 lorries tracked · GPS refresh every 15 seconds · Kemari ↔ Karachi routes</div></div>
+        </div>
+
+        <!-- Fleet stat strip -->
+        <div style="display: grid; grid-template-columns: repeat(5,1fr); gap: 10px;">
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 9px;">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: #22C55E; flex-shrink: 0;"></div>
+            <div><div style="font-size: 18px; font-weight: 700; font-family: 'DM Mono', monospace; color: #22C55E; line-height: 1;">92</div><div style="font-size: 10px; color: #5A6880; margin-top: 2px;">In Transit</div></div>
+          </div>
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 9px;">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: #F59E0B; flex-shrink: 0;"></div>
+            <div><div style="font-size: 18px; font-weight: 700; font-family: 'DM Mono', monospace; color: #F59E0B; line-height: 1;">31</div><div style="font-size: 10px; color: #5A6880; margin-top: 2px;">At Pump</div></div>
+          </div>
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 9px;">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: #3B82F6; flex-shrink: 0;"></div>
+            <div><div style="font-size: 18px; font-weight: 700; font-family: 'DM Mono', monospace; color: #3B82F6; line-height: 1;">18</div><div style="font-size: 10px; color: #5A6880; margin-top: 2px;">Returning</div></div>
+          </div>
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 9px;">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: #8896A9; flex-shrink: 0;"></div>
+            <div><div style="font-size: 18px; font-weight: 700; font-family: 'DM Mono', monospace; color: #8896A9; line-height: 1;">7</div><div style="font-size: 10px; color: #5A6880; margin-top: 2px;">Idle</div></div>
+          </div>
+          <div style="background: #0E1626; border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 9px;">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: #EF4444; flex-shrink: 0;"></div>
+            <div><div style="font-size: 18px; font-weight: 700; font-family: 'DM Mono', monospace; color: #EF4444; line-height: 1;">2</div><div style="font-size: 10px; color: #EF4444; margin-top: 2px; font-weight: 500;">⚠ Alert</div></div>
+          </div>
+        </div>
+
+        <!-- Map + side panel -->
+        <div style="display: grid; grid-template-columns: 1fr 280px; gap: 14px; align-items: start;">
+          <!-- Map -->
+          <div style="background: #070B18; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden;">
+            <div style="padding: 11px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-size: 11px; font-weight: 600; color: #5A6880;">Karachi Fleet Map · Representative sample</span>
+              <div style="display: flex; align-items: center; gap: 12px; font-size: 10px; color: #3A4A62;">
+                <div style="display: flex; align-items: center; gap: 4px;"><div style="width: 7px; height: 7px; border-radius: 50%; background: #22C55E;"></div>Transit</div>
+                <div style="display: flex; align-items: center; gap: 4px;"><div style="width: 7px; height: 7px; border-radius: 50%; background: #F59E0B;"></div>At Pump</div>
+                <div style="display: flex; align-items: center; gap: 4px;"><div style="width: 7px; height: 7px; border-radius: 50%; background: #3B82F6;"></div>Return</div>
+                <div style="display: flex; align-items: center; gap: 4px;"><div style="width: 7px; height: 7px; border-radius: 50%; background: #EF4444;"></div>Alert</div>
+              </div>
+            </div>
+            <svg viewBox="0 0 680 380" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; display: block;">
+              <!-- Map background -->
+              <rect width="680" height="380" fill="#070B18"/>
+              <!-- Sea / Port area -->
+              <path d="M0 320 Q60 290 100 340 Q140 370 180 380 L0 380Z" fill="rgba(20,50,100,0.35)"/>
+              <path d="M0 340 Q50 310 90 360 Q120 375 150 380 L0 380Z" fill="rgba(20,60,120,0.25)"/>
+              <!-- Roads - major arteries -->
+              <line x1="0" y1="72" x2="680" y2="72" stroke="rgba(255,255,255,0.13)" stroke-width="5"/>
+              <line x1="0" y1="116" x2="440" y2="116" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+              <line x1="0" y1="256" x2="400" y2="256" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+              <line x1="110" y1="0" x2="110" y2="380" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+              <line x1="290" y1="100" x2="390" y2="290" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+              <line x1="200" y1="155" x2="500" y2="155" stroke="rgba(255,255,255,0.09)" stroke-width="3"/>
+              <line x1="490" y1="145" x2="550" y2="360" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
+              <line x1="360" y1="60" x2="360" y2="340" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
+              <!-- Minor roads -->
+              <line x1="0" y1="190" x2="300" y2="190" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+              <line x1="220" y1="0" x2="220" y2="380" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+              <line x1="430" y1="0" x2="430" y2="380" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+              <line x1="0" y1="310" x2="280" y2="310" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+              <!-- District labels -->
+              <text x="58" y="282" font-size="9" fill="rgba(255,255,255,0.22)" font-family="system-ui,sans-serif" font-weight="500">KEMARI</text>
+              <text x="118" y="228" font-size="9" fill="rgba(255,255,255,0.18)" font-family="system-ui,sans-serif">LYARI</text>
+              <text x="112" y="138" font-size="9" fill="rgba(255,255,255,0.18)" font-family="system-ui,sans-serif">ORANGI</text>
+              <text x="224" y="90" font-size="9" fill="rgba(255,255,255,0.18)" font-family="system-ui,sans-serif">N. KARACHI</text>
+              <text x="175" y="208" font-size="9" fill="rgba(255,255,255,0.15)" font-family="system-ui,sans-serif">SITE</text>
+              <text x="280" y="220" font-size="9" fill="rgba(255,255,255,0.18)" font-family="system-ui,sans-serif">SADDAR</text>
+              <text x="376" y="185" font-size="9" fill="rgba(255,255,255,0.18)" font-family="system-ui,sans-serif">GULSHAN</text>
+              <text x="468" y="262" font-size="9" fill="rgba(255,255,255,0.18)" font-family="system-ui,sans-serif">KORANGI</text>
+              <text x="348" y="325" font-size="9" fill="rgba(255,255,255,0.15)" font-family="system-ui,sans-serif">DHA</text>
+              <text x="535" y="242" font-size="9" fill="rgba(255,255,255,0.15)" font-family="system-ui,sans-serif">LANDHI</text>
+              <!-- Port marker -->
+              <circle cx="82" cy="298" r="7" fill="rgba(200,16,46,0.25)" stroke="rgba(200,16,46,0.6)" stroke-width="1.5"/>
+              <text x="94" y="302" font-size="8" fill="rgba(200,16,46,0.7)" font-family="system-ui,sans-serif" font-weight="700">PORT</text>
+              <!-- IN-TRANSIT lorries (green) -->
+              <circle cx="148" cy="72" r="4" fill="#22C55E"/><circle cx="212" cy="72" r="4" fill="#22C55E"/>
+              <circle cx="298" cy="72" r="4" fill="#22C55E"/><circle cx="392" cy="72" r="4" fill="#22C55E"/>
+              <circle cx="468" cy="72" r="4" fill="#22C55E"/><circle cx="558" cy="72" r="4" fill="#22C55E"/>
+              <circle cx="136" cy="116" r="4" fill="#22C55E"/><circle cx="228" cy="116" r="4" fill="#22C55E"/>
+              <circle cx="328" cy="116" r="4" fill="#22C55E"/>
+              <circle cx="110" cy="178" r="4" fill="#22C55E"/><circle cx="110" cy="228" r="4" fill="#22C55E"/>
+              <circle cx="254" cy="155" r="4" fill="#22C55E"/><circle cx="338" cy="155" r="4" fill="#22C55E"/>
+              <circle cx="428" cy="155" r="4" fill="#22C55E"/>
+              <circle cx="318" cy="178" r="4" fill="#22C55E"/><circle cx="348" cy="218" r="4" fill="#22C55E"/>
+              <circle cx="492" cy="185" r="4" fill="#22C55E"/><circle cx="512" cy="248" r="4" fill="#22C55E"/>
+              <circle cx="608" cy="72" r="4" fill="#22C55E"/><circle cx="648" cy="72" r="4" fill="#22C55E"/>
+              <!-- AT PUMP lorries (amber) -->
+              <circle cx="168" cy="192" r="4.5" fill="#F59E0B"/><circle cx="274" cy="232" r="4.5" fill="#F59E0B"/>
+              <circle cx="398" cy="218" r="4.5" fill="#F59E0B"/><circle cx="452" cy="298" r="4.5" fill="#F59E0B"/>
+              <circle cx="548" cy="168" r="4.5" fill="#F59E0B"/><circle cx="582" cy="228" r="4.5" fill="#F59E0B"/>
+              <circle cx="308" cy="318" r="4.5" fill="#F59E0B"/><circle cx="414" cy="92" r="4.5" fill="#F59E0B"/>
+              <!-- RETURNING lorries (blue) -->
+              <circle cx="198" cy="272" r="4" fill="#3B82F6"/><circle cx="154" cy="298" r="4" fill="#3B82F6"/>
+              <circle cx="124" cy="318" r="4" fill="#3B82F6"/><circle cx="176" cy="334" r="4" fill="#3B82F6"/>
+              <circle cx="248" cy="348" r="4" fill="#3B82F6"/>
+              <!-- ALERT lorries (red, pulsing) -->
+              <circle cx="464" cy="188" r="6" fill="rgba(239,68,68,0.25)" stroke="#EF4444" stroke-width="2"/>
+              <circle cx="178" cy="134" r="6" fill="rgba(239,68,68,0.25)" stroke="#EF4444" stroke-width="2"/>
+              <!-- SELECTED lorry (LRR-0847, bright, white ring) -->
+              <circle cx="286" cy="232" r="7" fill="rgba(34,197,94,0.2)" stroke="white" stroke-width="2"/>
+              <circle cx="286" cy="232" r="4" fill="#22C55E"/>
+              <text x="295" y="229" font-size="7.5" fill="white" font-family="monospace" font-weight="700">LRR-0847</text>
+            </svg>
+          </div>
+
+          <!-- Right panel: selected lorry + quick list -->
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <!-- Selected lorry card -->
+            <div style="background: #0E1626; border: 1px solid rgba(34,197,94,0.25); border-radius: 10px; padding: 14px; border-top: 2px solid #22C55E;">
+              <div style="font-size: 10px; font-weight: 700; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 9px;">Active Track — LRR-0847</div>
+              <div style="display: flex; flex-direction: column; gap: 7px;">
+                <div style="display: flex; justify-content: space-between;"><span style="font-size: 11px; color: #5A6880;">Driver</span><span style="font-size: 11px; font-weight: 500; color: #C0D0E4;">M. Saleem Khan</span></div>
+                <div style="display: flex; justify-content: space-between;"><span style="font-size: 11px; color: #5A6880;">Product</span><span style="font-size: 11px; font-weight: 500; color: #C0D0E4;">HOBC</span></div>
+                <div style="display: flex; justify-content: space-between;"><span style="font-size: 11px; color: #5A6880;">Volume</span><span style="font-size: 11px; font-weight: 500; color: #C0D0E4; font-family: 'DM Mono', monospace;">8,000 L</span></div>
+                <div style="display: flex; justify-content: space-between;"><span style="font-size: 11px; color: #5A6880;">Speed</span><span style="font-size: 11px; font-weight: 500; color: #22C55E; font-family: 'DM Mono', monospace;">47 km/h</span></div>
+                <div style="display: flex; justify-content: space-between;"><span style="font-size: 11px; color: #5A6880;">ETA</span><span style="font-size: 11px; font-weight: 600; color: #C8102E; font-family: 'DM Mono', monospace;">~13:30</span></div>
+                <div style="display: flex; justify-content: space-between;"><span style="font-size: 11px; color: #5A6880;">Location</span><span style="font-size: 11px; font-weight: 500; color: #C0D0E4;">Saddar</span></div>
+                <div style="height: 1px; background: rgba(255,255,255,0.04);"></div>
+                <div style="display: flex; justify-content: space-between;"><span style="font-size: 11px; color: #5A6880;">Status</span><div style="display: flex; align-items: center; gap: 5px;"><div style="width: 5px; height: 5px; border-radius: 50%; background: #22C55E;"></div><span style="font-size: 11px; font-weight: 600; color: #22C55E;">On Route</span></div></div>
+              </div>
+            </div>
+            <!-- Alert lorries -->
+            <div style="background: #0E1626; border: 1px solid rgba(239,68,68,0.2); border-radius: 10px; padding: 13px;">
+              <div style="font-size: 10px; font-weight: 700; color: #EF4444; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 9px;">⚠ Alert Lorries</div>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="padding: 8px 10px; background: rgba(239,68,68,0.06); border-radius: 7px; border-left: 2px solid #EF4444;">
+                  <div style="font-size: 11.5px; font-weight: 700; color: #EF4444; font-family: 'DM Mono', monospace; margin-bottom: 2px;">LRR-0334</div>
+                  <div style="font-size: 10px; color: #8896A9;">Route deviation · Korangi</div>
+                </div>
+                <div style="padding: 8px 10px; background: rgba(239,68,68,0.06); border-radius: 7px; border-left: 2px solid #EF4444;">
+                  <div style="font-size: 11.5px; font-weight: 700; color: #EF4444; font-family: 'DM Mono', monospace; margin-bottom: 2px;">LRR-0781</div>
+                  <div style="font-size: 10px; color: #8896A9;">Valve tamper · Shah Faisal</div>
+                </div>
+              </div>
+              <div onClick="{{ goTo3 }}" style="margin-top: 10px; padding: 7px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 7px; font-size: 11.5px; font-weight: 600; color: #EF4444; text-align: center; cursor: pointer;" style-hover="background: rgba(239,68,68,0.14)">View All Alerts →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 3: AI ALERTS ── -->
+      <div style="display: {{ s3D }}; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div><div style="font-size: 17px; font-weight: 700; color: #E2EAF6; margin-bottom: 3px;">AI Alert Center</div><div style="font-size: 11.5px; color: #3A4A62;">Edge device anomaly detection · Real-time · 7 active alerts</div></div>
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <div style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(239,68,68,0.3); background: rgba(239,68,68,0.08); font-size: 11px; font-weight: 600; color: #EF4444;">2 Critical</div>
+            <div style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(245,158,11,0.3); background: rgba(245,158,11,0.08); font-size: 11px; font-weight: 600; color: #F59E0B;">3 Warning</div>
+            <div style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); font-size: 11px; font-weight: 500; color: #8896A9;">2 Info</div>
+          </div>
+        </div>
+
+        <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; overflow: hidden;">
+          <div style="display: grid; grid-template-columns: 90px 100px 1fr 1fr 80px 80px 130px; padding: 10px 18px; background: rgba(255,255,255,0.015); border-bottom: 1px solid rgba(255,255,255,0.04);">
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Level</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Lorry</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Alert Type</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Detail</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Time</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Status</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Action</span>
+          </div>
+          <sc-for list="{{ alerts }}" as="al" hint-placeholder-count="7">
+            <div style="display: grid; grid-template-columns: 90px 100px 1fr 1fr 80px 80px 130px; padding: 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.03); background: {{ al.rowBg }}; align-items: center;" style-hover="background: rgba(255,255,255,0.02)">
+              <div style="display: inline-flex; padding: 2px 8px; border-radius: 4px; background: {{ al.levelBg }}; border: 1px solid {{ al.levelBorder }}; width: fit-content;">
+                <span style="font-size: 10px; font-weight: 700; color: {{ al.levelColor }};">{{ al.levelLabel }}</span>
+              </div>
+              <span style="font-size: 12px; font-family: 'DM Mono', monospace; font-weight: 600; color: {{ al.levelColor }};">{{ al.lorry }}</span>
+              <span style="font-size: 11.5px; font-weight: 500; color: #C0D0E4;">{{ al.type }}</span>
+              <span style="font-size: 11px; color: #5A6880; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-right: 8px;">{{ al.detail }}</span>
+              <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #3A4A62;">{{ al.time }}</span>
+              <div>
+                <span style="font-size: 10px; font-weight: 600; color: {{ al.ackColor }};">{{ al.ackLabel }}</span>
+              </div>
+              <div style="display: flex; gap: 6px;">
+                <sc-if value="{{ al.canAck }}" hint-placeholder-val="{{ false }}">
+                  <button onClick="{{ al.ackHandler }}" style="padding: 4px 9px; background: rgba(200,16,46,0.1); border: 1px solid rgba(200,16,46,0.25); border-radius: 5px; font-size: 10.5px; font-weight: 600; color: #C8102E; cursor: pointer;" style-hover="background: rgba(200,16,46,0.18)">Acknowledge</button>
+                  <button style="padding: 4px 9px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 5px; font-size: 10.5px; font-weight: 600; color: #EF4444; cursor: pointer;" style-hover="background: rgba(239,68,68,0.14)">Escalate</button>
+                </sc-if>
+                <sc-if value="{{ al.isAcked }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-size: 10.5px; color: #3A4A62; font-weight: 500;">Handled</span>
+                </sc-if>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = {
+    screen: 1,
+    selectedBay: 0,
+    acknowledged: {},
+    gatePassGenerated: false,
+  };
+
+  renderVals() {
+    const s = this.state;
+    const S = (n) => s.screen === n;
+
+    const bayDefs = [
+      { id: 'B-1', lorryId: 'LRR-0847', driver: 'M. Saleem Khan', product: 'HOBC', volume: '8,000 L', statusLabel: 'Loading', statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.09)', progressWidth: '67%', isLoadingBay: true, isCompleteBay: false },
+      { id: 'B-2', lorryId: 'LRR-0923', driver: 'Ch. Riaz Ahmed', product: 'HSD', volume: '10,000 L', statusLabel: 'Queued', statusColor: '#F59E0B', statusBg: 'rgba(245,158,11,0.09)', progressWidth: '0%', isLoadingBay: false, isCompleteBay: false },
+      { id: 'B-3', lorryId: '—', driver: '—', product: '—', volume: '—', statusLabel: 'Available', statusColor: '#3A4A62', statusBg: 'rgba(255,255,255,0.04)', progressWidth: '0%', isLoadingBay: false, isCompleteBay: false },
+      { id: 'B-4', lorryId: 'LRR-0812', driver: 'S. Naqvi', product: 'MOGAS 92', volume: '7,500 L', statusLabel: 'Complete', statusColor: '#3B82F6', statusBg: 'rgba(59,130,246,0.09)', progressWidth: '100%', isLoadingBay: false, isCompleteBay: true },
+    ];
+
+    const bays = bayDefs.map((b, i) => ({
+      ...b,
+      isLoading: b.isLoadingBay,
+      cardBg: i === s.selectedBay ? '#141E2E' : '#0E1626',
+      cardBorder: i === s.selectedBay ? (b.statusColor + '44') : 'rgba(255,255,255,0.06)',
+      select: () => this.setState({ selectedBay: i }),
+    }));
+
+    const stepsData = [
+      [
+        { label: 'RFID Tag Read', value: '0x4E2B·8A91 · Authenticated', done: true, prog: false },
+        { label: 'Driver Authentication', value: 'M. Saleem Khan · DLR-0847', done: true, prog: false },
+        { label: 'Lorry Registration', value: 'LRR-0847 · Capacity: 8,000 L', done: true, prog: false },
+        { label: 'Product Authorization', value: 'HOBC · Lot #PLT-2847 · Approved', done: true, prog: false },
+        { label: 'Seal Integrity Check', value: 'KA-8847 / KB-9023 · Intact', done: true, prog: false },
+        { label: 'Loading Progress', value: '5,360 / 8,000 L loaded (67%)', done: false, prog: true },
+      ],
+      [
+        { label: 'RFID Tag Read', value: '0x7C3D·2F18 · Authenticated', done: true, prog: false },
+        { label: 'Driver Authentication', value: 'Ch. Riaz Ahmed · DLR-0923', done: true, prog: false },
+        { label: 'Lorry Registration', value: 'LRR-0923 · Capacity: 10,000 L', done: true, prog: false },
+        { label: 'Product Authorization', value: 'HSD · Awaiting Gantry Assignment', done: false, prog: false },
+        { label: 'Seal Integrity Check', value: 'Pending bay assignment', done: false, prog: false },
+        { label: 'Loading Progress', value: 'Awaiting bay clearance', done: false, prog: false },
+      ],
+      [
+        { label: 'RFID Tag Read', value: '—', done: false, prog: false },
+        { label: 'Driver Authentication', value: '—', done: false, prog: false },
+        { label: 'Lorry Registration', value: '—', done: false, prog: false },
+        { label: 'Product Authorization', value: '—', done: false, prog: false },
+        { label: 'Seal Integrity Check', value: '—', done: false, prog: false },
+        { label: 'Loading Progress', value: 'Bay Available — Awaiting Vehicle', done: false, prog: false },
+      ],
+      [
+        { label: 'RFID Tag Read', value: '0x9A1E·5C34 · Authenticated', done: true, prog: false },
+        { label: 'Driver Authentication', value: 'S. Naqvi · DLR-0812', done: true, prog: false },
+        { label: 'Lorry Registration', value: 'LRR-0812 · Capacity: 7,500 L', done: true, prog: false },
+        { label: 'Product Authorization', value: 'MOGAS 92 · Lot #PLT-2839', done: true, prog: false },
+        { label: 'Seal Integrity Check', value: 'KC-7823 / KD-6012 · Intact', done: true, prog: false },
+        { label: 'Loading Progress', value: '7,500 / 7,500 L · Complete ✓', done: true, prog: false },
+      ],
+    ];
+
+    const selectedSteps = (stepsData[s.selectedBay] || stepsData[0]).map(st => ({
+      ...st,
+      isDone: st.done,
+      isProgress: st.prog,
+      dotBg: st.prog ? 'rgba(245,158,11,0.15)' : st.done ? 'rgba(34,197,94,0.15)' : 'rgba(255,255,255,0.04)',
+      dotBorder: st.prog ? 'rgba(245,158,11,0.4)' : st.done ? 'rgba(34,197,94,0.4)' : 'rgba(255,255,255,0.08)',
+      labelColor: st.done || st.prog ? '#C0D0E4' : '#5A6880',
+      valColor: st.prog ? '#F59E0B' : st.done ? '#8ABDA0' : '#3A4A62',
+    }));
+
+    const selectedBayObj = bayDefs[s.selectedBay] || bayDefs[0];
+    const canGenGatePass = selectedBayObj.isCompleteBay;
+
+    const alertDefs = [
+      { id: 'A001', level: 'critical', levelLabel: 'Critical', levelColor: '#EF4444', levelBg: 'rgba(239,68,68,0.08)', levelBorder: 'rgba(239,68,68,0.2)', lorry: 'LRR-0334', type: 'Unauthorized Route Deviation', detail: '4.2 km off approved route · Korangi Industrial', time: '12:47' },
+      { id: 'A002', level: 'critical', levelLabel: 'Critical', levelColor: '#EF4444', levelBg: 'rgba(239,68,68,0.08)', levelBorder: 'rgba(239,68,68,0.2)', lorry: 'LRR-0781', type: 'Valve Tampering Detected', detail: 'Pressure anomaly · Compartment 2 sensor', time: '12:39' },
+      { id: 'A003', level: 'warning', levelLabel: 'Warning', levelColor: '#F59E0B', levelBg: 'rgba(245,158,11,0.06)', levelBorder: 'rgba(245,158,11,0.18)', lorry: 'LRR-0622', type: 'Geofence Breach', detail: 'Stopped outside approved zone for 12 min', time: '12:31' },
+      { id: 'A004', level: 'warning', levelLabel: 'Warning', levelColor: '#F59E0B', levelBg: 'rgba(245,158,11,0.06)', levelBorder: 'rgba(245,158,11,0.18)', lorry: 'LRR-0445', type: 'Engine Off — Restricted Zone', detail: 'Engine idle 28 min · No authorized stop', time: '12:18' },
+      { id: 'A005', level: 'warning', levelLabel: 'Warning', levelColor: '#F59E0B', levelBg: 'rgba(245,158,11,0.06)', levelBorder: 'rgba(245,158,11,0.18)', lorry: 'LRR-0889', type: 'Speed Violation', detail: 'Recorded 78 km/h in 50 km/h zone', time: '11:54' },
+      { id: 'A006', level: 'info', levelLabel: 'Info', levelColor: '#3B82F6', levelBg: 'rgba(59,130,246,0.05)', levelBorder: 'rgba(59,130,246,0.14)', lorry: 'LRR-0912', type: 'Scheduled Fuel Stop', detail: 'Authorized stop at PARCO Fuel Point 4', time: '11:30' },
+      { id: 'A007', level: 'info', levelLabel: 'Info', levelColor: '#3B82F6', levelBg: 'rgba(59,130,246,0.05)', levelBorder: 'rgba(59,130,246,0.14)', lorry: 'LRR-0847', type: 'Delivery ETA Updated', detail: 'Karimi Filling Station ETA: 13:30 PKT', time: '11:12' },
+    ];
+
+    const alerts = alertDefs.map(a => {
+      const isAcked = !!s.acknowledged[a.id] || a.level === 'info';
+      return {
+        ...a,
+        isAcked,
+        canAck: !isAcked,
+        rowBg: a.level === 'critical' && !isAcked ? 'rgba(239,68,68,0.03)' : 'transparent',
+        ackLabel: isAcked ? '✓ Done' : 'Open',
+        ackColor: isAcked ? '#3A4A62' : a.levelColor,
+        ackHandler: () => this.setState(prev => ({ acknowledged: { ...prev.acknowledged, [a.id]: true } })),
+      };
+    });
+
+    return {
+      s1D: S(1) ? 'flex' : 'none',
+      s2D: S(2) ? 'flex' : 'none',
+      s3D: S(3) ? 'flex' : 'none',
+      goTo1: () => this.setState({ screen: 1 }),
+      goTo2: () => this.setState({ screen: 2 }),
+      goTo3: () => this.setState({ screen: 3 }),
+      goToHub:       () => { window.location.href = './PARCO Supply Chain Hub - Standalone.html'; },
+      goToUpstreamA: () => { window.location.href = './PARCO Module A - Upstream Intake.dc.html'; },
+      n1Bg: S(1) ? 'rgba(200,16,46,0.13)' : 'transparent', n1Color: S(1) ? '#C8102E' : '#8896A9',
+      n2Bg: S(2) ? 'rgba(200,16,46,0.13)' : 'transparent', n2Color: S(2) ? '#C8102E' : '#8896A9',
+      n3Bg: S(3) ? 'rgba(200,16,46,0.13)' : 'transparent', n3Color: S(3) ? '#C8102E' : '#8896A9',
+      screenTitle: ['RFID Gantry Control', 'Live Telematics Map', 'AI Alert Center'][s.screen - 1],
+      bays,
+      selectedSteps,
+      selectedBayId: selectedBayObj.id,
+      selectedLorryId: selectedBayObj.lorryId,
+      gatePassBtnBg: canGenGatePass ? '#22C55E' : '#1A2840',
+      gatePassBtnCursor: canGenGatePass ? 'pointer' : 'not-allowed',
+      gatePassConfirmDisplay: s.gatePassGenerated ? 'flex' : 'none',
+      generateGatePass: () => { if (canGenGatePass) this.setState({ gatePassGenerated: true }); },
+      alerts,
+      criticalCount: alerts.filter(a => a.level === 'critical' && !a.isAcked).length,
+    };
+  }
+}
+</script>
+</body>
+</html>

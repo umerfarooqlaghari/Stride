@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<template id="__bundler_thumbnail" data-bg-color="#05080F">
+  <svg viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1440" height="900" fill="#05080F"/>
+    <rect width="1440" height="62" fill="#0A0F1E"/>
+    <rect x="36" y="14" width="34" height="34" rx="8" fill="#C8102E"/>
+    <polygon points="53,19 63,25 63,37 53,43 43,37 43,25" fill="white" fill-opacity="0.9"/>
+    <rect x="80" y="20" width="60" height="9" rx="3" fill="#E8EEF8" fill-opacity="0.7"/>
+    <rect x="80" y="33" width="90" height="5" rx="2" fill="#3A4A62"/>
+    <rect x="36" y="110" width="480" height="200" fill="#0A0F1E" rx="4" opacity="0.8"/>
+    <rect x="36" y="130" width="200" height="14" rx="3" fill="#E8EEF8" fill-opacity="0.6"/>
+    <rect x="36" y="152" width="320" height="10" rx="3" fill="#E8EEF8" fill-opacity="0.3"/>
+    <rect x="540" y="110" width="210" height="90" rx="8" fill="#0E1626"/>
+    <rect x="540" y="110" width="210" height="3" rx="1" fill="#C8102E"/>
+    <rect x="764" y="110" width="210" height="90" rx="8" fill="#0E1626"/>
+    <rect x="764" y="110" width="210" height="3" rx="1" fill="#22C55E"/>
+    <rect x="988" y="110" width="210" height="90" rx="8" fill="#0E1626"/>
+    <rect x="988" y="110" width="210" height="3" rx="1" fill="#F59E0B"/>
+    <rect x="1212" y="110" width="192" height="90" rx="8" fill="#0E1626"/>
+    <rect x="1212" y="110" width="192" height="3" rx="1" fill="#8B5CF6"/>
+    <rect x="36" y="340" width="440" height="220" rx="10" fill="#0E1626"/>
+    <rect x="36" y="340" width="440" height="3" rx="1" fill="#C8102E"/>
+    <rect x="496" y="340" width="440" height="220" rx="10" fill="#0E1626"/>
+    <rect x="496" y="340" width="440" height="3" rx="1" fill="#8B5CF6"/>
+    <rect x="956" y="340" width="448" height="220" rx="10" fill="#0E1626"/>
+    <rect x="956" y="340" width="448" height="3" rx="1" fill="#F59E0B"/>
+    <rect x="36" y="580" width="680" height="200" rx="10" fill="#0E1626"/>
+    <rect x="36" y="580" width="680" height="3" rx="1" fill="#22C55E"/>
+    <rect x="726" y="580" width="678" height="200" rx="10" fill="#0E1626"/>
+    <rect x="726" y="580" width="678" height="3" rx="1" fill="#3B82F6"/>
+  </svg>
+</template>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #05080F; font-family: 'DM Sans', system-ui, sans-serif; color: #DDE4EF; min-height: 100vh; }
+    ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.09); border-radius: 6px; }
+    a { text-decoration: none; color: inherit; }
+    @keyframes parcoPulse { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+  </style>
+</helmet>
+
+<!-- Page shell -->
+<div style="min-height: 100vh; background: #05080F; display: flex; flex-direction: column;">
+
+  <!-- Top nav -->
+  <header style="height: 62px; background: #0A0F1E; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; padding: 0 36px; gap: 16px; flex-shrink: 0; position: sticky; top: 0; z-index: 10;">
+    <div style="display: flex; align-items: center; gap: 11px; margin-right: 24px;">
+      <div style="width: 34px; height: 34px; background: #C8102E; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5L16 5.5V12.5L9 16.5L2 12.5V5.5L9 1.5Z" fill="white" fill-opacity="0.95"/><circle cx="9" cy="9" r="2.5" fill="#C8102E"/></svg>
+      </div>
+      <div>
+        <div style="font-size: 15px; font-weight: 800; color: #E8EEF8; letter-spacing: -0.2px;">PARCO</div>
+        <div style="font-size: 9.5px; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600;">Downstream Supply Chain</div>
+      </div>
+    </div>
+    <div style="height: 20px; width: 1px; background: rgba(255,255,255,0.06);"></div>
+    <nav style="display: flex; align-items: center; gap: 2px; flex: 1;">
+      <sc-for list="{{ navModules }}" as="m" hint-placeholder-count="5">
+        <a href="{{ m.href }}" style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; color: #8896A9; cursor: pointer; white-space: nowrap;" style-hover="background: rgba(255,255,255,0.04); color: #C0D0E4">
+          <span style="font-size: 10px; font-weight: 700; color: #2E3E55; background: rgba(255,255,255,0.05); padding: 1px 5px; border-radius: 3px;">{{ m.tag }}</span>
+          {{ m.label }}
+        </a>
+      </sc-for>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <div style="display: flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 5px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.14);">
+        <div style="width: 5px; height: 5px; border-radius: 50%; background: #22C55E; animation: parcoPulse 2s ease-in-out infinite;"></div>
+        <span style="font-size: 11px; font-weight: 500; color: #22C55E;">All Systems Online</span>
+      </div>
+      <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg,#C8102E,#7A091C); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white;">AR</div>
+    </div>
+  </header>
+
+  <!-- Hero section -->
+  <section style="padding: 56px 36px 40px; background: linear-gradient(180deg, #0A0F1E 0%, #05080F 100%); border-bottom: 1px solid rgba(255,255,255,0.06);">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; flex-wrap: wrap;">
+        <div>
+          <div style="display: inline-flex; align-items: center; gap: 7px; padding: 4px 12px; border-radius: 5px; background: rgba(200,16,46,0.08); border: 1px solid rgba(200,16,46,0.2); margin-bottom: 16px;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1L10.5 3.5V8.5L6 11L1.5 8.5V3.5L6 1Z" fill="#C8102E" fill-opacity="0.3" stroke="#C8102E" stroke-width="1"/></svg>
+            <span style="font-size: 10.5px; font-weight: 700; color: #C8102E; letter-spacing: 0.3px;">PARCO DOWNSTREAM DIGITIZATION v1.0</span>
+          </div>
+          <h1 style="font-size: 38px; font-weight: 800; color: #E8EEF8; letter-spacing: -0.8px; line-height: 1.1; margin-bottom: 12px;">Supply Chain<br>Command Centre</h1>
+          <p style="font-size: 14px; color: #5A6880; line-height: 1.6; max-width: 480px;">Replacing manual, paper-based workflows with a zero-touch digital platform — vessel intake through to SAP invoice, fully automated.</p>
+        </div>
+        <!-- Live KPIs -->
+        <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; min-width: 520px;">
+          <sc-for list="{{ heroKpis }}" as="k" hint-placeholder-count="4">
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 14px 16px; border-top: 2px solid {{ k.topColor }};">
+              <div style="font-size: 9.5px; font-weight: 700; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px;">{{ k.label }}</div>
+              <div style="font-size: 26px; font-weight: 800; font-family: 'DM Mono', monospace; color: {{ k.valueColor }}; line-height: 1; margin-bottom: 4px;">{{ k.value }}</div>
+              <div style="font-size: 10px; color: #3A4A62;">{{ k.sub }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Module cards grid -->
+  <section style="padding: 40px 36px 60px; flex: 1;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+        <div>
+          <div style="font-size: 16px; font-weight: 700; color: #C0D0E4; margin-bottom: 3px;">Platform Modules</div>
+          <div style="font-size: 11.5px; color: #3A4A62;">Click any module to open its prototype</div>
+        </div>
+        <div style="font-size: 11.5px; color: #3A4A62; font-family: 'DM Mono', monospace;">25 Jun 2026 · 13:04 PKT</div>
+      </div>
+
+      <!-- 5-module grid: 3 top, 2 bottom -->
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 16px;">
+        <sc-for list="{{ topModules }}" as="mod" hint-placeholder-count="3">
+          <a href="{{ mod.href }}" style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px; cursor: pointer; border-top: 3px solid {{ mod.accentColor }}; position: relative; overflow: hidden;" style-hover="background: #131D30; border-color: rgba(255,255,255,0.1)">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;">
+              <div style="width: 44px; height: 44px; border-radius: 11px; background: {{ mod.iconBg }}; border: 1.5px solid {{ mod.iconBorder }}; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <span style="font-size: 18px; font-weight: 800; color: {{ mod.accentColor }}; font-family: 'DM Sans', sans-serif; letter-spacing: -0.5px;">{{ mod.modLetter }}</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
+                <span style="font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 3px; background: rgba(255,255,255,0.05); color: #3A4A62; letter-spacing: 0.5px;">{{ mod.tag }}</span>
+                <div style="display: flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 4px; background: {{ mod.statusBg }}; border: 1px solid {{ mod.statusBorder }};">
+                  <div style="width: 5px; height: 5px; border-radius: 50%; background: {{ mod.statusColor }};"></div>
+                  <span style="font-size: 10px; font-weight: 600; color: {{ mod.statusColor }};">{{ mod.status }}</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div style="font-size: 16px; font-weight: 700; color: #C8D8EC; margin-bottom: 5px; letter-spacing: -0.2px;">{{ mod.title }}</div>
+              <div style="font-size: 11.5px; color: #4A5A72; line-height: 1.5;">{{ mod.desc }}</div>
+            </div>
+            <!-- Metrics row -->
+            <div style="display: flex; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.055);">
+              <sc-for list="{{ mod.metrics }}" as="metric" hint-placeholder-count="2">
+                <div>
+                  <div style="font-size: 16px; font-weight: 700; font-family: 'DM Mono', monospace; color: {{ metric.color }}; line-height: 1; margin-bottom: 2px;">{{ metric.value }}</div>
+                  <div style="font-size: 10px; color: #3A4A62;">{{ metric.label }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <!-- Arrow -->
+            <div style="position: absolute; bottom: 20px; right: 20px; width: 28px; height: 28px; border-radius: 7px; background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center;">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="{{ mod.accentColor }}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 16px;">
+        <sc-for list="{{ bottomModules }}" as="mod" hint-placeholder-count="2">
+          <a href="{{ mod.href }}" style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px; cursor: pointer; border-top: 3px solid {{ mod.accentColor }}; position: relative; overflow: hidden;" style-hover="background: #131D30; border-color: rgba(255,255,255,0.1)">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;">
+              <div style="width: 44px; height: 44px; border-radius: 11px; background: {{ mod.iconBg }}; border: 1.5px solid {{ mod.iconBorder }}; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <span style="font-size: 18px; font-weight: 800; color: {{ mod.accentColor }}; font-family: 'DM Sans', sans-serif; letter-spacing: -0.5px;">{{ mod.modLetter }}</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
+                <span style="font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 3px; background: rgba(255,255,255,0.05); color: #3A4A62; letter-spacing: 0.5px;">{{ mod.tag }}</span>
+                <div style="display: flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 4px; background: {{ mod.statusBg }}; border: 1px solid {{ mod.statusBorder }};">
+                  <div style="width: 5px; height: 5px; border-radius: 50%; background: {{ mod.statusColor }};"></div>
+                  <span style="font-size: 10px; font-weight: 600; color: {{ mod.statusColor }};">{{ mod.status }}</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div style="font-size: 16px; font-weight: 700; color: #C8D8EC; margin-bottom: 5px; letter-spacing: -0.2px;">{{ mod.title }}</div>
+              <div style="font-size: 11.5px; color: #4A5A72; line-height: 1.5;">{{ mod.desc }}</div>
+            </div>
+            <div style="display: flex; gap: 16px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.055);">
+              <sc-for list="{{ mod.metrics }}" as="metric" hint-placeholder-count="2">
+                <div>
+                  <div style="font-size: 16px; font-weight: 700; font-family: 'DM Mono', monospace; color: {{ metric.color }}; line-height: 1; margin-bottom: 2px;">{{ metric.value }}</div>
+                  <div style="font-size: 10px; color: #3A4A62;">{{ metric.label }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="position: absolute; bottom: 20px; right: 20px; width: 28px; height: 28px; border-radius: 7px; background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center;">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="{{ mod.accentColor }}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+
+      <!-- Flow annotation strip -->
+      <div style="margin-top: 28px; padding: 16px 22px; background: rgba(200,16,46,0.04); border: 1px solid rgba(200,16,46,0.15); border-radius: 10px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#C8102E" stroke-width="1.3"/><path d="M8 5v4M8 11v.5" stroke="#C8102E" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span style="font-size: 12px; font-weight: 600; color: #C8102E;">End-to-End Flow:</span>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <sc-for list="{{ flowSteps }}" as="step" hint-placeholder-count="5">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 11.5px; font-weight: 600; color: {{ step.color }}; padding: 3px 10px; border-radius: 5px; background: {{ step.bg }}; border: 1px solid {{ step.border }}; white-space: nowrap;">{{ step.label }}</span>
+              <sc-if value="{{ step.hasArrow }}" hint-placeholder-val="{{ false }}">
+                <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h12M9 1.5l4 3.5-4 3.5" stroke="rgba(255,255,255,0.2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="padding: 16px 36px; border-top: 1px solid rgba(255,255,255,0.055); display: flex; align-items: center; justify-content: space-between; background: #0A0F1E; flex-shrink: 0;">
+    <div style="font-size: 11px; color: #3A4A62;">PARCO Downstream Supply Chain Digitization · Design Prototype v1.0 · June 2026</div>
+    <div style="font-size: 11px; color: #3A4A62; font-family: 'DM Mono', monospace;">5 Modules · 19 Screens · SAP HANA Integrated</div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  renderVals() {
+    const heroKpis = [
+      { label: 'Active Vessels', value: '4', sub: 'Kemari Terminal', valueColor: '#E2EAF6', topColor: 'rgba(200,16,46,0.5)' },
+      { label: 'Lorries in Field', value: '150', sub: '92 in transit', valueColor: '#22C55E', topColor: 'rgba(34,197,94,0.4)' },
+      { label: 'Invoices Today', value: '23', sub: 'PKR 67.8M', valueColor: '#F59E0B', topColor: 'rgba(245,158,11,0.4)' },
+      { label: 'OCR Docs', value: '38', sub: 'Processed today', valueColor: '#8B5CF6', topColor: 'rgba(139,92,246,0.4)' },
+    ];
+
+    const navModules = [
+      { tag: 'A', label: 'Upstream Intake', href: './PARCO Module A - Upstream Intake.dc.html' },
+      { tag: 'B', label: 'OCR Hub', href: './PARCO Module B - OCR Hub.dc.html' },
+      { tag: 'C', label: 'Gantry & Fleet', href: './PARCO Module C - Gantry & Fleet.dc.html' },
+      { tag: 'D', label: 'e-POD Driver App', href: './PARCO Module D - e-POD Driver App.dc.html' },
+      { tag: 'E', label: 'O2C / SAP Hub', href: './PARCO Module E - O2C SAP Hub.dc.html' },
+    ];
+
+    const topModules = [
+      {
+        tag: 'MODULE A', href: './PARCO Module A - Upstream Intake.dc.html',
+        title: 'Upstream Intake & Berthing',
+        desc: 'Digital surveyor forms, vessel pipeline timeline, 3-authority compliance checkpoints, and immutable SHA-256 audit trail.',
+        accentColor: '#C8102E',
+        iconBg: 'rgba(200,16,46,0.1)', iconBorder: 'rgba(200,16,46,0.25)',
+        iconPath: '<path d="M11 3C7.7 3 5 5.7 5 9v4H3v2h16v-2h-2V9c0-3.3-2.7-6-6-6Z" stroke="#C8102E" stroke-width="1.6"/><path d="M8 19h6" stroke="#C8102E" stroke-width="1.6" stroke-linecap="round"/>',
+        status: 'Live', statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.08)', statusBorder: 'rgba(34,197,94,0.2)',
+        modLetter: 'A',
+        metrics: [
+          { value: '4', label: 'Vessels active', color: '#C8102E' },
+          { value: '4', label: 'Screens', color: '#5A6880' },
+        ],
+      },
+      {
+        tag: 'MODULE B', href: './PARCO Module B - OCR Hub.dc.html',
+        title: 'Transitional OCR Hub',
+        desc: 'Smart upload center, split-screen OCR verification with confidence scoring, and automated routing to SAP HANA.',
+        accentColor: '#8B5CF6',
+        iconBg: 'rgba(139,92,246,0.1)', iconBorder: 'rgba(139,92,246,0.25)',
+        iconPath: '<rect x="3" y="3" width="7" height="16" rx="1.5" stroke="#8B5CF6" stroke-width="1.6"/><rect x="12" y="3" width="7" height="16" rx="1.5" stroke="#8B5CF6" stroke-width="1.6"/><path d="M5.5 8h2M5.5 11h4M14.5 8h2M14.5 11h4" stroke="#8B5CF6" stroke-width="1.3" stroke-linecap="round"/>',
+        status: 'Live', statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.08)', statusBorder: 'rgba(34,197,94,0.2)',
+        modLetter: 'B',
+        metrics: [
+          { value: '38', label: 'Docs processed', color: '#8B5CF6' },
+          { value: '3', label: 'Screens', color: '#5A6880' },
+        ],
+      },
+      {
+        tag: 'MODULE C', href: './PARCO Module C - Gantry & Fleet.dc.html',
+        title: 'Smart Gantry & Fleet',
+        desc: 'RFID truck validation at loading bays, live Karachi telematics map with 150 lorries, and AI-powered anomaly alerts.',
+        accentColor: '#F59E0B',
+        iconBg: 'rgba(245,158,11,0.1)', iconBorder: 'rgba(245,158,11,0.25)',
+        iconPath: '<rect x="2" y="8" width="12" height="7" rx="1.5" stroke="#F59E0B" stroke-width="1.6"/><path d="M14 10.5l5-3v7l-5-3" stroke="#F59E0B" stroke-width="1.6"/><circle cx="5" cy="16.5" r="1.8" stroke="#F59E0B" stroke-width="1.3"/><circle cx="10" cy="16.5" r="1.8" stroke="#F59E0B" stroke-width="1.3"/>',
+        status: 'Live', statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.08)', statusBorder: 'rgba(34,197,94,0.2)',
+        modLetter: 'C',
+        metrics: [
+          { value: '150', label: 'Lorries tracked', color: '#F59E0B' },
+          { value: '3', label: 'Screens', color: '#5A6880' },
+        ],
+      },
+    ];
+
+    const bottomModules = [
+      {
+        tag: 'MODULE D', href: './PARCO Module D - e-POD Driver App.dc.html',
+        title: 'e-POD Driver App',
+        desc: 'Mobile-first delivery workflow for 150 drivers. Geofenced arrival, volume challan, live canvas e-signature, and instant SAP sync confirmation. High-contrast for outdoor use.',
+        accentColor: '#22C55E',
+        iconBg: 'rgba(34,197,94,0.1)', iconBorder: 'rgba(34,197,94,0.25)',
+        iconPath: '<rect x="7" y="2" width="8" height="14" rx="1.5" stroke="#22C55E" stroke-width="1.6"/><path d="M9.5 5h3M9.5 8h3M9.5 11h2" stroke="#22C55E" stroke-width="1.3" stroke-linecap="round"/><path d="M2 13l3-3 2 2 4-5" stroke="#22C55E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
+        status: 'Live', statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.08)', statusBorder: 'rgba(34,197,94,0.2)',
+        modLetter: 'D',
+        metrics: [
+          { value: '5', label: 'Screens · Mobile', color: '#22C55E' },
+          { value: '150', label: 'Drivers served', color: '#5A6880' },
+        ],
+      },
+      {
+        tag: 'MODULE E', href: './PARCO Module E - O2C SAP Hub.dc.html',
+        title: 'O2C / SAP HANA Integration',
+        desc: 'Auto-invoicing engine that triggers on e-POD completion, reconciliation dashboard across pending/invoiced/settled states, and dispute management queue with SAP push.',
+        accentColor: '#3B82F6',
+        iconBg: 'rgba(59,130,246,0.1)', iconBorder: 'rgba(59,130,246,0.25)',
+        iconPath: '<rect x="3" y="4" width="16" height="14" rx="2" stroke="#3B82F6" stroke-width="1.6"/><path d="M3 8h16" stroke="#3B82F6" stroke-width="1.6"/><circle cx="6.5" cy="6" r="1" fill="#3B82F6"/><circle cx="9.5" cy="6" r="1" fill="#3B82F6"/><path d="M7 12l2 2 4-4" stroke="#3B82F6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+        status: 'Live', statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.08)', statusBorder: 'rgba(34,197,94,0.2)',
+        modLetter: 'E',
+        metrics: [
+          { value: '23', label: 'Invoices today', color: '#3B82F6' },
+          { value: '3', label: 'Screens', color: '#5A6880' },
+        ],
+      },
+    ];
+
+    const flowSteps = [
+      { label: 'Vessel Berthing (A)', color: '#C8102E', bg: 'rgba(200,16,46,0.1)', border: 'rgba(200,16,46,0.25)', hasArrow: true },
+      { label: 'OCR Clearance (B)', color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)', border: 'rgba(139,92,246,0.25)', hasArrow: true },
+      { label: 'Gantry Load (C)', color: '#F59E0B', bg: 'rgba(245,158,11,0.1)', border: 'rgba(245,158,11,0.25)', hasArrow: true },
+      { label: 'e-POD Delivery (D)', color: '#22C55E', bg: 'rgba(34,197,94,0.1)', border: 'rgba(34,197,94,0.25)', hasArrow: true },
+      { label: 'SAP Auto-Invoice (E)', color: '#3B82F6', bg: 'rgba(59,130,246,0.1)', border: 'rgba(59,130,246,0.25)', hasArrow: false },
+    ];
+
+    return { heroKpis, navModules, topModules, bottomModules, flowSteps };
+  }
+}
+</script>
+</body>
+</html>

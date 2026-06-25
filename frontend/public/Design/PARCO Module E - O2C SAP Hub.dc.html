@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #05080F; font-family: 'DM Sans', system-ui, sans-serif; color: #DDE4EF; overflow: hidden; }
+    ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.09); border-radius: 6px; }
+    button { font-family: inherit; cursor: pointer; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+  </style>
+</helmet>
+
+<div style="display: flex; width: 100vw; height: 100vh; overflow: hidden; background: #05080F;">
+
+  <!-- SIDEBAR -->
+  <aside style="width: 218px; min-width: 218px; background: #0A0F1E; border-right: 1px solid rgba(255,255,255,0.055); display: flex; flex-direction: column; flex-shrink: 0;">
+    <div style="height: 58px; display: flex; align-items: center; padding: 0 16px; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.055); flex-shrink: 0;">
+      <div style="width: 32px; height: 32px; background: #C8102E; border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 1.5L15 5.25V11.75L8.5 15.5L2 11.75V5.25L8.5 1.5Z" fill="white" fill-opacity="0.95"/><circle cx="8.5" cy="8.5" r="2.4" fill="#C8102E"/></svg>
+      </div>
+      <div><div style="font-size: 13.5px; font-weight: 700; color: #E8EEF8;">PARCO</div><div style="font-size: 10px; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.5px;">Supply Chain</div></div>
+      <div style="margin-left: auto; font-size: 9px; padding: 2px 5px; border-radius: 3px; background: rgba(200,16,46,0.12); color: #C8102E; font-weight: 600;">MOD E</div>
+    </div>
+    <nav style="flex: 1; padding: 14px 8px; display: flex; flex-direction: column; gap: 18px; overflow-y: auto;">
+      <!-- Hub link -->
+      <div>
+        <div onClick="{{ goToHub }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: rgba(255,255,255,0.03);" style-hover="background: rgba(255,255,255,0.06)">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M6 3l-4 4 4 4" stroke="#5A6880" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="font-size: 11.5px; font-weight: 600; color: #5A6880; letter-spacing: 0.2px;">Supply Chain Hub</span>
+        </div>
+        <div style="height: 1px; background: rgba(255,255,255,0.05); margin: 6px 4px;"></div>
+      </div>
+      <div>
+        <div style="font-size: 9px; font-weight: 700; color: #2A3A52; text-transform: uppercase; letter-spacing: 1.2px; padding: 0 9px; margin-bottom: 5px;">Finance E</div>
+        <div style="display: flex; flex-direction: column; gap: 1px;">
+          <div onClick="{{ goTo1 }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: {{ n1Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="5.5" height="5" rx="1" stroke="{{ n1Color }}" stroke-width="1.3"/><rect x="7.5" y="2" width="5.5" height="5" rx="1" stroke="{{ n1Color }}" stroke-width="1.3"/><rect x="1" y="8" width="5.5" height="4" rx="1" stroke="{{ n1Color }}" stroke-width="1.3"/><rect x="7.5" y="8" width="5.5" height="4" rx="1" stroke="{{ n1Color }}" stroke-width="1.3"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: {{ n1Color }};">Reconciliation</span>
+          </div>
+          <div onClick="{{ goTo2 }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: {{ n2Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5v2M7 10.5v2M1.5 7h2M10.5 7h2" stroke="{{ n2Color }}" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="7" r="3.5" stroke="{{ n2Color }}" stroke-width="1.3"/><circle cx="7" cy="7" r="1.2" fill="{{ n2Color }}"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: {{ n2Color }};">Invoice Engine</span>
+          </div>
+          <div onClick="{{ goTo3 }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: {{ n3Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4h10M2 7h7M2 10h5" stroke="{{ n3Color }}" stroke-width="1.3" stroke-linecap="round"/><circle cx="11" cy="10" r="2" stroke="{{ n3Color }}" stroke-width="1.2"/><path d="M11 9v1h1" stroke="{{ n3Color }}" stroke-width="1" stroke-linecap="round"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: {{ n3Color }};">Dispute Queue</span>
+            <div style="margin-left: auto; min-width: 18px; height: 18px; border-radius: 9px; background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: #F59E0B; padding: 0 4px;">{{ openDisputeCount }}</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 9px; font-weight: 700; color: #2A3A52; text-transform: uppercase; letter-spacing: 1.2px; padding: 0 9px; margin-bottom: 5px;">Other Modules</div>
+        <div style="display: flex; flex-direction: column; gap: 1px;">
+          <div onClick="{{ goToUpstreamA }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" fill="#8896A9"/><rect x="8" y="1" width="5" height="5" rx="1" fill="#8896A9" fill-opacity="0.5"/><rect x="1" y="8" width="5" height="5" rx="1" fill="#8896A9" fill-opacity="0.5"/><rect x="8" y="8" width="5" height="5" rx="1" fill="#8896A9" fill-opacity="0.3"/></svg><span style="font-size: 13px; color: #8896A9;">Upstream A</span></div>
+          <div onClick="{{ goToFleetC }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="5" width="8.5" height="5" rx="1" stroke="#8896A9" stroke-width="1.3"/><path d="M9.5 7l4-2v5l-4-2" stroke="#8896A9" stroke-width="1.3"/></svg><span style="font-size: 13px; color: #8896A9;">Fleet C</span></div>
+          <div onClick="{{ goToOcrB }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="7" height="10" rx="1" stroke="#8896A9" stroke-width="1.3"/><rect x="6" y="2" width="7" height="10" rx="1" stroke="#8896A9" stroke-width="1.3"/></svg><span style="font-size: 13px; color: #8896A9;">OCR Hub B</span></div>
+        </div>
+      </div>
+    </nav>
+    <div style="padding: 10px 12px; border-top: 1px solid rgba(255,255,255,0.055); display: flex; align-items: center; gap: 9px; flex-shrink: 0;">
+      <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg,#C8102E,#7A091C); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white;">AR</div>
+      <div><div style="font-size: 11.5px; font-weight: 600; color: #B8C8DC;">A. Rahman</div><div style="font-size: 9.5px; color: #3A4A62;">SC Admin · Kemari</div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div style="flex: 1; display: flex; flex-direction: column; min-width: 0; overflow: hidden;">
+    <header style="height: 58px; background: #0A0F1E; border-bottom: 1px solid rgba(255,255,255,0.055); display: flex; align-items: center; padding: 0 22px; gap: 14px; flex-shrink: 0;">
+      <div style="flex: 1; display: flex; align-items: center; gap: 7px;">
+        <span style="font-size: 11px; color: #2A3A52; font-weight: 500;">O2C / SAP Hub</span>
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M3.5 2l4 3.5-4 3.5" stroke="#2A3A52" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span style="font-size: 13px; font-weight: 600; color: #C8D8EC;">{{ screenTitle }}</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 4px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.14);">
+        <div style="width: 5px; height: 5px; border-radius: 50%; background: #22C55E; animation: pulse 2s ease-in-out infinite;"></div>
+        <span style="font-size: 11px; font-weight: 500; color: #22C55E;">SAP HANA Connected · S/4HANA 2023 SP02</span>
+      </div>
+      <span style="font-size: 11.5px; color: #2E3E55; font-family: 'DM Mono', monospace;">25 Jun 2026 · 13:04 PKT</span>
+    </header>
+
+    <main style="flex: 1; overflow-y: auto; padding: 22px 26px; background: #05080F;">
+
+      <!-- ── SCREEN 1: RECONCILIATION ── -->
+      <div style="display: {{ s1D }}; flex-direction: column; gap: 18px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div><div style="font-size: 17px; font-weight: 700; color: #E2EAF6; margin-bottom: 3px;">Reconciliation Dashboard</div><div style="font-size: 11.5px; color: #3A4A62;">Order-to-Cash pipeline · Today · Shift B</div></div>
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <div style="padding: 7px 13px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); font-size: 11.5px; font-weight: 500; color: #8896A9; cursor: pointer;" style-hover="background: rgba(255,255,255,0.04)">↓ Export CSV</div>
+            <div style="padding: 7px 13px; border-radius: 6px; border: 1px solid rgba(200,16,46,0.3); background: rgba(200,16,46,0.07); font-size: 11.5px; font-weight: 600; color: #C8102E; cursor: pointer;" style-hover="background: rgba(200,16,46,0.12)">Generate SAP Report</div>
+          </div>
+        </div>
+
+        <!-- O2C pipeline visual -->
+        <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 20px 24px;">
+          <div style="font-size: 10px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 18px;">Order-to-Cash Pipeline — Today</div>
+          <div style="display: flex; align-items: center; gap: 0;">
+            <div style="flex: 1; text-align: center; padding: 0 12px;">
+              <div style="font-size: 32px; font-weight: 800; font-family: 'DM Mono', monospace; color: #C8102E; line-height: 1; margin-bottom: 5px;">5</div>
+              <div style="font-size: 12px; font-weight: 600; color: #C0D0E4; margin-bottom: 2px;">Pending Delivery</div>
+              <div style="font-size: 11px; color: #5A6880; font-family: 'DM Mono', monospace;">PKR 12.4M</div>
+              <div style="height: 3px; border-radius: 2px; background: rgba(200,16,46,0.4); margin-top: 10px;"></div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0 8px; margin-bottom: 14px;">
+              <svg width="22" height="14" viewBox="0 0 22 14" fill="none"><path d="M0 7h18M14 2l6 5-6 5" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span style="font-size: 9px; color: #2E3E55;">e-POD received</span>
+            </div>
+            <div style="flex: 1; text-align: center; padding: 0 12px;">
+              <div style="font-size: 32px; font-weight: 800; font-family: 'DM Mono', monospace; color: #F59E0B; line-height: 1; margin-bottom: 5px;">23</div>
+              <div style="font-size: 12px; font-weight: 600; color: #C0D0E4; margin-bottom: 2px;">Invoice Triggered</div>
+              <div style="font-size: 11px; color: #5A6880; font-family: 'DM Mono', monospace;">PKR 67.8M</div>
+              <div style="height: 3px; border-radius: 2px; background: rgba(245,158,11,0.4); margin-top: 10px;"></div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0 8px; margin-bottom: 14px;">
+              <svg width="22" height="14" viewBox="0 0 22 14" fill="none"><path d="M0 7h18M14 2l6 5-6 5" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span style="font-size: 9px; color: #2E3E55;">SAP confirmed</span>
+            </div>
+            <div style="flex: 1; text-align: center; padding: 0 12px;">
+              <div style="font-size: 32px; font-weight: 800; font-family: 'DM Mono', monospace; color: #22C55E; line-height: 1; margin-bottom: 5px;">18</div>
+              <div style="font-size: 12px; font-weight: 600; color: #C0D0E4; margin-bottom: 2px;">Settled</div>
+              <div style="font-size: 11px; color: #5A6880; font-family: 'DM Mono', monospace;">PKR 51.2M</div>
+              <div style="height: 3px; border-radius: 2px; background: rgba(34,197,94,0.4); margin-top: 10px;"></div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0 8px; margin-bottom: 14px;">
+              <svg width="22" height="14" viewBox="0 0 22 14" fill="none"><path d="M0 7h18M14 2l6 5-6 5" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span style="font-size: 9px; color: #2E3E55;">payment posted</span>
+            </div>
+            <div style="flex: 1; text-align: center; padding: 0 12px;">
+              <div style="font-size: 32px; font-weight: 800; font-family: 'DM Mono', monospace; color: #8B5CF6; line-height: 1; margin-bottom: 5px;">4</div>
+              <div style="font-size: 12px; font-weight: 600; color: #C0D0E4; margin-bottom: 2px;">Disputed</div>
+              <div style="font-size: 11px; color: #5A6880; font-family: 'DM Mono', monospace;">PKR 3.1M</div>
+              <div style="height: 3px; border-radius: 2px; background: rgba(139,92,246,0.4); margin-top: 10px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent invoice activity -->
+        <div style="display: grid; grid-template-columns: 1fr 300px; gap: 16px; align-items: start;">
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.055);">
+              <div style="font-size: 13px; font-weight: 600; color: #C0D0E4;">Recent Invoice Activity</div>
+              <div style="font-size: 10.5px; color: #3A4A62;">Auto-triggered by e-POD completion</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 120px 140px 130px 120px 90px 80px; padding: 9px 18px; background: rgba(255,255,255,0.015); border-bottom: 1px solid rgba(255,255,255,0.04);">
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">e-POD Ref</span>
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Invoice No.</span>
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Dealer</span>
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Amount</span>
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Status</span>
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Time</span>
+            </div>
+            <sc-for list="{{ recentInvoices }}" as="inv" hint-placeholder-count="6">
+              <div style="display: grid; grid-template-columns: 120px 140px 130px 120px 90px 80px; padding: 11px 18px; border-bottom: 1px solid rgba(255,255,255,0.03); align-items: center;" style-hover="background: rgba(255,255,255,0.02)">
+                <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #C8102E; font-weight: 500;">{{ inv.epod }}</span>
+                <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #6A7A92;">{{ inv.invNo }}</span>
+                <span style="font-size: 11px; color: #8896A9; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ inv.dealer }}</span>
+                <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #C0D0E4; font-weight: 500;">{{ inv.amount }}</span>
+                <div style="display: inline-flex; padding: 2px 7px; border-radius: 4px; background: {{ inv.statusBg }}; width: fit-content;"><span style="font-size: 10px; font-weight: 600; color: {{ inv.statusColor }};">{{ inv.statusLabel }}</span></div>
+                <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #3A4A62;">{{ inv.time }}</span>
+              </div>
+            </sc-for>
+          </div>
+
+          <!-- SAP connection panel -->
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden;">
+            <div style="padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.055);">
+              <div style="font-size: 12px; font-weight: 600; color: #C0D0E4; margin-bottom: 2px;">SAP HANA Connection</div>
+              <div style="font-size: 10px; color: #3A4A62;">S/4HANA 2023 SP02 · PROD-01</div>
+            </div>
+            <div style="padding: 14px 16px; display: flex; flex-direction: column; gap: 10px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: rgba(34,197,94,0.06); border-radius: 8px; border: 1px solid rgba(34,197,94,0.15);">
+                <div style="display: flex; align-items: center; gap: 7px;"><div style="width: 6px; height: 6px; border-radius: 50%; background: #22C55E; animation: pulse 2s ease-in-out infinite;"></div><span style="font-size: 12px; font-weight: 600; color: #22C55E;">Connected</span></div>
+                <span style="font-size: 10px; font-family: 'DM Mono', monospace; color: #22C55E;">42ms latency</span>
+              </div>
+              <sc-for list="{{ sapMetrics }}" as="m" hint-placeholder-count="5">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 11px; color: #5A6880;">{{ m.label }}</span>
+                  <span style="font-size: 11px; font-family: 'DM Mono', monospace; font-weight: 500; color: {{ m.valColor }};">{{ m.value }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 2: INVOICE ENGINE ── -->
+      <div style="display: {{ s2D }}; flex-direction: column; gap: 18px;">
+        <div><div style="font-size: 17px; font-weight: 700; color: #E2EAF6; margin-bottom: 3px;">Auto-Invoicing Engine</div><div style="font-size: 11.5px; color: #3A4A62;">Listens for e-POD completion → instantly triggers SAP HANA invoice API</div></div>
+
+        <!-- Engine status banner -->
+        <div style="background: #0E1626; border: 1px solid rgba(34,197,94,0.2); border-radius: 10px; padding: 18px 22px; display: flex; align-items: center; gap: 18px; border-left: 3px solid #22C55E;">
+          <div style="width: 52px; height: 52px; border-radius: 14px; background: rgba(34,197,94,0.1); border: 1.5px solid rgba(34,197,94,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke="#22C55E" stroke-width="1.8"/><circle cx="13" cy="13" r="3.5" fill="#22C55E" fill-opacity="0.3" stroke="#22C55E" stroke-width="1.5"/><path d="M13 3v3M13 20v3M3 13H6M20 13h3M6 6l2 2M18 18l2 2M6 20l2-2M18 8l2-2" stroke="#22C55E" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </div>
+          <div style="flex: 1;">
+            <div style="font-size: 15px; font-weight: 700; color: #22C55E; margin-bottom: 3px;">Invoice Engine Running</div>
+            <div style="font-size: 12px; color: #5A6880;">Polling e-POD queue every 30s · SAP API healthy · 0 failures today · Auto-retry enabled</div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: center; flex-shrink: 0;">
+            <div style="padding: 10px 16px; background: rgba(255,255,255,0.03); border-radius: 8px;"><div style="font-size: 22px; font-weight: 700; font-family: 'DM Mono', monospace; color: #22C55E; line-height: 1;">23</div><div style="font-size: 10px; color: #5A6880; margin-top: 3px;">Triggered today</div></div>
+            <div style="padding: 10px 16px; background: rgba(255,255,255,0.03); border-radius: 8px;"><div style="font-size: 22px; font-weight: 700; font-family: 'DM Mono', monospace; color: #C0D0E4; line-height: 1;">0</div><div style="font-size: 10px; color: #5A6880; margin-top: 3px;">Failures</div></div>
+          </div>
+        </div>
+
+        <!-- Trigger log -->
+        <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.055);">
+            <div style="font-size: 13px; font-weight: 600; color: #C0D0E4;">Invoice Trigger Log</div>
+            <div style="display: flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 4px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.14);">
+              <div style="width: 5px; height: 5px; border-radius: 50%; background: #22C55E; animation: pulse 2s ease-in-out infinite;"></div>
+              <span style="font-size: 10.5px; font-weight: 500; color: #22C55E;">Live</span>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 80px 130px 140px 120px 120px 90px 90px; padding: 9px 18px; background: rgba(255,255,255,0.015); border-bottom: 1px solid rgba(255,255,255,0.04);">
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Time</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">e-POD</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Invoice No.</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Dealer</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Trigger Event</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Amount</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">SAP Status</span>
+          </div>
+          <sc-for list="{{ triggerLog }}" as="t" hint-placeholder-count="8">
+            <div style="display: grid; grid-template-columns: 80px 130px 140px 120px 120px 90px 90px; padding: 11px 18px; border-bottom: 1px solid rgba(255,255,255,0.03); align-items: center;" style-hover="background: rgba(255,255,255,0.02)">
+              <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #3A4A62;">{{ t.time }}</span>
+              <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #C8102E; font-weight: 500;">{{ t.epod }}</span>
+              <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #6A7A92;">{{ t.inv }}</span>
+              <span style="font-size: 11px; color: #8896A9; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ t.dealer }}</span>
+              <span style="font-size: 10.5px; color: #5A6880;">{{ t.event }}</span>
+              <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #C0D0E4;">{{ t.amount }}</span>
+              <div style="display: flex; align-items: center; gap: 4px;">
+                <div style="width: 5px; height: 5px; border-radius: 50%; background: #22C55E; flex-shrink: 0;"></div>
+                <span style="font-size: 10.5px; color: #22C55E; font-weight: 500;">Posted</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 3: DISPUTE QUEUE ── -->
+      <div style="display: {{ s3D }}; flex-direction: column; gap: 18px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div><div style="font-size: 17px; font-weight: 700; color: #E2EAF6; margin-bottom: 3px;">Dispute Management Queue</div><div style="font-size: 11.5px; color: #3A4A62;">Volume discrepancies flagged by dealer, driver, or auto-detection · Requires human review before SAP push</div></div>
+          <div style="display: flex; align-items: center; gap: 7px; padding: 7px 13px; border-radius: 6px; background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2);">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="#F59E0B" stroke-width="1.3"/><path d="M6.5 3.5v4" stroke="#F59E0B" stroke-width="1.3" stroke-linecap="round"/><circle cx="6.5" cy="9.5" r="0.6" fill="#F59E0B"/></svg>
+            <span style="font-size: 12px; font-weight: 600; color: #F59E0B;">{{ openDisputeCount }} disputes awaiting review · PKR {{ openDisputeValue }}</span>
+          </div>
+        </div>
+
+        <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden;">
+          <div style="display: grid; grid-template-columns: 100px 140px 130px 96px 96px 100px 110px 88px 130px; padding: 10px 18px; background: rgba(255,255,255,0.015); border-bottom: 1px solid rgba(255,255,255,0.04);">
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Dispute ID</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">e-POD</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Dealer</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Ordered</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Delivered</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Variance</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Flagged By</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Status</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Action</span>
+          </div>
+          <sc-for list="{{ disputes }}" as="d" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 100px 140px 130px 96px 96px 100px 110px 88px 130px; padding: 13px 18px; border-bottom: 1px solid rgba(255,255,255,0.03); align-items: center; background: {{ d.rowBg }};" style-hover="background: rgba(255,255,255,0.02)">
+              <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #C8102E; font-weight: 500;">{{ d.id }}</span>
+              <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #6A7A92;">{{ d.epod }}</span>
+              <span style="font-size: 11px; color: #8896A9; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ d.dealer }}</span>
+              <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #6A7A92;">{{ d.ordered }}</span>
+              <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #6A7A92;">{{ d.delivered }}</span>
+              <span style="font-size: 11px; font-family: 'DM Mono', monospace; font-weight: 600; color: #F59E0B;">{{ d.variance }}</span>
+              <span style="font-size: 11px; color: #5A6880;">{{ d.flaggedBy }}</span>
+              <div style="display: inline-flex; padding: 2px 7px; border-radius: 4px; background: {{ d.statusBg }}; width: fit-content;"><span style="font-size: 10px; font-weight: 600; color: {{ d.statusColor }};">{{ d.statusLabel }}</span></div>
+              <div style="display: {{ d.actionDisplay }}; gap: 6px; align-items: center;">
+                <button onClick="{{ d.resolveHandler }}" style="padding: 5px 9px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25); border-radius: 5px; font-size: 10.5px; font-weight: 600; color: #22C55E; cursor: pointer;" style-hover="background: rgba(34,197,94,0.18)">✓ Approve</button>
+                <button style="padding: 5px 9px; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); border-radius: 5px; font-size: 10.5px; font-weight: 600; color: #EF4444; cursor: pointer;" style-hover="background: rgba(239,68,68,0.12)">Reject</button>
+              </div>
+              <div style="display: {{ d.resolvedDisplay }}; align-items: center; gap: 5px;">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" fill="#22C55E" fill-opacity="0.15"/><path d="M4 7l2.5 2.5 3.5-4" stroke="#22C55E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span style="font-size: 11px; font-weight: 600; color: #22C55E;">Pushed to SAP</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = {
+    screen: 1,
+    resolvedDisputes: {},
+  };
+
+  renderVals() {
+    const s = this.state;
+    const S = (n) => s.screen === n;
+
+    const recentInvoices = [
+      { epod: 'ePOD-2847-03', invNo: 'INV-2026-08721', dealer: 'Karimi Filling', amount: 'PKR 918,405', statusLabel: '✓ Posted', statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.09)', time: '13:42' },
+      { epod: 'ePOD-2847-02', invNo: 'INV-2026-08720', dealer: 'Al-Amin Petro.', amount: 'PKR 692,100', statusLabel: '✓ Posted', statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.09)', time: '12:15' },
+      { epod: 'ePOD-2839-05', invNo: 'INV-2026-08719', dealer: 'Gulshan S. Fuel', amount: 'PKR 1,224,750', statusLabel: '✓ Posted', statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.09)', time: '11:48' },
+      { epod: 'ePOD-2831-04', invNo: 'INV-2026-08718', dealer: 'Baloch Energy', amount: 'PKR 831,600', statusLabel: '⏳ Dispute', statusColor: '#F59E0B', statusBg: 'rgba(245,158,11,0.09)', time: '11:20' },
+      { epod: 'ePOD-2822-01', invNo: 'INV-2026-08717', dealer: 'APS Petroleum', amount: 'PKR 632,775', statusLabel: '✓ Posted', statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.09)', time: '10:55' },
+      { epod: 'ePOD-2819-03', invNo: 'INV-2026-08716', dealer: 'DHA Total Fuel', amount: 'PKR 1,038,240', statusLabel: '✓ Posted', statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.09)', time: '10:28' },
+    ];
+
+    const sapMetrics = [
+      { label: 'Documents posted today', value: '23', valColor: '#22C55E' },
+      { label: 'Avg. processing time', value: '1.4 sec', valColor: '#C0D0E4' },
+      { label: 'Queue depth', value: '0', valColor: '#22C55E' },
+      { label: 'Last sync', value: '13:04:22', valColor: '#8896A9' },
+      { label: 'API version', value: 'v2.3.1', valColor: '#3A4A62' },
+    ];
+
+    const triggerLog = [
+      { time: '13:42:07', epod: 'ePOD-2847-03', inv: 'INV-2026-08721', dealer: 'Karimi Filling', event: 'e-POD signed', amount: 'PKR 918,405' },
+      { time: '12:15:33', epod: 'ePOD-2847-02', inv: 'INV-2026-08720', dealer: 'Al-Amin Petro.', event: 'e-POD signed', amount: 'PKR 692,100' },
+      { time: '11:48:14', epod: 'ePOD-2839-05', inv: 'INV-2026-08719', dealer: 'Gulshan S. Fuel', event: 'e-POD signed', amount: 'PKR 1,224,750' },
+      { time: '11:20:47', epod: 'ePOD-2831-04', inv: 'INV-2026-08718', dealer: 'Baloch Energy', event: 'Dispute resolved', amount: 'PKR 831,600' },
+      { time: '10:55:22', epod: 'ePOD-2822-01', inv: 'INV-2026-08717', dealer: 'APS Petroleum', event: 'e-POD signed', amount: 'PKR 632,775' },
+      { time: '10:28:09', epod: 'ePOD-2819-03', inv: 'INV-2026-08716', dealer: 'DHA Total Fuel', event: 'e-POD signed', amount: 'PKR 1,038,240' },
+      { time: '09:44:55', epod: 'ePOD-2812-02', inv: 'INV-2026-08715', dealer: 'Clifton Pumps', event: 'e-POD signed', amount: 'PKR 747,900' },
+      { time: '09:18:30', epod: 'ePOD-2808-01', inv: 'INV-2026-08714', dealer: 'North KHI Fuel', event: 'e-POD signed', amount: 'PKR 564,300' },
+    ];
+
+    const disputeDefs = [
+      { id: 'D-2847', epod: 'ePOD-2847-02', dealer: 'Shah Fuel Station', ordered: '6,000 L', delivered: '5,847 L', variance: '-153 L (2.55%)', flaggedBy: 'Auto-detect' },
+      { id: 'D-2831', epod: 'ePOD-2831-04', dealer: 'Gulistan Petroleum', ordered: '8,500 L', delivered: '8,312 L', variance: '-188 L (2.21%)', flaggedBy: 'Dealer' },
+      { id: 'D-2819', epod: 'ePOD-2819-01', dealer: 'Northern Fuels Ltd.', ordered: '5,000 L', delivered: '4,890 L', variance: '-110 L (2.20%)', flaggedBy: 'Driver' },
+      { id: 'D-2803', epod: 'ePOD-2803-03', dealer: 'Al-Razi Petroleum', ordered: '7,200 L', delivered: '7,045 L', variance: '-155 L (2.15%)', flaggedBy: 'Auto-detect' },
+    ];
+
+    const disputes = disputeDefs.map(d => {
+      const resolved = !!s.resolvedDisputes[d.id];
+      return {
+        ...d,
+        statusLabel: resolved ? '✓ Resolved' : 'Pending Review',
+        statusColor: resolved ? '#22C55E' : '#F59E0B',
+        statusBg: resolved ? 'rgba(34,197,94,0.09)' : 'rgba(245,158,11,0.09)',
+        rowBg: resolved ? 'rgba(34,197,94,0.025)' : 'transparent',
+        actionDisplay: resolved ? 'none' : 'flex',
+        resolvedDisplay: resolved ? 'flex' : 'none',
+        resolveHandler: () => this.setState(prev => ({
+          resolvedDisputes: { ...prev.resolvedDisputes, [d.id]: true }
+        })),
+      };
+    });
+
+    const openDisputes = disputes.filter(d => !d.resolvedDisplay || d.resolvedDisplay === 'none');
+    const openDisputeCount = disputeDefs.filter(d => !s.resolvedDisputes[d.id]).length;
+
+    return {
+      s1D: S(1) ? 'flex' : 'none',
+      s2D: S(2) ? 'flex' : 'none',
+      s3D: S(3) ? 'flex' : 'none',
+      goTo1: () => this.setState({ screen: 1 }),
+      goTo2: () => this.setState({ screen: 2 }),
+      goTo3: () => this.setState({ screen: 3 }),
+      goToHub:       () => { window.location.href = './PARCO Supply Chain Hub - Standalone.html'; },
+      goToUpstreamA: () => { window.location.href = './PARCO Module A - Upstream Intake.dc.html'; },
+      goToFleetC:    () => { window.location.href = './PARCO Module C - Gantry & Fleet.dc.html'; },
+      goToOcrB:      () => { window.location.href = './PARCO Module B - OCR Hub.dc.html'; },
+      n1Bg: S(1) ? 'rgba(200,16,46,0.13)' : 'transparent', n1Color: S(1) ? '#C8102E' : '#8896A9',
+      n2Bg: S(2) ? 'rgba(200,16,46,0.13)' : 'transparent', n2Color: S(2) ? '#C8102E' : '#8896A9',
+      n3Bg: S(3) ? 'rgba(200,16,46,0.13)' : 'transparent', n3Color: S(3) ? '#C8102E' : '#8896A9',
+      screenTitle: ['Reconciliation Dashboard', 'Auto-Invoicing Engine', 'Dispute Management Queue'][s.screen - 1],
+      recentInvoices, sapMetrics, triggerLog, disputes,
+      openDisputeCount,
+      openDisputeValue: openDisputeCount > 0 ? '3.1M' : '0',
+    };
+  }
+}
+</script>
+</body>
+</html>

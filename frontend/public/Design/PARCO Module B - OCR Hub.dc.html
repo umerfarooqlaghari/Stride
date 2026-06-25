@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #05080F; font-family: 'DM Sans', system-ui, sans-serif; color: #DDE4EF; overflow: hidden; }
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.09); border-radius: 6px; }
+    button { font-family: inherit; cursor: pointer; }
+  </style>
+</helmet>
+
+<!-- Root -->
+<div style="display: flex; width: 100vw; height: 100vh; background: #05080F; overflow: hidden;">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside style="width: 218px; min-width: 218px; background: #0A0F1E; border-right: 1px solid rgba(255,255,255,0.055); display: flex; flex-direction: column; height: 100vh; flex-shrink: 0;">
+
+    <!-- Logo -->
+    <div style="height: 58px; display: flex; align-items: center; padding: 0 16px; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.055); flex-shrink: 0;">
+      <div style="width: 32px; height: 32px; background: #C8102E; border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 1.5L15 5.25V11.75L8.5 15.5L2 11.75V5.25L8.5 1.5Z" fill="white" fill-opacity="0.95"/><circle cx="8.5" cy="8.5" r="2.4" fill="#C8102E"/></svg>
+      </div>
+      <div>
+        <div style="font-size: 13.5px; font-weight: 700; color: #E8EEF8; letter-spacing: 0.4px; line-height: 1.2;">PARCO</div>
+        <div style="font-size: 10px; color: #3A4A62; letter-spacing: 0.5px; font-weight: 500; text-transform: uppercase;">Supply Chain</div>
+      </div>
+      <div style="margin-left: auto; font-size: 9px; padding: 2px 5px; border-radius: 3px; background: rgba(200,16,46,0.12); color: #C8102E; font-weight: 600; letter-spacing: 0.3px;">MOD B</div>
+    </div>
+
+    <!-- Nav -->
+    <nav style="flex: 1; padding: 14px 8px; overflow-y: auto; display: flex; flex-direction: column; gap: 18px;">
+
+      <!-- Hub link -->
+      <div>
+        <div onClick="{{ goToHub }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: rgba(255,255,255,0.03);" style-hover="background: rgba(255,255,255,0.06)">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M6 3l-4 4 4 4" stroke="#5A6880" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="font-size: 11.5px; font-weight: 600; color: #5A6880; letter-spacing: 0.2px;">Supply Chain Hub</span>
+        </div>
+        <div style="height: 1px; background: rgba(255,255,255,0.05); margin: 6px 4px;"></div>
+      </div>
+
+      <div>
+        <div style="font-size: 9px; font-weight: 700; color: #2A3A52; text-transform: uppercase; letter-spacing: 1.2px; padding: 0 9px; margin-bottom: 5px;">OCR Hub B</div>
+        <div style="display: flex; flex-direction: column; gap: 1px;">
+
+          <div onClick="{{ goTo1 }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: {{ n1Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5L12.5 5v4L7 12.5 1.5 9V5L7 1.5Z" stroke="{{ n1Color }}" stroke-width="1.3"/><path d="M7 5.5v5M4.5 8l2.5 2.5L9.5 8" stroke="{{ n1Color }}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: {{ n1Color }};">Upload Center</span>
+          </div>
+
+          <div onClick="{{ goTo2 }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: {{ n2Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="7" height="10" rx="1" stroke="{{ n2Color }}" stroke-width="1.3"/><rect x="6" y="2" width="7" height="10" rx="1" stroke="{{ n2Color }}" stroke-width="1.3"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: {{ n2Color }};">OCR Verification</span>
+          </div>
+
+          <div onClick="{{ goTo3 }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: {{ n3Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="2.5" cy="7" r="1.5" stroke="{{ n3Color }}" stroke-width="1.3"/><circle cx="7" cy="3" r="1.5" stroke="{{ n3Color }}" stroke-width="1.3"/><circle cx="11.5" cy="7" r="1.5" stroke="{{ n3Color }}" stroke-width="1.3"/><circle cx="7" cy="11" r="1.5" stroke="{{ n3Color }}" stroke-width="1.3"/><path d="M4 7h1.5M8.5 7H10M7 4.5V5.5M7 8.5V9.5" stroke="{{ n3Color }}" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: {{ n3Color }};">Routing Engine</span>
+          </div>
+
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size: 9px; font-weight: 700; color: #2A3A52; text-transform: uppercase; letter-spacing: 1.2px; padding: 0 9px; margin-bottom: 5px;">Upstream A</div>
+        <div style="display: flex; flex-direction: column; gap: 1px;">
+          <div onClick="{{ goToUpstreamA }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" fill="#8896A9"/><rect x="8" y="1" width="5" height="5" rx="1" fill="#8896A9" fill-opacity="0.65"/><rect x="1" y="8" width="5" height="5" rx="1" fill="#8896A9" fill-opacity="0.65"/><rect x="8" y="8" width="5" height="5" rx="1" fill="#8896A9" fill-opacity="0.4"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: #8896A9;">Dashboard</span>
+          </div>
+          <div onClick="{{ goToUpstreamA }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5L13 4.5V8C13 11 10.5 13 7 13.5C3.5 13 1 11 1 8V4.5L7 1.5Z" stroke="#8896A9" stroke-width="1.3"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: #8896A9;">Compliance</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size: 9px; font-weight: 700; color: #2A3A52; text-transform: uppercase; letter-spacing: 1.2px; padding: 0 9px; margin-bottom: 5px;">Finance E</div>
+        <div style="display: flex; flex-direction: column; gap: 1px;">
+          <div onClick="{{ goToFinanceE }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="2" width="11" height="10" rx="1.5" stroke="#8896A9" stroke-width="1.3"/><path d="M7 4.5v5M5 7h4" stroke="#8896A9" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: #8896A9;">O2C / SAP Hub</span>
+          </div>
+        </div>
+      </div>
+
+    </nav>
+
+    <div style="padding: 10px 12px; border-top: 1px solid rgba(255,255,255,0.055); display: flex; align-items: center; gap: 9px; flex-shrink: 0;">
+      <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #C8102E 0%, #7A091C 100%); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; flex-shrink: 0;">AR</div>
+      <div style="min-width: 0; flex: 1;">
+        <div style="font-size: 11.5px; font-weight: 600; color: #B8C8DC; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">A. Rahman</div>
+        <div style="font-size: 9.5px; color: #3A4A62;">SC Admin · Kemari</div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ═══ MAIN AREA ═══ -->
+  <div style="flex: 1; display: flex; flex-direction: column; min-width: 0; overflow: hidden;">
+
+    <!-- Top bar -->
+    <header style="height: 58px; background: #0A0F1E; border-bottom: 1px solid rgba(255,255,255,0.055); display: flex; align-items: center; padding: 0 22px; gap: 14px; flex-shrink: 0;">
+      <div style="display: flex; align-items: center; gap: 7px; flex: 1;">
+        <span style="font-size: 11px; color: #2A3A52; font-weight: 500;">OCR Hub</span>
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M3.5 2l4 3.5-4 3.5" stroke="#2A3A52" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span style="font-size: 13px; font-weight: 600; color: #C8D8EC;">{{ screenTitle }}</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 4px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.14);">
+        <div style="width: 5px; height: 5px; border-radius: 50%; background: #22C55E;"></div>
+        <span style="font-size: 11px; font-weight: 500; color: #22C55E;">OCR Engine Ready · 4 docs in queue</span>
+      </div>
+      <span style="font-size: 11.5px; color: #2E3E55; font-family: 'DM Mono', monospace;">25 Jun 2026 · 13:04 PKT</span>
+      <div style="width: 32px; height: 32px; border-radius: 6px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; cursor: pointer;" style-hover="background: rgba(255,255,255,0.07)">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 2C5.6 2 4 3.6 4 5.5v3.7L2.5 11h10L11 9.2V5.5C11 3.6 9.4 2 7.5 2Z" stroke="#8896A9" stroke-width="1.25"/><path d="M6 12.5a1.5 1.5 0 0 0 3 0" stroke="#8896A9" stroke-width="1.25" stroke-linecap="round"/></svg>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main style="flex: 1; overflow-y: auto; padding: 22px 26px; background: #05080F;">
+
+      <!-- ═══════════════════════
+           SCREEN 1 · UPLOAD CENTER
+      ════════════════════════════ -->
+      <div style="display: {{ s1D }}; flex-direction: column; gap: 18px;">
+
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-size: 17px; font-weight: 700; color: #E2EAF6; margin-bottom: 3px;">Smart Upload Center</div>
+            <div style="font-size: 11.5px; color: #3A4A62;">Drag-and-drop scanned PDFs or images · OCR auto-extraction on upload</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <div style="padding: 7px 13px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); font-size: 11.5px; font-weight: 500; color: #8896A9; cursor: pointer;" style-hover="background: rgba(255,255,255,0.04)">Doc History</div>
+            <div onClick="{{ goTo2 }}" style="padding: 7px 13px; border-radius: 6px; border: 1px solid rgba(200,16,46,0.3); background: rgba(200,16,46,0.07); font-size: 11.5px; font-weight: 600; color: #C8102E; cursor: pointer;" style-hover="background: rgba(200,16,46,0.12)">Begin OCR Review →</div>
+          </div>
+        </div>
+
+        <!-- Doc type selector -->
+        <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 16px 20px;">
+          <div style="font-size: 11px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 12px;">Document Type</div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <sc-for list="{{ docTypes }}" as="dt" hint-placeholder-count="4">
+              <div onClick="{{ dt.select }}" style="padding: 7px 14px; border-radius: 6px; border: 1px solid {{ dt.border }}; background: {{ dt.bg }}; font-size: 12px; font-weight: 500; color: {{ dt.color }}; cursor: pointer; white-space: nowrap;" style-hover="background: {{ dt.hoverBg }}">{{ dt.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- Upload zone -->
+        <div style="background: #0E1626; border: 2px dashed {{ uploadBorderColor }}; border-radius: 12px; padding: 0; overflow: hidden; cursor: pointer;" style-hover="border-color: rgba(200,16,46,0.4)">
+
+          <!-- Empty state -->
+          <div style="display: {{ emptyZoneDisplay }}; flex-direction: column; align-items: center; justify-content: center; padding: 48px 24px; gap: 14px;" onClick="{{ triggerUpload }}">
+            <div style="width: 60px; height: 60px; border-radius: 14px; background: rgba(200,16,46,0.08); border: 1.5px solid rgba(200,16,46,0.2); display: flex; align-items: center; justify-content: center;">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 20V8M14 8L9 13M14 8L19 13" stroke="#C8102E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 20h18" stroke="#C8102E" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 15px; font-weight: 600; color: #C0D0E4; margin-bottom: 5px;">Drop files here or <span style="color: #C8102E; text-decoration: underline;">browse</span></div>
+              <div style="font-size: 12px; color: #3A4A62;">Supports PDF, TIFF, PNG, JPG · Max 50 MB per file</div>
+              <div style="font-size: 11px; color: #2E3E55; margin-top: 4px;">Bill of Lading · Delivery Challan · Lab Certificate · Gate Pass</div>
+            </div>
+          </div>
+
+          <!-- Uploaded state -->
+          <div style="display: {{ uploadedZoneDisplay }}; align-items: center; gap: 16px; padding: 20px 24px; background: rgba(34,197,94,0.04); border-top: 3px solid #22C55E;">
+            <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(34,197,94,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 3h10l5 5v11H4V3Z" stroke="#22C55E" stroke-width="1.6"/><path d="M14 3v5h5" stroke="#22C55E" stroke-width="1.6"/><path d="M7.5 12.5l2.5 2.5 5-6" stroke="#22C55E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-size: 14px; font-weight: 600; color: #C0D0E4; margin-bottom: 2px;">BL-KHI-2847-A.pdf · Bill of Lading</div>
+              <div style="font-size: 11.5px; color: #3A4A62;">2.4 MB · Uploaded just now · OCR processing complete · 9 fields extracted</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+              <div style="padding: 5px 10px; border-radius: 5px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); font-size: 11px; font-weight: 600; color: #22C55E;">✓ OCR Ready</div>
+              <div onClick="{{ goTo2 }}" style="padding: 7px 14px; border-radius: 6px; background: #C8102E; font-size: 12px; font-weight: 600; color: white; cursor: pointer; border: none;" style-hover="background: #E5102E">Verify Fields →</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Recent uploads -->
+        <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; overflow: hidden;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.055);">
+            <div style="font-size: 13px; font-weight: 600; color: #C0D0E4;">Recent Uploads</div>
+            <div style="font-size: 10.5px; color: #3A4A62;">Last 24 hours · 5 documents</div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 130px 140px 72px 110px 70px; padding: 9px 18px; background: rgba(255,255,255,0.015); border-bottom: 1px solid rgba(255,255,255,0.04);">
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Document</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Type</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Vessel</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Date</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Status</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Action</span>
+          </div>
+          <sc-for list="{{ recentUploads }}" as="u" hint-placeholder-count="5">
+            <div style="display: grid; grid-template-columns: 1fr 130px 140px 72px 110px 70px; padding: 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.03); align-items: center;" style-hover="background: rgba(255,255,255,0.02)">
+              <div style="display: flex; align-items: center; gap: 9px;">
+                <div style="width: 28px; height: 28px; border-radius: 6px; background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 1.5h6l3 3v7H2V1.5Z" stroke="#5A6880" stroke-width="1.2"/><path d="M8 1.5v3h3" stroke="#5A6880" stroke-width="1.2"/></svg>
+                </div>
+                <span style="font-size: 12px; font-weight: 500; color: #B0C0D8; font-family: 'DM Mono', monospace;">{{ u.name }}</span>
+              </div>
+              <span style="font-size: 11px; color: #8896A9;">{{ u.type }}</span>
+              <span style="font-size: 11px; color: #6A7A92;">{{ u.vessel }}</span>
+              <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #3A4A62;">{{ u.date }}</span>
+              <span style="font-size: 10.5px; font-weight: 600; padding: 2px 8px; border-radius: 4px; color: {{ u.statusColor }}; background: {{ u.statusBg }}; display: inline-block;">{{ u.statusLabel }}</span>
+              <span style="font-size: 11.5px; font-weight: 600; color: #C8102E; cursor: pointer;" style-hover="color: #E5102E">{{ u.action }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+      </div>
+
+      <!-- ══════════════════════════
+           SCREEN 2 · OCR VERIFICATION
+      ═══════════════════════════════ -->
+      <div style="display: {{ s2D }}; flex-direction: column; gap: 16px;">
+
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-size: 17px; font-weight: 700; color: #E2EAF6; margin-bottom: 3px;">OCR Verification</div>
+            <div style="font-size: 11.5px; color: #3A4A62;">BL-KHI-2847-A.pdf · Bill of Lading · MV Indus Spirit · Uploaded 13:02 PKT</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <div onClick="{{ goTo1 }}" style="padding: 7px 13px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); font-size: 11.5px; font-weight: 500; color: #8896A9; cursor: pointer;" style-hover="background: rgba(255,255,255,0.04)">← Back</div>
+            <div style="font-size: 11.5px; font-weight: 500; color: #3A4A62;">{{ verifiedCount }} / {{ totalCount }} fields verified</div>
+            <div style="width: 100px; height: 5px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden;">
+              <div style="height: 100%; width: {{ verifiedPct }}; background: #22C55E; border-radius: 3px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Split layout -->
+        <div style="display: grid; grid-template-columns: 1fr 360px; gap: 16px; align-items: start;">
+
+          <!-- Left: Document viewer -->
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; overflow: hidden;">
+            <div style="padding: 13px 16px; border-bottom: 1px solid rgba(255,255,255,0.055); display: flex; align-items: center; justify-content: space-between;">
+              <div style="font-size: 12px; font-weight: 600; color: #C0D0E4;">Document Preview</div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 5px;"><div style="width: 8px; height: 8px; border-radius: 2px; background: rgba(245,158,11,0.7);"></div><span style="font-size: 10px; color: #5A6880;">Needs review</span></div>
+                <div style="display: flex; align-items: center; gap: 5px;"><div style="width: 8px; height: 8px; border-radius: 2px; background: rgba(34,197,94,0.7);"></div><span style="font-size: 10px; color: #5A6880;">High confidence</span></div>
+              </div>
+            </div>
+            <div style="padding: 16px; overflow-y: auto; max-height: 560px;">
+              <!-- Document SVG -->
+              <svg viewBox="0 0 460 580" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; border-radius: 4px;">
+                <!-- Paper bg -->
+                <rect width="460" height="580" fill="#F5F2EA" rx="3"/>
+                <!-- Header -->
+                <rect x="0" y="0" width="460" height="62" fill="#14213D" rx="3"/>
+                <text x="18" y="24" font-size="15" font-weight="700" fill="white" font-family="sans-serif">BILL OF LADING</text>
+                <text x="18" y="42" font-size="9" fill="rgba(255,255,255,0.5)" font-family="sans-serif">Original · Non-Negotiable · Kemari Terminal</text>
+                <!-- HL: B/L Number (green) -->
+                <rect x="310" y="10" width="130" height="42" fill="rgba(34,197,94,0.12)" stroke="rgba(34,197,94,0.5)" stroke-width="1.5" rx="3"/>
+                <text x="316" y="26" font-size="8" fill="rgba(34,197,94,0.8)" font-family="sans-serif">B/L No.</text>
+                <text x="316" y="42" font-size="11" font-weight="700" fill="#22C55E" font-family="monospace">BL-KHI-2847-A</text>
+
+                <!-- Shipper section -->
+                <rect x="14" y="74" width="210" height="58" fill="#EDEAE0" rx="2" stroke="#D4CEBB" stroke-width="0.5"/>
+                <text x="20" y="88" font-size="8" fill="#8A8070" font-family="sans-serif">SHIPPER</text>
+                <!-- HL: Shipper (green) -->
+                <rect x="16" y="92" width="205" height="34" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.4)" stroke-width="1" rx="2"/>
+                <rect x="22" y="97" width="130" height="7" fill="#6A8A60" rx="2"/>
+                <rect x="22" y="108" width="100" height="6" fill="#8A9A7A" rx="2"/>
+                <rect x="22" y="118" width="80" height="5" fill="#9AA48A" rx="2"/>
+
+                <!-- Consignee section -->
+                <rect x="236" y="74" width="210" height="58" fill="#EDEAE0" rx="2" stroke="#D4CEBB" stroke-width="0.5"/>
+                <text x="242" y="88" font-size="8" fill="#8A8070" font-family="sans-serif">CONSIGNEE</text>
+                <rect x="242" y="94" width="160" height="7" fill="#B4AE9E" rx="2"/>
+                <rect x="242" y="105" width="120" height="6" fill="#B4AE9E" rx="2"/>
+                <rect x="242" y="115" width="100" height="5" fill="#C4BEB0" rx="2"/>
+
+                <!-- Vessel section -->
+                <rect x="14" y="144" width="432" height="44" fill="#EDEAE0" rx="2" stroke="#D4CEBB" stroke-width="0.5"/>
+                <text x="20" y="158" font-size="8" fill="#8A8070" font-family="sans-serif">VESSEL DETAILS</text>
+                <!-- HL: Vessel (green) -->
+                <rect x="16" y="160" width="200" height="22" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.35)" stroke-width="1" rx="2"/>
+                <rect x="22" y="165" width="120" height="7" fill="#6A8A60" rx="2"/>
+                <rect x="22" y="176" width="90" height="5" fill="#8A9A7A" rx="2"/>
+                <rect x="230" y="162" width="100" height="7" fill="#B4AE9E" rx="2"/>
+                <rect x="350" y="162" width="80" height="7" fill="#B4AE9E" rx="2"/>
+                <rect x="230" y="174" width="80" height="5" fill="#C4BEB0" rx="2"/>
+                <rect x="350" y="174" width="60" height="5" fill="#C4BEB0" rx="2"/>
+
+                <!-- Port section -->
+                <rect x="14" y="200" width="432" height="38" fill="#EDEAE0" rx="2" stroke="#D4CEBB" stroke-width="0.5"/>
+                <text x="20" y="214" font-size="8" fill="#8A8070" font-family="sans-serif">PORT OF LOADING / DISCHARGE</text>
+                <!-- HL: Ports (green) -->
+                <rect x="16" y="218" width="200" height="16" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.35)" stroke-width="1" rx="2"/>
+                <rect x="22" y="222" width="140" height="7" fill="#6A8A60" rx="2"/>
+                <rect x="235" y="218" width="200" height="16" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.35)" stroke-width="1" rx="2"/>
+                <rect x="242" y="222" width="140" height="7" fill="#6A8A60" rx="2"/>
+
+                <!-- Commodity -->
+                <rect x="14" y="250" width="432" height="50" fill="#EDEAE0" rx="2" stroke="#D4CEBB" stroke-width="0.5"/>
+                <text x="20" y="264" font-size="8" fill="#8A8070" font-family="sans-serif">DESCRIPTION OF GOODS</text>
+                <rect x="22" y="270" width="280" height="7" fill="#B4AE9E" rx="2"/>
+                <rect x="22" y="282" width="200" height="6" fill="#C4BEB0" rx="2"/>
+                <rect x="22" y="293" width="160" height="5" fill="#D4CEBB" rx="2"/>
+
+                <!-- Volume section - AMBER (needs review) -->
+                <rect x="14" y="312" width="432" height="64" fill="#EDEAE0" rx="2" stroke="#D4CEBB" stroke-width="0.5"/>
+                <text x="20" y="326" font-size="8" fill="#8A8070" font-family="sans-serif">WEIGHT / VOLUME</text>
+                <!-- HL: Volume (amber) -->
+                <rect x="16" y="328" width="428" height="44" fill="rgba(245,158,11,0.12)" stroke="rgba(245,158,11,0.55)" stroke-width="1.5" rx="2"/>
+                <rect x="22" y="334" width="80" height="6" fill="#8A8070" rx="2"/>
+                <rect x="160" y="334" width="80" height="6" fill="#8A8070" rx="2"/>
+                <rect x="300" y="334" width="80" height="6" fill="#8A8070" rx="2"/>
+                <rect x="22" y="346" width="100" height="9" fill="#6A5A30" rx="2"/>
+                <rect x="160" y="346" width="80" height="9" fill="#6A5A30" rx="2"/>
+                <rect x="300" y="346" width="80" height="9" fill="#6A5A30" rx="2"/>
+                <rect x="22" y="360" width="90" height="7" fill="#7A6A40" rx="2"/>
+                <rect x="160" y="360" width="70" height="7" fill="#7A6A40" rx="2"/>
+                <rect x="300" y="360" width="70" height="7" fill="#7A6A40" rx="2"/>
+
+                <!-- Misc text rows -->
+                <rect x="14" y="390" width="432" height="5" fill="transparent" rx="2"/>
+                <rect x="22" y="396" width="340" height="5" fill="#CEC8B8" rx="2"/>
+                <rect x="22" y="406" width="280" height="5" fill="#CEC8B8" rx="2"/>
+                <rect x="22" y="416" width="310" height="5" fill="#CEC8B8" rx="2"/>
+                <rect x="22" y="428" width="260" height="5" fill="#D4CEC0" rx="2"/>
+
+                <!-- Date highlight (green) -->
+                <rect x="14" y="446" width="160" height="22" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.35)" stroke-width="1" rx="2"/>
+                <text x="20" y="460" font-size="8" fill="rgba(34,197,94,0.6)" font-family="sans-serif">DATE OF ISSUE</text>
+                <rect x="20" y="462" width="110" height="7" fill="#6A8A60" rx="2"/>
+
+                <!-- Stamp -->
+                <ellipse cx="380" cy="520" rx="56" ry="42" fill="rgba(200,16,46,0.06)" stroke="rgba(200,16,46,0.25)" stroke-width="1.5"/>
+                <ellipse cx="380" cy="520" rx="44" ry="32" fill="transparent" stroke="rgba(200,16,46,0.15)" stroke-width="0.5"/>
+                <text x="380" y="516" font-size="8" fill="rgba(200,16,46,0.5)" text-anchor="middle" font-family="sans-serif">PARCO</text>
+                <text x="380" y="526" font-size="7" fill="rgba(200,16,46,0.35)" text-anchor="middle" font-family="sans-serif">AUTHENTICATED</text>
+
+                <!-- Signature line -->
+                <line x1="30" y1="555" x2="200" y2="555" stroke="#D4CEBB" stroke-width="1"/>
+                <text x="30" y="570" font-size="8" fill="#A09888" font-family="sans-serif">Authorized Signatory</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Right: Extracted fields -->
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; overflow: hidden; display: flex; flex-direction: column;">
+            <div style="padding: 13px 16px; border-bottom: 1px solid rgba(255,255,255,0.055);">
+              <div style="font-size: 12px; font-weight: 600; color: #C0D0E4; margin-bottom: 2px;">Extracted Fields</div>
+              <div style="font-size: 10.5px; color: #3A4A62;">Click each field to verify · Amber = review required</div>
+            </div>
+
+            <!-- Fields list -->
+            <div style="flex: 1; overflow-y: auto; max-height: 420px;">
+              <sc-for list="{{ ocrFields }}" as="f" hint-placeholder-count="9">
+                <div onClick="{{ f.handler }}" style="padding: 11px 16px; border-bottom: 1px solid rgba(255,255,255,0.03); cursor: pointer; background: {{ f.rowBg }};" style-hover="background: rgba(255,255,255,0.025)">
+                  <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 5px;">
+                    <div style="flex: 1; min-width: 0;">
+                      <div style="font-size: 9.5px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px;">{{ f.label }}</div>
+                      <div style="font-size: 12.5px; font-weight: 500; color: #C0D0E4; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ f.value }}</div>
+                    </div>
+                    <div style="width: 22px; height: 22px; border-radius: 6px; background: {{ f.checkBg }}; border: 1.5px solid {{ f.checkBorder }}; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 10px;">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="display: {{ f.checkDisplay }};"><path d="M2 6l3 3 5-6" stroke="{{ f.checkColor }}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="flex: 1; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden;">
+                      <div style="height: 100%; width: {{ f.confWidth }}; background: {{ f.confColor }}; border-radius: 2px;"></div>
+                    </div>
+                    <span style="font-size: 10px; font-family: 'DM Mono', monospace; font-weight: 500; color: {{ f.confColor }}; min-width: 34px; text-align: right;">{{ f.confLabel }}</span>
+                    <sc-if value="{{ f.hasNote }}" hint-placeholder-val="{{ false }}">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#F59E0B" stroke-width="1.2"/><path d="M6 4v3" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round"/><circle cx="6" cy="8.5" r="0.5" fill="#F59E0B"/></svg>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+
+            <!-- Action bar -->
+            <div style="padding: 14px 16px; border-top: 1px solid rgba(255,255,255,0.055); display: flex; flex-direction: column; gap: 9px; flex-shrink: 0;">
+              <button onClick="{{ approveAndRoute }}" style="width: 100%; padding: 11px; background: {{ routeBtnBg }}; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; color: white; cursor: {{ routeBtnCursor }}; display: flex; align-items: center; justify-content: center; gap: 8px;" style-hover="opacity: 0.9">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M9 4l3.5 3.5L9 11" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Approve &amp; Route to SAP HANA
+              </button>
+              <div style="display: flex; gap: 8px;">
+                <button style="flex: 1; padding: 9px; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2); border-radius: 7px; font-size: 11.5px; font-weight: 600; color: #F59E0B; cursor: pointer;" style-hover="background: rgba(245,158,11,0.14)">⚠ Flag for Review</button>
+                <button style="flex: 1; padding: 9px; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); border-radius: 7px; font-size: 11.5px; font-weight: 600; color: #EF4444; cursor: pointer;" style-hover="background: rgba(239,68,68,0.12)">✕ Reject Document</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Routing done banner -->
+        <div style="display: {{ routingDoneDisplay }}; align-items: center; justify-content: space-between; padding: 16px 22px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.2); border-radius: 9px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 34px; height: 34px; border-radius: 50%; background: rgba(34,197,94,0.14); display: flex; align-items: center; justify-content: center;">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M3 8.5l5 5 6-8" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 14px; font-weight: 700; color: #22C55E; margin-bottom: 2px;">Document Routed to SAP HANA</div>
+              <div style="font-size: 11.5px; color: #5A6880;">Invoice trigger queued · Port Admin notified · BL-KHI-2847-A archived · Audit log entry created</div>
+            </div>
+          </div>
+          <div onClick="{{ goTo3 }}" style="padding: 9px 18px; background: #22C55E; border-radius: 7px; font-size: 12.5px; font-weight: 700; color: #05080F; cursor: pointer; white-space: nowrap; flex-shrink: 0;" style-hover="background: #2ADB72">View Routing Engine →</div>
+        </div>
+
+      </div>
+
+      <!-- ══════════════════════════
+           SCREEN 3 · ROUTING ENGINE
+      ═══════════════════════════════ -->
+      <div style="display: {{ s3D }}; flex-direction: column; gap: 18px;">
+
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;">
+          <div>
+            <div style="font-size: 17px; font-weight: 700; color: #E2EAF6; margin-bottom: 3px;">Routing Engine</div>
+            <div style="font-size: 11.5px; color: #3A4A62;">Define how extracted documents flow from OCR Hub → downstream systems</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 5px; background: rgba(200,16,46,0.06); border: 1px solid rgba(200,16,46,0.2); flex-shrink: 0;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1.5v1M6 9.5v1M1.5 6h1M9.5 6h1M3 3l.7.7M8.3 8.3l.7.7M3 9l.7-.7M8.3 3.7l.7-.7" stroke="#C8102E" stroke-width="1.3" stroke-linecap="round"/><circle cx="6" cy="6" r="2" stroke="#C8102E" stroke-width="1.3"/></svg>
+            <span style="font-size: 11px; font-weight: 600; color: #C8102E;">Flow Annotation: OCR Hub → SAP HANA Integration Hub</span>
+          </div>
+        </div>
+
+        <!-- Flow diagram card -->
+        <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 28px 20px; overflow-x: auto;">
+          <div style="font-size: 11px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 22px;">End-to-End Document Flow</div>
+
+          <div style="display: flex; align-items: center; gap: 0; min-width: 900px;">
+
+            <!-- Stage 1: Upload -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 130px;">
+              <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(59,130,246,0.12); border: 1.5px solid rgba(59,130,246,0.3); display: flex; align-items: center; justify-content: center;">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 16V6M11 6L7 10M11 6L15 10" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 17h12" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 12px; font-weight: 600; color: #C0D0E4; margin-bottom: 2px;">1. Upload</div>
+                <div style="font-size: 10px; color: #3A4A62;">Drag &amp; drop PDF / image</div>
+              </div>
+            </div>
+
+            <!-- Arrow -->
+            <div style="flex: 1; height: 2px; background: linear-gradient(90deg, rgba(59,130,246,0.4) 0%, rgba(245,158,11,0.4) 100%); position: relative; margin-bottom: 28px;">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="position: absolute; right: -1px; top: -4px;"><path d="M0 5h8M5 1l4 4-4 4" stroke="rgba(245,158,11,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <!-- Stage 2: OCR -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 130px;">
+              <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(245,158,11,0.12); border: 1.5px solid rgba(245,158,11,0.3); display: flex; align-items: center; justify-content: center;">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="16" height="16" rx="2" stroke="#F59E0B" stroke-width="1.8"/><path d="M7 8h4M7 11h8M7 14h5" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="8" r="2" fill="#F59E0B" fill-opacity="0.3" stroke="#F59E0B" stroke-width="1"/></svg>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 12px; font-weight: 600; color: #C0D0E4; margin-bottom: 2px;">2. OCR Engine</div>
+                <div style="font-size: 10px; color: #3A4A62;">AI field extraction</div>
+              </div>
+            </div>
+
+            <!-- Arrow -->
+            <div style="flex: 1; height: 2px; background: linear-gradient(90deg, rgba(245,158,11,0.4) 0%, rgba(139,92,246,0.4) 100%); position: relative; margin-bottom: 28px;">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="position: absolute; right: -1px; top: -4px;"><path d="M0 5h8M5 1l4 4-4 4" stroke="rgba(139,92,246,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <!-- Stage 3: Confidence -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 130px;">
+              <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(139,92,246,0.12); border: 1.5px solid rgba(139,92,246,0.3); display: flex; align-items: center; justify-content: center;">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11L9 16L18 6" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="9" stroke="#8B5CF6" stroke-width="1.5" fill="none" stroke-dasharray="4 2"/></svg>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 12px; font-weight: 600; color: #C0D0E4; margin-bottom: 2px;">3. Confidence</div>
+                <div style="font-size: 10px; color: #3A4A62;">Score &amp; flag fields</div>
+              </div>
+            </div>
+
+            <!-- Arrow -->
+            <div style="flex: 1; height: 2px; background: linear-gradient(90deg, rgba(139,92,246,0.4) 0%, rgba(200,16,46,0.4) 100%); position: relative; margin-bottom: 28px;">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="position: absolute; right: -1px; top: -4px;"><path d="M0 5h8M5 1l4 4-4 4" stroke="rgba(200,16,46,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <!-- Stage 4: Human Review -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 130px;">
+              <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(200,16,46,0.12); border: 1.5px solid rgba(200,16,46,0.3); display: flex; align-items: center; justify-content: center;">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="8" r="3.5" stroke="#C8102E" stroke-width="1.8"/><path d="M4 19c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="#C8102E" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 12px; font-weight: 600; color: #C0D0E4; margin-bottom: 2px;">4. Validation</div>
+                <div style="font-size: 10px; color: #3A4A62;">Human field review</div>
+              </div>
+            </div>
+
+            <!-- Arrow (highlighted - the annotated path) -->
+            <div style="flex: 1; height: 3px; background: linear-gradient(90deg, #C8102E 0%, #22C55E 100%); position: relative; margin-bottom: 28px; box-shadow: 0 0 8px rgba(200,16,46,0.4);">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="position: absolute; right: -1px; top: -3.5px;"><path d="M0 5h8M5 1l4 4-4 4" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <!-- Stage 5: Routing / SAP (highlighted destination) -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 130px;">
+              <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(34,197,94,0.14); border: 2px solid rgba(34,197,94,0.5); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 14px rgba(34,197,94,0.2);">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="16" height="16" rx="2" stroke="#22C55E" stroke-width="1.8"/><path d="M7 11l3 3 5-5" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 12px; font-weight: 700; color: #22C55E; margin-bottom: 2px;">5. SAP HANA</div>
+                <div style="font-size: 10px; color: #3A4A62;">Auto-invoice trigger</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Output branches -->
+          <div style="display: flex; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.04);">
+            <div style="flex: 1; padding: 12px 14px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.18); border-radius: 8px; display: flex; align-items: center; gap: 9px;">
+              <div style="width: 8px; height: 8px; border-radius: 50%; background: #22C55E; flex-shrink: 0;"></div>
+              <div>
+                <div style="font-size: 12px; font-weight: 600; color: #22C55E; margin-bottom: 1px;">SAP HANA Integration</div>
+                <div style="font-size: 10px; color: #3A4A62;">Invoice generated + B/L archived</div>
+              </div>
+            </div>
+            <div style="flex: 1; padding: 12px 14px; background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.18); border-radius: 8px; display: flex; align-items: center; gap: 9px;">
+              <div style="width: 8px; height: 8px; border-radius: 50%; background: #3B82F6; flex-shrink: 0;"></div>
+              <div>
+                <div style="font-size: 12px; font-weight: 600; color: #3B82F6; margin-bottom: 1px;">Port Admin Notified</div>
+                <div style="font-size: 10px; color: #3A4A62;">Email + platform alert sent</div>
+              </div>
+            </div>
+            <div style="flex: 1; padding: 12px 14px; background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.18); border-radius: 8px; display: flex; align-items: center; gap: 9px;">
+              <div style="width: 8px; height: 8px; border-radius: 50%; background: #F59E0B; flex-shrink: 0;"></div>
+              <div>
+                <div style="font-size: 12px; font-weight: 600; color: #F59E0B; margin-bottom: 1px;">Manual Review Queue</div>
+                <div style="font-size: 10px; color: #3A4A62;">Low-confidence docs flagged</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Routing rules table -->
+        <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; overflow: hidden;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.055);">
+            <div style="font-size: 13px; font-weight: 600; color: #C0D0E4;">Active Routing Rules</div>
+            <div style="padding: 5px 12px; border-radius: 5px; background: rgba(200,16,46,0.07); border: 1px solid rgba(200,16,46,0.2); font-size: 11px; font-weight: 600; color: #C8102E; cursor: pointer;">+ Add Rule</div>
+          </div>
+          <div style="display: grid; grid-template-columns: 56px 130px 1fr 1fr 1fr 80px; padding: 9px 18px; background: rgba(255,255,255,0.015); border-bottom: 1px solid rgba(255,255,255,0.04);">
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">#</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Document</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Condition</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Action</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Target</span>
+            <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.5px;">Status</span>
+          </div>
+          <sc-for list="{{ routingRules }}" as="r" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 56px 130px 1fr 1fr 1fr 80px; padding: 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.03); align-items: center;" style-hover="background: rgba(255,255,255,0.02)">
+              <span style="font-size: 10px; font-family: 'DM Mono', monospace; color: #C8102E; font-weight: 500;">{{ r.id }}</span>
+              <span style="font-size: 11.5px; font-weight: 500; color: #B0C0D8;">{{ r.doc }}</span>
+              <span style="font-size: 11px; color: #6A7A92;">{{ r.condition }}</span>
+              <span style="font-size: 11px; color: #8896A9;">{{ r.action }}</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                <sc-for list="{{ r.targets }}" as="t" hint-placeholder-count="2">
+                  <span style="font-size: 9.5px; font-weight: 600; padding: 2px 6px; border-radius: 3px; color: {{ t.color }}; background: {{ t.bg }}; white-space: nowrap;">{{ t.label }}</span>
+                </sc-for>
+              </div>
+              <div style="display: flex; align-items: center; gap: 5px;">
+                <div style="width: 6px; height: 6px; border-radius: 50%; background: #22C55E;"></div>
+                <span style="font-size: 11px; color: #22C55E; font-weight: 500;">Active</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1440, &quot;height&quot;: 900 }
+}">
+class Component extends DCLogic {
+  state = {
+    screen: 1,
+    hasUpload: false,
+    docType: 'bol',
+    verifiedFields: {},
+    routingDone: false,
+  };
+
+  renderVals() {
+    const s = this.state;
+    const S = (n) => s.screen === n;
+
+    // ── Doc type pills
+    const docTypeOptions = [
+      { key: 'bol',     label: 'Bill of Lading',   isActive: s.docType === 'bol' },
+      { key: 'challan', label: 'Delivery Challan',  isActive: s.docType === 'challan' },
+      { key: 'lab',     label: 'Lab Certificate',   isActive: s.docType === 'lab' },
+      { key: 'gate',    label: 'Gate Pass',          isActive: s.docType === 'gate' },
+    ].map(dt => ({
+      ...dt,
+      border:  dt.isActive ? 'rgba(200,16,46,0.35)' : 'rgba(255,255,255,0.07)',
+      bg:      dt.isActive ? 'rgba(200,16,46,0.1)'  : 'rgba(255,255,255,0.03)',
+      hoverBg: dt.isActive ? 'rgba(200,16,46,0.14)' : 'rgba(255,255,255,0.06)',
+      color:   dt.isActive ? '#C8102E'               : '#8896A9',
+      select:  () => this.setState({ docType: dt.key }),
+    }));
+
+    // ── Recent uploads
+    const recentUploads = [
+      { name: 'BL-KHI-2847-A.pdf',  type: 'Bill of Lading',   vessel: 'MV Indus Spirit',    date: '25 Jun', statusLabel: '✓ Verified',    statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.09)',   action: 'View' },
+      { name: 'DC-KHI-0831.pdf',    type: 'Delivery Challan', vessel: '—',                  date: '24 Jun', statusLabel: '⏳ OCR Review',  statusColor: '#F59E0B', statusBg: 'rgba(245,158,11,0.09)', action: 'Review' },
+      { name: 'LC-PQ-2847.pdf',     type: 'Lab Certificate',  vessel: 'MV Indus Spirit',    date: '25 Jun', statusLabel: '✓ Verified',    statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.09)',   action: 'View' },
+      { name: 'GP-LRR-0847.pdf',    type: 'Gate Pass',        vessel: '—',                  date: '25 Jun', statusLabel: '✓ Verified',    statusColor: '#22C55E', statusBg: 'rgba(34,197,94,0.09)',   action: 'View' },
+      { name: 'BL-KHI-2839.pdf',    type: 'Bill of Lading',   vessel: 'MV K. Voyager',     date: '24 Jun', statusLabel: '⚠ Flagged',     statusColor: '#EF4444', statusBg: 'rgba(239,68,68,0.09)',   action: 'Review' },
+    ];
+
+    // ── OCR fields
+    const rawFields = [
+      { key: 'blno',      label: 'B/L Number',           value: 'BL-KHI-2847-A',                    conf: 99.8, hasNote: false },
+      { key: 'shipper',   label: 'Shipper',               value: 'Total Parco Pakistan Ltd.',        conf: 98.2, hasNote: false },
+      { key: 'vessel',    label: 'Vessel Name',           value: 'MV Indus Spirit',                  conf: 99.1, hasNote: false },
+      { key: 'polport',   label: 'Port of Loading',       value: 'Salalah, Oman',                    conf: 96.4, hasNote: false },
+      { key: 'podport',   label: 'Port of Discharge',     value: 'Karachi, Pakistan',                conf: 99.5, hasNote: false },
+      { key: 'commodity', label: 'Commodity',             value: 'High Octane Blending Component',   conf: 97.3, hasNote: false },
+      { key: 'grossvol',  label: 'Gross Volume',          value: '42,180 MT',                         conf: 94.7, hasNote: true  },
+      { key: 'netvol',    label: 'Net Standard Volume',   value: '41,947 MT',                         conf: 93.2, hasNote: true  },
+      { key: 'bldate',    label: 'B/L Date',              value: '22 Jun 2026',                       conf: 98.9, hasNote: false },
+    ];
+
+    const ocrFields = rawFields.map(f => {
+      const isVerified = !!s.verifiedFields[f.key];
+      const confColor  = f.conf >= 96 ? '#22C55E' : f.conf >= 90 ? '#F59E0B' : '#EF4444';
+      const confWidth  = f.conf.toFixed(0) + '%';
+      return {
+        ...f,
+        isVerified,
+        confColor,
+        confWidth,
+        confLabel: f.conf.toFixed(1) + '%',
+        rowBg:       isVerified ? 'rgba(34,197,94,0.04)' : 'transparent',
+        checkBg:     isVerified ? 'rgba(34,197,94,0.15)' : 'rgba(255,255,255,0.04)',
+        checkBorder: isVerified ? 'rgba(34,197,94,0.4)'  : 'rgba(255,255,255,0.1)',
+        checkColor:  '#22C55E',
+        checkDisplay: isVerified ? 'block' : 'none',
+        handler: () => this.setState(prev => ({
+          verifiedFields: { ...prev.verifiedFields, [f.key]: !prev.verifiedFields[f.key] }
+        })),
+      };
+    });
+
+    const verifiedCount = ocrFields.filter(f => f.isVerified).length;
+    const totalCount    = ocrFields.length;
+    const allVerified   = verifiedCount === totalCount;
+    const verifiedPct   = Math.round(verifiedCount / totalCount * 100) + '%';
+
+    // ── Routing rules
+    const routingRules = [
+      {
+        id: 'R-01', doc: 'Bill of Lading', condition: 'All fields verified',
+        action: 'Auto-sync + archive',
+        targets: [
+          { label: 'SAP HANA', color: '#22C55E', bg: 'rgba(34,197,94,0.1)' },
+          { label: 'Port Admin', color: '#3B82F6', bg: 'rgba(59,130,246,0.1)' },
+        ],
+      },
+      {
+        id: 'R-02', doc: 'Delivery Challan', condition: 'Volume delta < 1%',
+        action: 'Generate e-POD link',
+        targets: [
+          { label: 'SAP HANA', color: '#22C55E', bg: 'rgba(34,197,94,0.1)' },
+          { label: 'Driver App', color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)' },
+        ],
+      },
+      {
+        id: 'R-03', doc: 'Lab Certificate', condition: 'Confidence > 95%',
+        action: 'Archive + QC notify',
+        targets: [
+          { label: 'Quality System', color: '#F59E0B', bg: 'rgba(245,158,11,0.1)' },
+        ],
+      },
+      {
+        id: 'R-04', doc: 'Any', condition: 'Confidence < 85%',
+        action: 'Flag for manual review',
+        targets: [
+          { label: 'Review Queue', color: '#EF4444', bg: 'rgba(239,68,68,0.1)' },
+        ],
+      },
+    ];
+
+    return {
+      // Screen
+      s1D: S(1) ? 'flex' : 'none',
+      s2D: S(2) ? 'flex' : 'none',
+      s3D: S(3) ? 'flex' : 'none',
+
+      goTo1: () => this.setState({ screen: 1 }),
+      goTo2: () => this.setState({ screen: 2 }),
+      goTo3: () => this.setState({ screen: 3 }),
+      goToHub:       () => { window.location.href = './PARCO Supply Chain Hub - Standalone.html'; },
+      goToUpstreamA: () => { window.location.href = './PARCO Module A - Upstream Intake.dc.html'; },
+      goToFinanceE:  () => { window.location.href = './PARCO Module E - O2C SAP Hub.dc.html'; },
+
+      // Nav
+      n1Bg: S(1) ? 'rgba(200,16,46,0.13)' : 'transparent', n1Color: S(1) ? '#C8102E' : '#8896A9',
+      n2Bg: S(2) ? 'rgba(200,16,46,0.13)' : 'transparent', n2Color: S(2) ? '#C8102E' : '#8896A9',
+      n3Bg: S(3) ? 'rgba(200,16,46,0.13)' : 'transparent', n3Color: S(3) ? '#C8102E' : '#8896A9',
+
+      screenTitle: ['Upload Center', 'OCR Verification', 'Routing Engine'][s.screen - 1],
+
+      // Upload
+      hasUpload: s.hasUpload,
+      emptyZoneDisplay:    s.hasUpload ? 'none'  : 'flex',
+      uploadedZoneDisplay: s.hasUpload ? 'flex'  : 'none',
+      uploadBorderColor: s.hasUpload ? 'rgba(34,197,94,0.35)' : 'rgba(255,255,255,0.1)',
+      triggerUpload: () => this.setState({ hasUpload: true }),
+
+      // Data
+      docTypes: docTypeOptions,
+      recentUploads,
+      ocrFields,
+
+      // OCR stats
+      verifiedCount,
+      totalCount,
+      verifiedPct,
+      allVerified,
+
+      // Route button
+      routeBtnBg:     allVerified ? '#C8102E' : '#1A2840',
+      routeBtnCursor: allVerified ? 'pointer' : 'not-allowed',
+
+      approveAndRoute: () => {
+        if (this.state.verifiedFields && Object.keys(this.state.verifiedFields).length === totalCount) {
+          this.setState({ routingDone: true });
+        }
+      },
+
+      routingDoneDisplay: s.routingDone ? 'flex' : 'none',
+
+      routingRules,
+    };
+  }
+}
+</script>
+</body>
+</html>

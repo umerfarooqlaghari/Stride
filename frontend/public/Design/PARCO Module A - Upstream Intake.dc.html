@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #05080F; font-family: 'DM Sans', system-ui, sans-serif; color: #DDE4EF; overflow: hidden; }
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.09); border-radius: 6px; }
+    input, textarea { font-family: inherit; }
+    button { font-family: inherit; }
+    @keyframes parcoPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+    @keyframes parcoIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</helmet>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ROOT SHELL
+════════════════════════════════════════════════════════════ -->
+<div style="display: flex; width: 100vw; height: 100vh; background: #05080F; overflow: hidden;">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside style="width: 218px; min-width: 218px; background: #0A0F1E; border-right: 1px solid rgba(255,255,255,0.055); display: flex; flex-direction: column; height: 100vh; z-index: 10; flex-shrink: 0;">
+
+    <!-- Logo -->
+    <div style="height: 58px; display: flex; align-items: center; padding: 0 16px; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.055); flex-shrink: 0;">
+      <div style="width: 32px; height: 32px; background: #C8102E; border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+          <path d="M8.5 1.5L15 5.25V11.75L8.5 15.5L2 11.75V5.25L8.5 1.5Z" fill="white" fill-opacity="0.95"/>
+          <circle cx="8.5" cy="8.5" r="2.4" fill="#C8102E"/>
+        </svg>
+      </div>
+      <div>
+        <div style="font-size: 13.5px; font-weight: 700; color: #E8EEF8; letter-spacing: 0.4px; line-height: 1.2;">PARCO</div>
+        <div style="font-size: 10px; color: #3A4A62; letter-spacing: 0.5px; font-weight: 500; text-transform: uppercase;">Supply Chain</div>
+      </div>
+      <div style="margin-left: auto; font-size: 9px; padding: 2px 5px; border-radius: 3px; background: rgba(200,16,46,0.12); color: #C8102E; font-weight: 600; letter-spacing: 0.3px;">MOD A</div>
+    </div>
+
+    <!-- Nav -->
+    <nav style="flex: 1; padding: 14px 8px; overflow-y: auto; display: flex; flex-direction: column; gap: 18px;">
+
+      <!-- Hub link -->
+      <div>
+        <div onClick="{{ goToHub }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: rgba(255,255,255,0.03);" style-hover="background: rgba(255,255,255,0.06)">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M6 3l-4 4 4 4" stroke="#5A6880" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="font-size: 11.5px; font-weight: 600; color: #5A6880; letter-spacing: 0.2px;">Supply Chain Hub</span>
+        </div>
+        <div style="height: 1px; background: rgba(255,255,255,0.05); margin: 6px 4px;"></div>
+      </div>
+
+      <!-- Upstream -->
+      <div>
+        <div style="font-size: 9px; font-weight: 700; color: #2A3A52; text-transform: uppercase; letter-spacing: 1.2px; padding: 0 9px; margin-bottom: 5px;">Upstream A</div>
+        <div style="display: flex; flex-direction: column; gap: 1px;">
+
+          <div onClick="{{ goTo1 }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: {{ n1Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <rect x="1" y="1" width="5" height="5" rx="1" fill="{{ n1Color }}"/>
+              <rect x="8" y="1" width="5" height="5" rx="1" fill="{{ n1Color }}" fill-opacity="0.65"/>
+              <rect x="1" y="8" width="5" height="5" rx="1" fill="{{ n1Color }}" fill-opacity="0.65"/>
+              <rect x="8" y="8" width="5" height="5" rx="1" fill="{{ n1Color }}" fill-opacity="0.4"/>
+            </svg>
+            <span style="font-size: 13px; font-weight: 500; color: {{ n1Color }};">Dashboard</span>
+          </div>
+
+          <div onClick="{{ goTo2 }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: {{ n2Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <rect x="2" y="1.5" width="10" height="11" rx="1.5" stroke="{{ n2Color }}" stroke-width="1.3"/>
+              <path d="M4.5 5.5h5M4.5 7.5h5M4.5 9.5h3" stroke="{{ n2Color }}" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+            <span style="font-size: 13px; font-weight: 500; color: {{ n2Color }};">Surveyor Form</span>
+          </div>
+
+          <div onClick="{{ goTo3 }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: {{ n3Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M7 1.5L13 4.5V8C13 11 10.5 13 7 13.5C3.5 13 1 11 1 8V4.5L7 1.5Z" stroke="{{ n3Color }}" stroke-width="1.3"/>
+              <path d="M4.5 7l2 2 3-3" stroke="{{ n3Color }}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span style="font-size: 13px; font-weight: 500; color: {{ n3Color }};">Compliance</span>
+            <div style="margin-left: auto; min-width: 16px; height: 16px; border-radius: 8px; background: #C8102E; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: white; padding: 0 4px;">1</div>
+          </div>
+
+          <div onClick="{{ goTo4 }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer; background: {{ n4Bg }};" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 3h10M2 6h7M2 9h8M2 12h5" stroke="{{ n4Color }}" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+            <span style="font-size: 13px; font-weight: 500; color: {{ n4Color }};">Audit Trail</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Fleet -->
+      <div>
+        <div style="font-size: 9px; font-weight: 700; color: #2A3A52; text-transform: uppercase; letter-spacing: 1.2px; padding: 0 9px; margin-bottom: 5px;">Fleet C</div>
+        <div style="display: flex; flex-direction: column; gap: 1px;">
+          <div onClick="{{ goToFleetC }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="5" width="8" height="5" rx="1" stroke="#8896A9" stroke-width="1.3"/><path d="M9 7l4-2v5l-4-2" stroke="#8896A9" stroke-width="1.3"/><circle cx="3" cy="11" r="1.1" fill="#8896A9"/><circle cx="7" cy="11" r="1.1" fill="#8896A9"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: #8896A9;">Gantry Control</span>
+          </div>
+          <div onClick="{{ goToFleetC }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#8896A9" stroke-width="1.3"/><circle cx="7" cy="7" r="1.5" fill="#8896A9"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: #8896A9;">Live Tracking</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Finance -->
+      <div>
+        <div style="font-size: 9px; font-weight: 700; color: #2A3A52; text-transform: uppercase; letter-spacing: 1.2px; padding: 0 9px; margin-bottom: 5px;">Finance E</div>
+        <div style="display: flex; flex-direction: column; gap: 1px;">
+          <div onClick="{{ goToFinanceE }}" style="display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 6px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.035)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="2" width="11" height="10" rx="1.5" stroke="#8896A9" stroke-width="1.3"/><path d="M7 4.5v5M5 7h4" stroke="#8896A9" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span style="font-size: 13px; font-weight: 500; color: #8896A9;">O2C / SAP Hub</span>
+          </div>
+        </div>
+      </div>
+
+    </nav>
+
+    <!-- User footer -->
+    <div style="padding: 10px 12px; border-top: 1px solid rgba(255,255,255,0.055); display: flex; align-items: center; gap: 9px; flex-shrink: 0;">
+      <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #C8102E 0%, #7A091C 100%); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; flex-shrink: 0;">AR</div>
+      <div style="min-width: 0; flex: 1;">
+        <div style="font-size: 11.5px; font-weight: 600; color: #B8C8DC; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">A. Rahman</div>
+        <div style="font-size: 9.5px; color: #3A4A62; white-space: nowrap;">SC Admin · Kemari</div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ═══ MAIN AREA ═══ -->
+  <div style="flex: 1; display: flex; flex-direction: column; min-width: 0; overflow: hidden;">
+
+    <!-- TOP BAR -->
+    <header style="height: 58px; background: #0A0F1E; border-bottom: 1px solid rgba(255,255,255,0.055); display: flex; align-items: center; padding: 0 22px; gap: 14px; flex-shrink: 0;">
+
+      <div style="display: flex; align-items: center; gap: 7px; flex: 1; min-width: 0;">
+        <span style="font-size: 11px; color: #2A3A52; font-weight: 500;">Upstream Intake</span>
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M3.5 2l4 3.5-4 3.5" stroke="#2A3A52" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span style="font-size: 13px; font-weight: 600; color: #C8D8EC;">{{ screenTitle }}</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 4px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.14);">
+        <div style="width: 5px; height: 5px; border-radius: 50%; background: #22C55E; animation: parcoPulse 2s ease-in-out infinite;"></div>
+        <span style="font-size: 11px; font-weight: 500; color: #22C55E;">Live · Shift B  06:00–14:00</span>
+      </div>
+
+      <span style="font-size: 11.5px; color: #2E3E55; font-family: 'DM Mono', monospace; letter-spacing: 0.2px;">25 Jun 2026 · 13:04 PKT</span>
+
+      <div style="position: relative; width: 32px; height: 32px; border-radius: 6px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;" style-hover="background: rgba(255,255,255,0.07)">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 2C5.6 2 4 3.6 4 5.5v3.7L2.5 11h10L11 9.2V5.5C11 3.6 9.4 2 7.5 2Z" stroke="#8896A9" stroke-width="1.25"/><path d="M6 12.5a1.5 1.5 0 0 0 3 0" stroke="#8896A9" stroke-width="1.25" stroke-linecap="round"/></svg>
+        <div style="position: absolute; top: -3px; right: -3px; width: 13px; height: 13px; border-radius: 50%; background: #C8102E; font-size: 7.5px; font-weight: 700; color: white; display: flex; align-items: center; justify-content: center; border: 1.5px solid #0A0F1E;">1</div>
+      </div>
+
+    </header>
+
+    <!-- CONTENT AREA -->
+    <main style="flex: 1; overflow-y: auto; padding: 22px 26px; background: #05080F;">
+
+      <!-- ═══════════════════════════════
+           SCREEN 1 · DASHBOARD
+      ════════════════════════════════ -->
+      <sc-if value="{{ screen1 }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-direction: column; gap: 18px;">
+
+          <!-- KPI Row -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+
+            <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 16px 18px; border-top: 2px solid rgba(200,16,46,0.4);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                <span style="font-size: 10px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.7px;">Active Vessels</span>
+                <div style="width: 26px; height: 26px; border-radius: 5px; background: rgba(200,16,46,0.1); display: flex; align-items: center; justify-content: center;">
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 9.5L4 6l2.5 2.5L9 4l2.5 3 1-2" stroke="#C8102E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div style="font-size: 30px; font-weight: 700; color: #E2EAF6; font-family: 'DM Mono', monospace; line-height: 1; margin-bottom: 5px;">4</div>
+              <div style="font-size: 10.5px; color: #3E9E6F;">↑ 2 vessels from prev. shift</div>
+            </div>
+
+            <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 16px 18px; border-top: 2px solid rgba(200,16,46,0.4);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                <span style="font-size: 10px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.7px;">Intake Today</span>
+                <div style="width: 26px; height: 26px; border-radius: 5px; background: rgba(200,16,46,0.1); display: flex; align-items: center; justify-content: center;">
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 2v9M3.5 8l3 3 3-3" stroke="#C8102E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div style="font-size: 30px; font-weight: 700; color: #E2EAF6; font-family: 'DM Mono', monospace; line-height: 1; margin-bottom: 5px;">121,450</div>
+              <div style="font-size: 10.5px; color: #5A6880;">MT · <span style="color: #3E9E6F;">+8,230 MT vs. avg</span></div>
+            </div>
+
+            <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 16px 18px; border-top: 2px solid rgba(245,158,11,0.45);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                <span style="font-size: 10px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.7px;">Pending Actions</span>
+                <div style="width: 26px; height: 26px; border-radius: 5px; background: rgba(245,158,11,0.1); display: flex; align-items: center; justify-content: center;">
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#F59E0B" stroke-width="1.3"/><path d="M6.5 3.5v3.5l2 1.5" stroke="#F59E0B" stroke-width="1.3" stroke-linecap="round"/></svg>
+                </div>
+              </div>
+              <div style="font-size: 30px; font-weight: 700; color: #F59E0B; font-family: 'DM Mono', monospace; line-height: 1; margin-bottom: 5px;">1</div>
+              <div style="font-size: 10.5px; color: #F59E0B;">Clearance overdue · Berth B-03</div>
+            </div>
+
+            <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 16px 18px; border-top: 2px solid rgba(34,197,94,0.35);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                <span style="font-size: 10px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.7px;">Pipeline Uptime</span>
+                <div style="width: 26px; height: 26px; border-radius: 5px; background: rgba(34,197,94,0.1); display: flex; align-items: center; justify-content: center;">
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-6" stroke="#22C55E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div style="font-size: 30px; font-weight: 700; color: #22C55E; font-family: 'DM Mono', monospace; line-height: 1; margin-bottom: 5px;">98.7%</div>
+              <div style="font-size: 10.5px; color: #5A6880;">Last 7 days · All lines nominal</div>
+            </div>
+
+          </div>
+
+          <!-- Main grid -->
+          <div style="display: grid; grid-template-columns: 1fr 292px; gap: 14px; align-items: start;">
+
+            <!-- Vessel Pipeline Table -->
+            <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; overflow: hidden;">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.055);">
+                <div>
+                  <div style="font-size: 13px; font-weight: 600; color: #C0D0E4;">Vessel Pipeline</div>
+                  <div style="font-size: 10.5px; color: #3A4A62; margin-top: 1px;">Kemari Terminal · Port Qasim</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 7px;">
+                  <div style="padding: 5px 10px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.08); font-size: 11px; font-weight: 500; color: #8896A9; cursor: pointer;" style-hover="background: rgba(255,255,255,0.04)">Filter ▾</div>
+                  <div style="padding: 5px 10px; border-radius: 5px; border: 1px solid rgba(200,16,46,0.3); background: rgba(200,16,46,0.07); font-size: 11px; font-weight: 600; color: #C8102E; cursor: pointer;" style-hover="background: rgba(200,16,46,0.13)">+ Vessel</div>
+                </div>
+              </div>
+
+              <!-- Table head -->
+              <div style="display: grid; grid-template-columns: 78px 1fr 76px 60px 130px 88px 110px 72px; padding: 9px 18px; background: rgba(255,255,255,0.015); border-bottom: 1px solid rgba(255,255,255,0.04);">
+                <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">ID</span>
+                <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Vessel Name</span>
+                <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Product</span>
+                <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Berth</span>
+                <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Status</span>
+                <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Volume</span>
+                <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Discharge</span>
+                <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Action</span>
+              </div>
+
+              <sc-for list="{{ vessels }}" as="v" hint-placeholder-count="4">
+                <div onClick="{{ openVessel }}" style="display: grid; grid-template-columns: 78px 1fr 76px 60px 130px 88px 110px 72px; padding: 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.03); cursor: pointer; align-items: center;" style-hover="background: rgba(255,255,255,0.022)">
+                  <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #3A4A62;">{{ v.id }}</span>
+                  <div>
+                    <div style="font-size: 12.5px; font-weight: 500; color: #C0D0E4; line-height: 1.2;">{{ v.name }}</div>
+                    <div style="font-size: 9.5px; color: #3A4A62; margin-top: 1px;">{{ v.agent }}</div>
+                  </div>
+                  <span style="font-size: 11.5px; font-weight: 500; color: #8896A9;">{{ v.product }}</span>
+                  <span style="font-size: 11.5px; font-family: 'DM Mono', monospace; color: #8896A9;">{{ v.berth }}</span>
+                  <div style="display: flex; align-items: center; gap: 5px;">
+                    <div style="width: 5px; height: 5px; border-radius: 50%; background: {{ v.statusColor }}; animation: parcoPulse 2.5s ease-in-out infinite; flex-shrink: 0;"></div>
+                    <span style="font-size: 11px; font-weight: 500; color: {{ v.statusColor }}; white-space: nowrap;">{{ v.statusLabel }}</span>
+                  </div>
+                  <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #6A7A92;">{{ v.volume }}</span>
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <div style="flex: 1; height: 3.5px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden;">
+                      <div style="height: 100%; width: {{ v.progress }}; background: {{ v.progressColor }}; border-radius: 2px;"></div>
+                    </div>
+                    <span style="font-size: 9.5px; color: #3A4A62; font-family: 'DM Mono', monospace; min-width: 26px; text-align: right;">{{ v.progress }}</span>
+                  </div>
+                  <span style="font-size: 11.5px; font-weight: 600; color: #C8102E; cursor: pointer;" style-hover="color: #E5102E">Review →</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <!-- Right column -->
+            <div style="display: flex; flex-direction: column; gap: 13px;">
+
+              <!-- Pipeline Schedule -->
+              <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; overflow: hidden;">
+                <div style="padding: 13px 15px; border-bottom: 1px solid rgba(255,255,255,0.055);">
+                  <div style="font-size: 12px; font-weight: 600; color: #C0D0E4;">Pipeline Injection</div>
+                  <div style="font-size: 10px; color: #3A4A62; margin-top: 1px;">Scheduled — Today</div>
+                </div>
+                <sc-for list="{{ pipelineSchedule }}" as="p" hint-placeholder-count="4">
+                  <div style="padding: 10px 15px; border-bottom: 1px solid rgba(255,255,255,0.03); display: flex; align-items: center; gap: 9px;">
+                    <span style="font-size: 11.5px; font-family: 'DM Mono', monospace; color: #C8102E; min-width: 36px; font-weight: 500;">{{ p.time }}</span>
+                    <div style="flex: 1; min-width: 0;">
+                      <div style="font-size: 11px; font-weight: 500; color: #B0C0D8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ p.pipeline }}</div>
+                      <div style="font-size: 9.5px; color: #3A4A62; margin-top: 1px;">{{ p.product }} · {{ p.volume }}</div>
+                    </div>
+                    <div style="width: 5px; height: 5px; border-radius: 50%; background: {{ p.dotColor }}; flex-shrink: 0;"></div>
+                  </div>
+                </sc-for>
+              </div>
+
+              <!-- Alerts -->
+              <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; overflow: hidden;">
+                <div style="padding: 13px 15px; border-bottom: 1px solid rgba(255,255,255,0.055); display: flex; align-items: center; justify-content: space-between;">
+                  <div style="font-size: 12px; font-weight: 600; color: #C0D0E4;">System Alerts</div>
+                  <div style="width: 16px; height: 16px; border-radius: 8px; background: #C8102E; display: flex; align-items: center; justify-content: center; font-size: 8.5px; font-weight: 700; color: white;">1</div>
+                </div>
+                <sc-for list="{{ systemAlerts }}" as="a" hint-placeholder-count="3">
+                  <div style="padding: 11px 15px; border-bottom: 1px solid rgba(255,255,255,0.03); border-left: 2px solid {{ a.levelColor }}; background: {{ a.levelBg }};">
+                    <div style="font-size: 11px; font-weight: 500; color: #B0C0D8; margin-bottom: 3px; line-height: 1.35;">{{ a.message }}</div>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                      <span style="font-size: 10px; color: {{ a.levelColor }};">{{ a.detail }}</span>
+                      <span style="font-size: 10px; font-family: 'DM Mono', monospace; color: #3A4A62;">{{ a.time }}</span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ═══════════════════════════════
+           SCREEN 2 · SURVEYOR FORM
+      ════════════════════════════════ -->
+      <sc-if value="{{ screen2 }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 18px; max-width: 920px;">
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div onClick="{{ goTo1 }}" style="display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; color: #5A6880; cursor: pointer;" style-hover="color: #8896A9">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 2L4 6.5l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Back to Dashboard
+            </div>
+          </div>
+
+          <!-- Vessel banner -->
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 16px 22px; display: flex; align-items: center; gap: 20px; border-left: 3px solid #C8102E;">
+            <div style="flex: 1; min-width: 0;">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px; flex-wrap: wrap;">
+                <span style="font-size: 17px; font-weight: 700; color: #E2EAF6;">MV Indus Spirit</span>
+                <span style="font-size: 10.5px; padding: 3px 8px; border-radius: 4px; background: rgba(245,158,11,0.1); color: #F59E0B; font-weight: 600;">Awaiting Clearance</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 14px; font-size: 11.5px; color: #5A6880; flex-wrap: wrap;">
+                <span>IMO: 9234567</span>
+                <span style="color: #2A3A52;">·</span>
+                <span>Berth <strong style="color: #8896A9;">B-07</strong> · Kemari</span>
+                <span style="color: #2A3A52;">·</span>
+                <span>Product: <strong style="color: #8896A9;">HOBC</strong></span>
+                <span style="color: #2A3A52;">·</span>
+                <span>Arrived: <strong style="color: #8896A9;">06:20 PKT</strong></span>
+              </div>
+            </div>
+            <div style="text-align: right; flex-shrink: 0;">
+              <div style="font-size: 10px; color: #3A4A62; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.5px;">Survey Ref.</div>
+              <div style="font-size: 14px; font-family: 'DM Mono', monospace; color: #C8102E; font-weight: 500;">SRV-2847-A</div>
+            </div>
+          </div>
+
+          <!-- Two-column form -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+
+            <!-- Measurements -->
+            <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 18px 22px;">
+              <div style="font-size: 13px; font-weight: 600; color: #C0D0E4; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.055);">Cargo Measurements</div>
+              <div style="display: flex; flex-direction: column; gap: 14px;">
+
+                <div>
+                  <label style="display: block; font-size: 10.5px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px;">API Gravity</label>
+                  <div style="display: flex; align-items: center; background: #080C18; border: 1px solid rgba(255,255,255,0.09); border-radius: 7px; overflow: hidden;">
+                    <input type="number" value="34.7" style="flex: 1; background: transparent; border: none; padding: 9px 13px; font-size: 14px; font-family: 'DM Mono', monospace; font-weight: 500; color: #E2EAF6; outline: none;"/>
+                    <span style="padding: 0 13px; font-size: 11px; color: #3A4A62; background: rgba(255,255,255,0.025); border-left: 1px solid rgba(255,255,255,0.055); height: 100%; display: flex; align-items: center; white-space: nowrap;">° API</span>
+                  </div>
+                  <div style="font-size: 10px; color: #3E9E6F; margin-top: 4px;">✓ Within HOBC spec · 34.0–38.0° API</div>
+                </div>
+
+                <div>
+                  <label style="display: block; font-size: 10.5px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px;">Observed Temperature</label>
+                  <div style="display: flex; align-items: center; background: #080C18; border: 1px solid rgba(255,255,255,0.09); border-radius: 7px; overflow: hidden;">
+                    <input type="number" value="29.3" style="flex: 1; background: transparent; border: none; padding: 9px 13px; font-size: 14px; font-family: 'DM Mono', monospace; font-weight: 500; color: #E2EAF6; outline: none;"/>
+                    <span style="padding: 0 13px; font-size: 11px; color: #3A4A62; background: rgba(255,255,255,0.025); border-left: 1px solid rgba(255,255,255,0.055); height: 100%; display: flex; align-items: center;">°C</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label style="display: block; font-size: 10.5px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px;">Gross Observed Volume</label>
+                  <div style="display: flex; align-items: center; background: #080C18; border: 1px solid rgba(255,255,255,0.09); border-radius: 7px; overflow: hidden;">
+                    <input type="number" value="42180" style="flex: 1; background: transparent; border: none; padding: 9px 13px; font-size: 14px; font-family: 'DM Mono', monospace; font-weight: 500; color: #E2EAF6; outline: none;"/>
+                    <span style="padding: 0 13px; font-size: 11px; color: #3A4A62; background: rgba(255,255,255,0.025); border-left: 1px solid rgba(255,255,255,0.055); height: 100%; display: flex; align-items: center;">MT</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label style="display: block; font-size: 10.5px; font-weight: 600; color: #3A4A62; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px;">Net Standard Volume <span style="color: #3E9E6F; font-weight: 400; text-transform: none; letter-spacing: 0;">(temp-corrected)</span></label>
+                  <div style="display: flex; align-items: center; background: #080C18; border: 1px solid rgba(34,197,94,0.22); border-radius: 7px; overflow: hidden;">
+                    <input type="number" value="41947" style="flex: 1; background: transparent; border: none; padding: 9px 13px; font-size: 14px; font-family: 'DM Mono', monospace; font-weight: 500; color: #22C55E; outline: none;"/>
+                    <span style="padding: 0 13px; font-size: 11px; color: #3A4A62; background: rgba(255,255,255,0.025); border-left: 1px solid rgba(255,255,255,0.055); height: 100%; display: flex; align-items: center;">MT</span>
+                  </div>
+                  <div style="font-size: 10px; color: #3A4A62; margin-top: 4px;">VCF applied: 0.9945 @ 15°C reference</div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Documents + Particulars -->
+            <div style="display: flex; flex-direction: column; gap: 13px;">
+
+              <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 18px 22px;">
+                <div style="font-size: 13px; font-weight: 600; color: #C0D0E4; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.055);">Lab Certificate &amp; Documents</div>
+                <div style="display: flex; flex-direction: column; gap: 9px;">
+                  <div style="display: flex; align-items: center; gap: 10px; padding: 10px 13px; background: rgba(34,197,94,0.05); border: 1px solid rgba(34,197,94,0.16); border-radius: 7px;">
+                    <div style="width: 30px; height: 30px; border-radius: 6px; background: rgba(34,197,94,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 2h6l3 3v7h-9V2Z" stroke="#22C55E" stroke-width="1.2"/><path d="M8.5 2v3h3" stroke="#22C55E" stroke-width="1.2"/><path d="M4.5 7.5h5M4.5 9.5h3" stroke="#22C55E" stroke-width="1.2" stroke-linecap="round"/></svg>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                      <div style="font-size: 11.5px; font-weight: 500; color: #B0C0D8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Lab_Cert_PQ-2847.pdf</div>
+                      <div style="font-size: 9.5px; color: #3A4A62; margin-top: 1px;">1.2 MB · 10:15 PKT</div>
+                    </div>
+                    <span style="font-size: 10px; font-weight: 600; color: #22C55E; flex-shrink: 0;">✓ Verified</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 10px; padding: 10px 13px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); border-radius: 7px; cursor: pointer;" style-hover="background: rgba(255,255,255,0.04)">
+                    <div style="width: 30px; height: 30px; border-radius: 6px; background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 9.5V4M7 4L5 6M7 4L9 6" stroke="#3A4A62" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 10.5h8" stroke="#3A4A62" stroke-width="1.3" stroke-linecap="round"/></svg>
+                    </div>
+                    <div>
+                      <div style="font-size: 11.5px; font-weight: 500; color: #5A6880;">Bill of Lading</div>
+                      <div style="font-size: 9.5px; color: #2E3E55;">Click or drag to upload</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 18px 22px;">
+                <div style="font-size: 13px; font-weight: 600; color: #C0D0E4; margin-bottom: 13px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.055);">Vessel Particulars</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                  <div><div style="font-size: 9.5px; color: #3A4A62; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.4px;">IMO Number</div><div style="font-size: 12px; font-family: 'DM Mono', monospace; color: #8896A9;">9234567</div></div>
+                  <div><div style="font-size: 9.5px; color: #3A4A62; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.4px;">Flag State</div><div style="font-size: 12px; color: #8896A9;">Pakistan</div></div>
+                  <div><div style="font-size: 9.5px; color: #3A4A62; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.4px;">LOA</div><div style="font-size: 12px; font-family: 'DM Mono', monospace; color: #8896A9;">182.4 m</div></div>
+                  <div><div style="font-size: 9.5px; color: #3A4A62; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.4px;">Gross Tonnage</div><div style="font-size: 12px; font-family: 'DM Mono', monospace; color: #8896A9;">28,450 GT</div></div>
+                  <div><div style="font-size: 9.5px; color: #3A4A62; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.4px;">Agent</div><div style="font-size: 12px; color: #8896A9;">K-Port Services</div></div>
+                  <div><div style="font-size: 9.5px; color: #3A4A62; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.4px;">Last Port</div><div style="font-size: 12px; color: #8896A9;">Salalah, Oman</div></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Submit row -->
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px;">
+            <div style="font-size: 11.5px; color: #3A4A62;">Surveyor: <strong style="color: #8896A9;">Capt. Zubair Ahmed</strong> · SGS Pakistan · Cert. SGS-PK-847</div>
+            <button onClick="{{ submitSurvey }}" style="display: flex; align-items: center; gap: 8px; padding: 9px 22px; background: #C8102E; border: none; border-radius: 7px; font-size: 13px; font-weight: 600; color: white; cursor: pointer;" style-hover="background: #E01232">
+              Submit for Compliance Review
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3.5l3 3-3 3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+        </div>
+      </sc-if>
+
+      <!-- ═══════════════════════════════
+           SCREEN 3 · COMPLIANCE
+      ════════════════════════════════ -->
+      <sc-if value="{{ screen3 }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 18px; max-width: 980px;">
+
+          <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+            <div>
+              <div style="font-size: 17px; font-weight: 700; color: #E2EAF6; margin-bottom: 4px;">Compliance Checkpoints</div>
+              <div style="font-size: 11.5px; color: #3A4A62;">MV Indus Spirit · SRV-2847-A · Submitted 12:58 PKT</div>
+            </div>
+            <div onClick="{{ goTo2 }}" style="display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; color: #5A6880; cursor: pointer; margin-top: 4px;" style-hover="color: #8896A9">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 2L4 6.5l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Back to Survey
+            </div>
+          </div>
+
+          <!-- Stepper -->
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 20px 32px;">
+            <div style="display: flex; align-items: center; justify-content: center;">
+
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 7px; min-width: 110px;">
+                <div style="width: 34px; height: 34px; border-radius: 50%; background: {{ step1CircleBg }}; border: 2px solid {{ step1Color }}; display: flex; align-items: center; justify-content: center;">
+                  <sc-if value="{{ custApproved }}" hint-placeholder-val="{{ false }}">
+                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 7.5l3.5 3.5 5.5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </sc-if>
+                  <sc-if value="{{ custRejected }}" hint-placeholder-val="{{ false }}">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M3 3l7 7M10 3L3 10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  </sc-if>
+                  <sc-if value="{{ custPending }}" hint-placeholder-val="{{ true }}">
+                    <span style="font-size: 12px; font-weight: 700; color: white;">1</span>
+                  </sc-if>
+                </div>
+                <span style="font-size: 11px; font-weight: 600; color: {{ step1Color }}; text-align: center;">Customs Auth.</span>
+              </div>
+
+              <div style="flex: 1; height: 2px; background: {{ conn1Color }}; margin: 0 6px; margin-bottom: 22px;"></div>
+
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 7px; min-width: 110px;">
+                <div style="width: 34px; height: 34px; border-radius: 50%; background: {{ step2CircleBg }}; border: 2px solid {{ step2Color }}; display: flex; align-items: center; justify-content: center;">
+                  <sc-if value="{{ papcoApproved }}" hint-placeholder-val="{{ false }}">
+                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 7.5l3.5 3.5 5.5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </sc-if>
+                  <sc-if value="{{ papcoRejected }}" hint-placeholder-val="{{ false }}">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M3 3l7 7M10 3L3 10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  </sc-if>
+                  <sc-if value="{{ papcoPending }}" hint-placeholder-val="{{ true }}">
+                    <span style="font-size: 12px; font-weight: 700; color: #3A4A62;">2</span>
+                  </sc-if>
+                </div>
+                <span style="font-size: 11px; font-weight: 600; color: {{ step2Color }}; text-align: center;">PAPCO Port Div.</span>
+              </div>
+
+              <div style="flex: 1; height: 2px; background: {{ conn2Color }}; margin: 0 6px; margin-bottom: 22px;"></div>
+
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 7px; min-width: 110px;">
+                <div style="width: 34px; height: 34px; border-radius: 50%; background: {{ step3CircleBg }}; border: 2px solid {{ step3Color }}; display: flex; align-items: center; justify-content: center;">
+                  <sc-if value="{{ survApproved }}" hint-placeholder-val="{{ false }}">
+                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 7.5l3.5 3.5 5.5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </sc-if>
+                  <sc-if value="{{ survRejected }}" hint-placeholder-val="{{ false }}">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M3 3l7 7M10 3L3 10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  </sc-if>
+                  <sc-if value="{{ survPending }}" hint-placeholder-val="{{ true }}">
+                    <span style="font-size: 12px; font-weight: 700; color: #3A4A62;">3</span>
+                  </sc-if>
+                </div>
+                <span style="font-size: 11px; font-weight: 600; color: {{ step3Color }}; text-align: center;">SGS Surveyor</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Three compliance cards -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+
+            <!-- Card 1: Customs -->
+            <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 18px; display: flex; flex-direction: column; gap: 13px;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="width: 34px; height: 34px; border-radius: 7px; background: rgba(200,16,46,0.1); display: flex; align-items: center; justify-content: center;">
+                  <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><rect x="2" y="3" width="13" height="10" rx="1.5" stroke="#C8102E" stroke-width="1.3"/><path d="M2 6.5h13" stroke="#C8102E" stroke-width="1.3"/><circle cx="4.5" cy="4.8" r="0.7" fill="#C8102E"/><circle cx="7" cy="4.8" r="0.7" fill="#C8102E"/></svg>
+                </div>
+                <div style="font-size: 10.5px; font-weight: 600; padding: 3px 8px; border-radius: 4px; color: {{ custColor }}; background: {{ custBg }};">{{ custLabel }}</div>
+              </div>
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: #E2EAF6; margin-bottom: 2px;">Pakistan Customs</div>
+                <div style="font-size: 11px; color: #3A4A62;">Port Customs Authority — Kemari</div>
+              </div>
+              <div style="padding: 11px 13px; background: rgba(255,255,255,0.02); border-radius: 6px; border: 1px solid rgba(255,255,255,0.04);">
+                <div style="font-size: 9.5px; color: #2E3E55; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.5px;">Reviewing Officer</div>
+                <div style="font-size: 12px; font-weight: 600; color: #B0C0D8;">Ch. Asghar Malik</div>
+                <div style="font-size: 10px; color: #3A4A62; margin-top: 1px;">Badge: PC-4421 · Shift Supervisor</div>
+              </div>
+              <div style="font-size: 10.5px; color: #3A4A62; line-height: 1.5;">Bill of Lading, Import Permit, Hazmat Declaration reviewed</div>
+              <sc-if value="{{ custPending }}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; gap: 7px;">
+                  <button onClick="{{ approveCust }}" style="flex: 1; padding: 8px; background: rgba(34,197,94,0.09); border: 1px solid rgba(34,197,94,0.22); border-radius: 6px; font-size: 12px; font-weight: 600; color: #22C55E; cursor: pointer;" style-hover="background: rgba(34,197,94,0.16)">✓ Approve</button>
+                  <button onClick="{{ rejectCust }}" style="flex: 1; padding: 8px; background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.14); border-radius: 6px; font-size: 12px; font-weight: 600; color: #EF4444; cursor: pointer;" style-hover="background: rgba(239,68,68,0.11)">✕ Reject</button>
+                </div>
+              </sc-if>
+              <sc-if value="{{ custApproved }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; align-items: center; gap: 7px; padding: 9px 12px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.18); border-radius: 6px;">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6.5" fill="#22C55E" fill-opacity="0.15"/><path d="M4 7.5l2.5 2.5 4.5-5" stroke="#22C55E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span style="font-size: 11.5px; font-weight: 600; color: #22C55E;">Clearance Granted · 13:04 PKT</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ custRejected }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; align-items: center; gap: 7px; padding: 9px 12px; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.18); border-radius: 6px;">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6.5" fill="#EF4444" fill-opacity="0.15"/><path d="M5 5l5 5M10 5L5 10" stroke="#EF4444" stroke-width="1.6" stroke-linecap="round"/></svg>
+                  <span style="font-size: 11.5px; font-weight: 600; color: #EF4444;">Rejected — Requires Review</span>
+                </div>
+              </sc-if>
+            </div>
+
+            <!-- Card 2: PAPCO -->
+            <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 18px; display: flex; flex-direction: column; gap: 13px;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="width: 34px; height: 34px; border-radius: 7px; background: rgba(59,130,246,0.1); display: flex; align-items: center; justify-content: center;">
+                  <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 2L14.5 5.5V11.5L8.5 15L2.5 11.5V5.5L8.5 2Z" stroke="#3B82F6" stroke-width="1.3"/><path d="M5.5 8.5l2 2 4-4" stroke="#3B82F6" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div style="font-size: 10.5px; font-weight: 600; padding: 3px 8px; border-radius: 4px; color: {{ papcoColor }}; background: {{ papcoBg }};">{{ papcoLabel }}</div>
+              </div>
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: #E2EAF6; margin-bottom: 2px;">PAPCO Port Div.</div>
+                <div style="font-size: 11px; color: #3A4A62;">Pakistan Petroleum Port Authority</div>
+              </div>
+              <div style="padding: 11px 13px; background: rgba(255,255,255,0.02); border-radius: 6px; border: 1px solid rgba(255,255,255,0.04);">
+                <div style="font-size: 9.5px; color: #2E3E55; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.5px;">Port Supervisor</div>
+                <div style="font-size: 12px; font-weight: 600; color: #B0C0D8;">Eng. Tariq Hassan</div>
+                <div style="font-size: 10px; color: #3A4A62; margin-top: 1px;">PAPCO-ID: TH-0192 · Berth Ops.</div>
+              </div>
+              <div style="font-size: 10.5px; color: #3A4A62; line-height: 1.5;">Berth allocation, mooring safety, pipeline connection auth.</div>
+              <sc-if value="{{ papcoPending }}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; gap: 7px;">
+                  <button onClick="{{ approvePapco }}" style="flex: 1; padding: 8px; background: rgba(34,197,94,0.09); border: 1px solid rgba(34,197,94,0.22); border-radius: 6px; font-size: 12px; font-weight: 600; color: #22C55E; cursor: pointer;" style-hover="background: rgba(34,197,94,0.16)">✓ Approve</button>
+                  <button onClick="{{ rejectPapco }}" style="flex: 1; padding: 8px; background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.14); border-radius: 6px; font-size: 12px; font-weight: 600; color: #EF4444; cursor: pointer;" style-hover="background: rgba(239,68,68,0.11)">✕ Reject</button>
+                </div>
+              </sc-if>
+              <sc-if value="{{ papcoApproved }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; align-items: center; gap: 7px; padding: 9px 12px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.18); border-radius: 6px;">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6.5" fill="#22C55E" fill-opacity="0.15"/><path d="M4 7.5l2.5 2.5 4.5-5" stroke="#22C55E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span style="font-size: 11.5px; font-weight: 600; color: #22C55E;">Port Clearance Granted</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ papcoRejected }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; align-items: center; gap: 7px; padding: 9px 12px; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.18); border-radius: 6px;">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6.5" fill="#EF4444" fill-opacity="0.15"/><path d="M5 5l5 5M10 5L5 10" stroke="#EF4444" stroke-width="1.6" stroke-linecap="round"/></svg>
+                  <span style="font-size: 11.5px; font-weight: 600; color: #EF4444;">Rejected — Requires Review</span>
+                </div>
+              </sc-if>
+            </div>
+
+            <!-- Card 3: SGS -->
+            <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; padding: 18px; display: flex; flex-direction: column; gap: 13px;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="width: 34px; height: 34px; border-radius: 7px; background: rgba(139,92,246,0.1); display: flex; align-items: center; justify-content: center;">
+                  <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 2L14.5 5.5V11.5L8.5 15L2.5 11.5V5.5L8.5 2Z" stroke="#8B5CF6" stroke-width="1.3"/><circle cx="8.5" cy="8.5" r="2.2" stroke="#8B5CF6" stroke-width="1.3"/></svg>
+                </div>
+                <div style="font-size: 10.5px; font-weight: 600; padding: 3px 8px; border-radius: 4px; color: {{ survColor }}; background: {{ survBg }};">{{ survLabel }}</div>
+              </div>
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: #E2EAF6; margin-bottom: 2px;">SGS Pakistan</div>
+                <div style="font-size: 11px; color: #3A4A62;">Independent Marine Surveyor</div>
+              </div>
+              <div style="padding: 11px 13px; background: rgba(255,255,255,0.02); border-radius: 6px; border: 1px solid rgba(255,255,255,0.04);">
+                <div style="font-size: 9.5px; color: #2E3E55; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.5px;">Lead Inspector</div>
+                <div style="font-size: 12px; font-weight: 600; color: #B0C0D8;">Capt. Zubair Ahmed</div>
+                <div style="font-size: 10px; color: #3A4A62; margin-top: 1px;">Cert: SGS-PK-847 · Tanker Insp.</div>
+              </div>
+              <div style="font-size: 10.5px; color: #3A4A62; line-height: 1.5;">Independent verification of GOV, NSV, API gravity &amp; cert. of quality</div>
+              <sc-if value="{{ survPending }}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; gap: 7px;">
+                  <button onClick="{{ approveSurv }}" style="flex: 1; padding: 8px; background: rgba(34,197,94,0.09); border: 1px solid rgba(34,197,94,0.22); border-radius: 6px; font-size: 12px; font-weight: 600; color: #22C55E; cursor: pointer;" style-hover="background: rgba(34,197,94,0.16)">✓ Approve</button>
+                  <button onClick="{{ rejectSurv }}" style="flex: 1; padding: 8px; background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.14); border-radius: 6px; font-size: 12px; font-weight: 600; color: #EF4444; cursor: pointer;" style-hover="background: rgba(239,68,68,0.11)">✕ Reject</button>
+                </div>
+              </sc-if>
+              <sc-if value="{{ survApproved }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; align-items: center; gap: 7px; padding: 9px 12px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.18); border-radius: 6px;">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6.5" fill="#22C55E" fill-opacity="0.15"/><path d="M4 7.5l2.5 2.5 4.5-5" stroke="#22C55E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span style="font-size: 11.5px; font-weight: 600; color: #22C55E;">Ind. Certificate Granted</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ survRejected }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; align-items: center; gap: 7px; padding: 9px 12px; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.18); border-radius: 6px;">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6.5" fill="#EF4444" fill-opacity="0.15"/><path d="M5 5l5 5M10 5L5 10" stroke="#EF4444" stroke-width="1.6" stroke-linecap="round"/></svg>
+                  <span style="font-size: 11.5px; font-weight: 600; color: #EF4444;">Rejected — Requires Review</span>
+                </div>
+              </sc-if>
+            </div>
+
+          </div>
+
+          <!-- All-approved CTA -->
+          <sc-if value="{{ allApproved }}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 16px 22px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.2); border-radius: 9px; display: flex; align-items: center; justify-content: space-between; animation: parcoIn 0.3s ease;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 34px; height: 34px; border-radius: 50%; background: rgba(34,197,94,0.14); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M3 8.5l5 5 6-8" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div>
+                  <div style="font-size: 14px; font-weight: 700; color: #22C55E; margin-bottom: 2px;">All Clearances Obtained</div>
+                  <div style="font-size: 11.5px; color: #5A6880;">MV Indus Spirit cleared for pipeline injection. Immutable audit record created.</div>
+                </div>
+              </div>
+              <button onClick="{{ goToAudit }}" style="padding: 9px 20px; background: #22C55E; border: none; border-radius: 7px; font-size: 13px; font-weight: 700; color: #05080F; cursor: pointer; flex-shrink: 0; white-space: nowrap;" style-hover="background: #2ADB72">View Audit Trail →</button>
+            </div>
+          </sc-if>
+
+        </div>
+      </sc-if>
+
+      <!-- ═══════════════════════════════
+           SCREEN 4 · AUDIT TRAIL
+      ════════════════════════════════ -->
+      <sc-if value="{{ screen4 }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+
+          <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+            <div>
+              <div style="font-size: 17px; font-weight: 700; color: #E2EAF6; margin-bottom: 4px;">Immutable Audit Trail</div>
+              <div style="font-size: 11.5px; color: #3A4A62;">SHA-256 integrity signed · entries cannot be altered · read-only ledger</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 9px;">
+              <div style="padding: 7px 13px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08); font-size: 11.5px; font-weight: 500; color: #8896A9; cursor: pointer;" style-hover="background: rgba(255,255,255,0.04)">↓ Export CSV</div>
+              <div style="padding: 7px 13px; border-radius: 6px; border: 1px solid rgba(200,16,46,0.28); background: rgba(200,16,46,0.07); font-size: 11.5px; font-weight: 500; color: #C8102E; cursor: pointer;" style-hover="background: rgba(200,16,46,0.12)">Generate Report</div>
+            </div>
+          </div>
+
+          <!-- Filter bar -->
+          <div style="display: flex; align-items: center; gap: 9px; padding: 11px 15px; background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; flex-wrap: wrap;">
+            <span style="font-size: 10px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.8px;">Filter:</span>
+            <div style="padding: 4px 11px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); font-size: 11.5px; color: #8896A9; cursor: pointer;" style-hover="background: rgba(255,255,255,0.06)">All Vessels ▾</div>
+            <div style="padding: 4px 11px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); font-size: 11.5px; color: #8896A9; cursor: pointer;" style-hover="background: rgba(255,255,255,0.06)">All Actions ▾</div>
+            <div style="padding: 4px 11px; border-radius: 5px; border: 1px solid rgba(200,16,46,0.3); background: rgba(200,16,46,0.07); font-size: 11.5px; color: #C8102E; cursor: pointer;" style-hover="background: rgba(200,16,46,0.12)">Today ▾</div>
+            <div style="padding: 4px 11px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); font-size: 11.5px; color: #8896A9; cursor: pointer;" style-hover="background: rgba(255,255,255,0.06)">All Modules ▾</div>
+            <div style="margin-left: auto; display: flex; align-items: center; gap: 5px; padding: 4px 11px; border-radius: 5px; background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.14);">
+              <div style="width: 5px; height: 5px; border-radius: 50%; background: #22C55E;"></div>
+              <span style="font-size: 10.5px; font-weight: 500; color: #22C55E;">8 entries · All verified</span>
+            </div>
+          </div>
+
+          <!-- Audit table -->
+          <div style="background: #0E1626; border: 1px solid rgba(255,255,255,0.06); border-radius: 9px; overflow: hidden;">
+            <div style="display: grid; grid-template-columns: 82px 110px 120px 170px 88px 150px 1fr 64px; padding: 10px 18px; border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02);">
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Timestamp</span>
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">User</span>
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Role</span>
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Action</span>
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Module</span>
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Vessel</span>
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Details</span>
+              <span style="font-size: 9.5px; font-weight: 700; color: #2E3E55; text-transform: uppercase; letter-spacing: 0.6px;">Hash</span>
+            </div>
+            <sc-for list="{{ auditEntries }}" as="e" hint-placeholder-count="8">
+              <div style="display: grid; grid-template-columns: 82px 110px 120px 170px 88px 150px 1fr 64px; padding: 11px 18px; border-bottom: 1px solid rgba(255,255,255,0.03); align-items: center;" style-hover="background: rgba(255,255,255,0.02)">
+                <span style="font-size: 11px; font-family: 'DM Mono', monospace; color: #3A4A62;">{{ e.time }}</span>
+                <span style="font-size: 11.5px; font-weight: 500; color: #B0C0D8;">{{ e.user }}</span>
+                <span style="font-size: 11px; color: #5A6880;">{{ e.role }}</span>
+                <div>
+                  <span style="font-size: 9.5px; font-family: 'DM Mono', monospace; font-weight: 500; padding: 2px 6px; border-radius: 3px; color: {{ e.actionColor }}; background: {{ e.actionBg }}; white-space: nowrap;">{{ e.action }}</span>
+                </div>
+                <span style="font-size: 11px; color: #5A6880;">{{ e.module }}</span>
+                <span style="font-size: 11px; color: #6A7A92;">{{ e.vessel }}</span>
+                <span style="font-size: 11px; color: #4A5A72; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ e.detail }}</span>
+                <div style="display: flex; align-items: center; gap: 3px;">
+                  <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 1L8 3V6L4.5 8L1 6V3L4.5 1Z" fill="#22C55E" fill-opacity="0.35"/></svg>
+                  <span style="font-size: 9.5px; font-family: 'DM Mono', monospace; color: #22C55E; opacity: 0.7;">{{ e.hash }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+        </div>
+      </sc-if>
+
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1440, &quot;height&quot;: 900 }
+}">
+class Component extends DCLogic {
+  state = {
+    screen: 1,
+    custStatus: 'pending',
+    papcoStatus: 'pending',
+    survStatus: 'pending',
+  };
+
+  sd(status) {
+    if (status === 'approved') return { label: 'Approved', color: '#22C55E', bg: 'rgba(34,197,94,0.09)' };
+    if (status === 'rejected') return { label: 'Rejected', color: '#EF4444', bg: 'rgba(239,68,68,0.09)' };
+    return { label: 'Pending Review', color: '#8896A9', bg: 'rgba(136,150,169,0.09)' };
+  }
+
+  stepColor(status, isFirst) {
+    if (status === 'approved') return '#22C55E';
+    if (status === 'rejected') return '#EF4444';
+    return isFirst ? '#C8102E' : '#2E3E55';
+  }
+
+  renderVals() {
+    const s = this.state;
+    const S = (n) => s.screen === n;
+
+    const cust = this.sd(s.custStatus);
+    const papco = this.sd(s.papcoStatus);
+    const surv = this.sd(s.survStatus);
+
+    const s1c = this.stepColor(s.custStatus, true);
+    const s2c = this.stepColor(s.papcoStatus, false);
+    const s3c = this.stepColor(s.survStatus, false);
+
+    const allApproved =
+      s.custStatus === 'approved' &&
+      s.papcoStatus === 'approved' &&
+      s.survStatus === 'approved';
+
+    const vessels = [
+      { id: 'V-2847', name: 'MV Indus Spirit',    product: 'HOBC',     berth: 'B-07', statusLabel: 'Discharging',        statusColor: '#22C55E', volume: '42,180 MT', progress: '67%',  progressColor: '#22C55E', agent: 'K-Port Services Ltd.' },
+      { id: 'V-2851', name: 'MV Arabian Star',     product: 'HSD',      berth: 'B-12', statusLabel: 'In Transit',          statusColor: '#3B82F6', volume: '35,500 MT', progress: '0%',   progressColor: '#3B82F6', agent: 'Orient Maritime Inc.' },
+      { id: 'V-2839', name: 'MV Karachi Voyager',  product: 'MOGAS 92', berth: 'B-03', statusLabel: 'Awaiting Clearance',  statusColor: '#F59E0B', volume: '28,200 MT', progress: '100%', progressColor: '#F59E0B', agent: 'Pak Gulf Shipping' },
+      { id: 'V-2855', name: 'MV Sind Endeavour',   product: 'Jet A-1',  berth: 'B-09', statusLabel: 'Berthing',            statusColor: '#E8A020', volume: '15,750 MT', progress: '12%',  progressColor: '#E8A020', agent: 'National Shipping Co.' },
+    ];
+
+    const pipelineSchedule = [
+      { time: '14:00', pipeline: 'Mahmood Kot Pipeline', product: 'HOBC',     volume: '12,000 MT', dotColor: '#3B82F6' },
+      { time: '16:30', pipeline: 'Machike Junction',     product: 'HSD',      volume: '18,000 MT', dotColor: '#2E3E55' },
+      { time: '19:00', pipeline: 'Karachi North',        product: 'MOGAS 92', volume: '8,500 MT',  dotColor: '#2E3E55' },
+      { time: '21:45', pipeline: 'Mehmood Kot Alt.',     product: 'Jet A-1',  volume: '6,200 MT',  dotColor: '#2E3E55' },
+    ];
+
+    const systemAlerts = [
+      { levelColor: '#F59E0B', levelBg: 'rgba(245,158,11,0.055)', message: 'MV Karachi Voyager: Customs clearance overdue', detail: '3h 22m past deadline', time: '12:47' },
+      { levelColor: '#3B82F6', levelBg: 'rgba(59,130,246,0.055)', message: 'Pipeline pressure variance at KP-04 sensor', detail: '±0.4 bar — within tolerance', time: '11:31' },
+      { levelColor: '#22C55E', levelBg: 'rgba(34,197,94,0.055)', message: 'MV Indus Spirit: Lab analysis received', detail: 'API 34.7° — Quality cleared', time: '10:15' },
+    ];
+
+    const actionColorMap = {
+      'COMPLIANCE_APPROVE': '#22C55E',
+      'SURVEY_SUBMIT':       '#3B82F6',
+      'ALERT_TRIGGERED':     '#F59E0B',
+      'CUSTOMS_INSPECT':     '#8B5CF6',
+      'LAB_RESULT_IN':       '#22C55E',
+      'BERTH_ASSIGNED':      '#3B82F6',
+      'VESSEL_ETA_UPDATE':   '#8896A9',
+      'VESSEL_BERTHED':      '#E8A020',
+    };
+    const actionBgMap = {
+      'COMPLIANCE_APPROVE': 'rgba(34,197,94,0.1)',
+      'SURVEY_SUBMIT':       'rgba(59,130,246,0.1)',
+      'ALERT_TRIGGERED':     'rgba(245,158,11,0.1)',
+      'CUSTOMS_INSPECT':     'rgba(139,92,246,0.1)',
+      'LAB_RESULT_IN':       'rgba(34,197,94,0.1)',
+      'BERTH_ASSIGNED':      'rgba(59,130,246,0.1)',
+      'VESSEL_ETA_UPDATE':   'rgba(136,150,169,0.1)',
+      'VESSEL_BERTHED':      'rgba(232,160,32,0.1)',
+    };
+
+    const auditEntries = [
+      { time: '13:04:22', user: 'M. Qasim',        role: 'SC Admin',       action: 'COMPLIANCE_APPROVE', module: 'Compliance', vessel: 'MV Indus Spirit',   detail: 'PAPCO port clearance issued',           hash: 'a3f9e2c' },
+      { time: '12:58:11', user: 'Capt. Z. Ahmed',  role: 'Ind. Surveyor',  action: 'SURVEY_SUBMIT',       module: 'Surveyor',   vessel: 'MV Indus Spirit',   detail: 'API 34.7°, Net Vol 41,947 MT',           hash: 'b7d1a4f' },
+      { time: '12:47:03', user: 'System',           role: 'Automated',      action: 'ALERT_TRIGGERED',    module: 'Compliance', vessel: 'MV K. Voyager',     detail: 'Customs clearance overdue — 3h 22m',    hash: 'c5e8b2d' },
+      { time: '11:30:45', user: 'Ch. A. Malik',     role: 'Customs Officer',action: 'CUSTOMS_INSPECT',    module: 'Compliance', vessel: 'MV Indus Spirit',   detail: 'Initial customs inspection logged',      hash: 'd2f4a9e' },
+      { time: '10:15:30', user: 'Lab System',       role: 'Automated',      action: 'LAB_RESULT_IN',      module: 'Intake',     vessel: 'MV Indus Spirit',   detail: 'Quality cert. PQ-2847 uploaded',         hash: 'e8c3b1f' },
+      { time: '09:44:18', user: 'Port Control',     role: 'Port Authority', action: 'BERTH_ASSIGNED',     module: 'Intake',     vessel: 'MV Indus Spirit',   detail: 'Berth B-07 allocated — Kemari Terminal', hash: 'f1a6d4c' },
+      { time: '08:22:05', user: 'AIS System',       role: 'Automated',      action: 'VESSEL_ETA_UPDATE',  module: 'Intake',     vessel: 'MV Arabian Star',   detail: 'ETA updated: 18:45 PKT local',          hash: 'a9e2f7b' },
+      { time: '06:20:00', user: 'Port Control',     role: 'Port Authority', action: 'VESSEL_BERTHED',     module: 'Intake',     vessel: 'MV Indus Spirit',   detail: 'Vessel berthed at B-07, Kemari',         hash: 'b4c8e3a' },
+    ].map(e => ({
+      ...e,
+      actionColor: actionColorMap[e.action] || '#8896A9',
+      actionBg:    actionBgMap[e.action]    || 'rgba(136,150,169,0.1)',
+    }));
+
+    return {
+      // Screen flags
+      screen1: S(1), screen2: S(2), screen3: S(3), screen4: S(4),
+
+      // Nav handlers
+      goTo1: () => this.setState({ screen: 1 }),
+      goTo2: () => this.setState({ screen: 2 }),
+      goTo3: () => this.setState({ screen: 3 }),
+      goTo4: () => this.setState({ screen: 4 }),
+      goToHub:     () => { window.location.href = './PARCO Supply Chain Hub - Standalone.html'; },
+      goToFleetC:  () => { window.location.href = './PARCO Module C - Gantry & Fleet.dc.html'; },
+      goToFinanceE:() => { window.location.href = './PARCO Module E - O2C SAP Hub.dc.html'; },
+
+      // Nav active bg / color
+      n1Bg: S(1) ? 'rgba(200,16,46,0.13)' : 'transparent',
+      n1Color: S(1) ? '#C8102E' : '#8896A9',
+      n2Bg: S(2) ? 'rgba(200,16,46,0.13)' : 'transparent',
+      n2Color: S(2) ? '#C8102E' : '#8896A9',
+      n3Bg: S(3) ? 'rgba(200,16,46,0.13)' : 'transparent',
+      n3Color: S(3) ? '#C8102E' : '#8896A9',
+      n4Bg: S(4) ? 'rgba(200,16,46,0.13)' : 'transparent',
+      n4Color: S(4) ? '#C8102E' : '#8896A9',
+
+      screenTitle: ['Dashboard', 'Surveyor Form', 'Compliance Checkpoints', 'Audit Trail'][s.screen - 1],
+
+      // Data
+      vessels, pipelineSchedule, systemAlerts, auditEntries,
+
+      // Compliance status display
+      custLabel: cust.label, custColor: cust.color, custBg: cust.bg,
+      papcoLabel: papco.label, papcoColor: papco.color, papcoBg: papco.bg,
+      survLabel: surv.label, survColor: surv.color, survBg: surv.bg,
+
+      // Compliance booleans
+      custPending:  s.custStatus  === 'pending',
+      custApproved: s.custStatus  === 'approved',
+      custRejected: s.custStatus  === 'rejected',
+      papcoPending: s.papcoStatus === 'pending',
+      papcoApproved:s.papcoStatus === 'approved',
+      papcoRejected:s.papcoStatus === 'rejected',
+      survPending:  s.survStatus  === 'pending',
+      survApproved: s.survStatus  === 'approved',
+      survRejected: s.survStatus  === 'rejected',
+
+      // Compliance actions
+      approveCust:  () => this.setState({ custStatus:  'approved' }),
+      rejectCust:   () => this.setState({ custStatus:  'rejected' }),
+      approvePapco: () => this.setState({ papcoStatus: 'approved' }),
+      rejectPapco:  () => this.setState({ papcoStatus: 'rejected' }),
+      approveSurv:  () => this.setState({ survStatus:  'approved' }),
+      rejectSurv:   () => this.setState({ survStatus:  'rejected' }),
+
+      allApproved,
+
+      // Stepper
+      step1Color: s1c, step2Color: s2c, step3Color: s3c,
+      step1CircleBg: s1c,
+      step2CircleBg: s.papcoStatus !== 'pending' ? s2c : 'transparent',
+      step3CircleBg: s.survStatus  !== 'pending' ? s3c : 'transparent',
+      conn1Color: s.custStatus  === 'approved' ? '#22C55E' : s.custStatus  === 'rejected' ? 'rgba(239,68,68,0.4)' : 'rgba(255,255,255,0.07)',
+      conn2Color: s.papcoStatus === 'approved' ? '#22C55E' : s.papcoStatus === 'rejected' ? 'rgba(239,68,68,0.4)' : 'rgba(255,255,255,0.07)',
+
+      // Navigation shortcuts
+      goToAudit:   () => this.setState({ screen: 4 }),
+      submitSurvey:() => this.setState({ screen: 3 }),
+      openVessel:  () => this.setState({ screen: 2 }),
+    };
+  }
+}
+</script>
+</body>
+</html>
