@@ -112,11 +112,11 @@ export default function ModuleSidebar() {
       </nav>
 
       <div className="border-t border-slate-100 px-4 py-3 shrink-0">
-        <Link href="/" className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-[#0D1B3E] transition-colors">
+        <Link href="/supply-chain" className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-[#0D1B3E] transition-colors">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
             <path d="M7.5 1.5L3 6l4.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          Back to Hub
+          Back to Supply Chain Hub
         </Link>
       </div>
     </aside>

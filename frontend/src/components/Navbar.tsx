@@ -5,7 +5,20 @@ import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const onModule = pathname.startsWith("/modules");
+
+  let backHref: string | null = null;
+  let backLabel: string | null = null;
+
+  if (pathname.startsWith("/operations/")) {
+    backHref = "/operations";
+    backLabel = "Back to Operations Hub";
+  } else if (pathname.startsWith("/modules/")) {
+    backHref = "/supply-chain";
+    backLabel = "Back to Supply Chain Hub";
+  } else if (pathname === "/supply-chain" || pathname === "/operations") {
+    backHref = "/";
+    backLabel = "Back to PARCO System";
+  }
 
   return (
     <header className="bg-[#0D1B3E] border-b border-[#1E3A8A]/40 sticky top-0 z-50">
@@ -20,16 +33,19 @@ export default function Navbar() {
           </div>
           <div className="leading-none">
             <div className="text-[13px] font-bold text-white tracking-wide">PARCO</div>
-            <div className="text-[9px] text-slate-400 uppercase tracking-widest">Supply Chain Hub</div>
+            <div className="text-[9px] text-slate-400 uppercase tracking-widest">Internal Systems</div>
           </div>
         </Link>
 
-        {onModule && (
-          <Link href="/" className="hidden md:flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors">
+        {backHref && (
+          <Link
+            href={backHref}
+            className="hidden md:flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors"
+          >
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path d="M7.5 1.5L3 6l4.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            Back to Hub
+            {backLabel}
           </Link>
         )}
 
